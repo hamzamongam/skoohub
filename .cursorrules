@@ -1,0 +1,35 @@
+# Project Standards & AI Rules
+
+All feature development in this project must adhere to the patterns established in the `auth` feature.
+
+## 1. Feature Structure
+Each feature must be contained within `src/feature/<feature-name>/` with the following sub-directories:
+- `repo/`: Contains `<feature>.repo.ts`. Handles all direct database calls (Prisma).
+- `services/`: Contains `<feature>.service.ts` and its unit tests `<feature>.service.spec.ts`. Handles business logic.
+- `contract/`: Contains `<feature>.schema.ts` (Zod) and `<feature>.contract.ts` (ORPC definitions).
+- `procedure/`: Contains `<feature>.router.ts`. Bridges the contract with the service layer.
+
+## 2. Coding Style
+- **Dependency Injection**: Services must use constructor injection to receive their repositories and other service dependencies.
+- **Logging**: Always use the global logger (`import { logger } from "@/lib/logger"`).
+  - Log `info` for significant lifecycle events (e.g., "User signed up").
+  - Log `warn` for non-critical failures or validation issues.
+  - Log `error` for critical failures with full context.
+  - Log `debug` for detailed operational flow.
+- **Error Handling**:
+  - Throw domain-specific errors from `@/utils/errors` (e.g., `NotFoundError`, `UnauthorizedError`).
+  - Use `ORPCError` in the procedure layer for API-facing error codes.
+
+## 3. Database Interactions
+- Never call Prisma directly from services or routers.
+- All database logic must reside in the `Repository` class.
+- Use `this.repo.transaction` for atomic multi-model operations.
+
+## 4. Testing Requirements
+- Every service method must have corresponding unit tests in a `.spec.ts` file.
+- Use Vitest and mock all external dependencies (Prisma, Better-Auth, other services).
+- Tests should verify both success paths and error handling.
+
+## 5. End-to-End Type Safety
+- All inputs and outputs must be validated using Zod schemas in the `contract` directory.
+- ORPC contracts must be used to ensure type safety from server to client.

@@ -1,0 +1,308 @@
+src/components/base/datatable/DataTableSkeleton.tsx:47:9 suppressions/unused ━━━━━━━━━━
+
+  ! Suppression comment has no effect. Remove the suppression or make sure you are suppressing the correct rule.
+  
+    45 │ 						{Array.from({ length: rowCount }).map((_, i) => (
+    46 │ 							<TableRow
+  > 47 │ 								// biome-ignore lint/suspicious/noArrayIndexKey: skeleton
+       │ 								^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    48 │ 								key={`row-${i}-${rowCount}`}
+    49 │ 								className="border-border/30"
+  
+
+src/components/base/datatable/DataTableSkeleton.tsx:53:11 suppressions/unused ━━━━━━━━━━
+
+  ! Suppression comment has no effect. Remove the suppression or make sure you are suppressing the correct rule.
+  
+    51 │ 								{Array.from({ length: columnCount }).map((_, j) => (
+    52 │ 									<TableCell
+  > 53 │ 										// biome-ignore lint/suspicious/noArrayIndexKey: skeleton
+       │ 										^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    54 │ 										key={`cell-${i}-${j}-${columnCount}`}
+    55 │ 										className="py-4"
+  
+
+src/components/base/forms/BaseFormItem.tsx:21:29 lint/suspicious/noExplicitAny ━━━━━━━━━━
+
+  ! Unexpected any. Specify a different type.
+  
+    19 │ 	children: ReactElement;
+    20 │ 	required?: boolean;
+  > 21 │ 	getValueFromEvent?: (...e: any) => any;
+       │ 	                           ^^^
+    22 │ }
+    23 │ 
+  
+  i any disables many type checking rules. Its use should be avoided.
+  
+
+src/components/base/forms/BaseFormItem.tsx:21:37 lint/suspicious/noExplicitAny ━━━━━━━━━━
+
+  ! Unexpected any. Specify a different type.
+  
+    19 │ 	children: ReactElement;
+    20 │ 	required?: boolean;
+  > 21 │ 	getValueFromEvent?: (...e: any) => any;
+       │ 	                                   ^^^
+    22 │ }
+    23 │ 
+  
+  i any disables many type checking rules. Its use should be avoided.
+  
+
+src/components/base/forms/BaseFormItem.tsx:45:20 lint/suspicious/noExplicitAny ━━━━━━━━━━
+
+  ! Unexpected any. Specify a different type.
+  
+    44 │ 	const childProps = {
+  > 45 │ 		onChange: (...e: any) => {
+       │ 		                 ^^^
+    46 │ 			if (getValueFromEvent) {
+    47 │ 				onChange(getValueFromEvent?.(...(e as any)));
+  
+  i any disables many type checking rules. Its use should be avoided.
+  
+
+src/components/base/forms/BaseFormItem.tsx:47:43 lint/suspicious/noExplicitAny ━━━━━━━━━━
+
+  ! Unexpected any. Specify a different type.
+  
+    45 │ 		onChange: (...e: any) => {
+    46 │ 			if (getValueFromEvent) {
+  > 47 │ 				onChange(getValueFromEvent?.(...(e as any)));
+       │ 				                                      ^^^
+    48 │ 			} else {
+    49 │ 				onChange(...e);
+  
+  i any disables many type checking rules. Its use should be avoided.
+  
+
+src/components/base/forms/useBaseForm.ts:20:28 lint/suspicious/noExplicitAny ━━━━━━━━━━
+
+  ! Unexpected any. Specify a different type.
+  
+    18 │ // biome-ignore lint/suspicious/noExplicitAny: library generics
+    19 │ type useBaseFormReturn<T extends ZodType<any, any>> = [
+  > 20 │ 	UseFormReturn<z.infer<T>, any, any>,
+       │ 	                          ^^^
+    21 │ 	op: { validateFields: () => Promise<z.infer<T>> },
+    22 │ ];
+  
+  i any disables many type checking rules. Its use should be avoided.
+  
+
+src/components/base/forms/useBaseForm.ts:20:33 lint/suspicious/noExplicitAny ━━━━━━━━━━
+
+  ! Unexpected any. Specify a different type.
+  
+    18 │ // biome-ignore lint/suspicious/noExplicitAny: library generics
+    19 │ type useBaseFormReturn<T extends ZodType<any, any>> = [
+  > 20 │ 	UseFormReturn<z.infer<T>, any, any>,
+       │ 	                               ^^^
+    21 │ 	op: { validateFields: () => Promise<z.infer<T>> },
+    22 │ ];
+  
+  i any disables many type checking rules. Its use should be avoided.
+  
+
+src/components/layout/dashboard-layout/AppSidebar.tsx:5:2 lint/correctness/noUnusedImports  FIXABLE  ━━━━━━━━━━
+
+  ! Several of these imports are unused.
+  
+     3 │ import { Link } from "@tanstack/react-router";
+     4 │ import {
+   > 5 │ 	BarChart3,
+       │ 	^^^^^^^^^^
+   > 6 │ 	BookOpen,
+        ...
+  > 14 │ 	UserSquare2,
+  > 15 │ 	Users,
+       │ 	^^^^^
+    16 │ } from "lucide-react";
+    17 │ import type * as React from "react";
+  
+  i Unused imports might be the result of an incomplete refactoring.
+  
+  i Unsafe fix: Remove the unused imports.
+  
+      3   3 │   import { Link } from "@tanstack/react-router";
+      4   4 │   import {
+      5     │ - → BarChart3,
+      6   5 │   	BookOpen,
+      7   6 │   	ChevronRight,
+      8     │ - → LayoutDashboard,
+      9     │ - → LifeBuoy,
+     10     │ - → LogOut,
+     11     │ - → MoreHorizontal,
+     12     │ - → Settings,
+     13   7 │   	Sparkles,
+     14     │ - → UserSquare2,
+     15     │ - → Users,
+     16   8 │   } from "lucide-react";
+     17   9 │   import type * as React from "react";
+  
+
+src/components/layout/dashboard-layout/DashboardFooter.tsx:1:8 lint/correctness/noUnusedImports  FIXABLE  ━━━━━━━━━━
+
+  ! These imports are unused.
+  
+  > 1 │ import React, { type FC } from "react";
+      │        ^^^^^
+    2 │ 
+    3 │ const DashboardFooter: FC = () => {
+  
+  i Unused imports might be the result of an incomplete refactoring.
+  
+  i Unsafe fix: Remove the unused imports.
+  
+    1 │ import·React,·{·type·FC·}·from·"react";
+      │        -------                         
+
+src/components/ui/field.tsx:75:50 suppressions/incorrect ━━━━━━━━━━
+
+  ! A suppression shouldn't have an <explanation> placeholder. Example of suppression: // biome-ignore lint: false positive
+  
+    73 │ }: React.ComponentProps<"div"> & VariantProps<typeof fieldVariants>) {
+    74 │ 	return (
+  > 75 │ 		// biome-ignore lint/a11y/useSemanticElements: <explanation>
+       │ 		                                               ^^^^^^^^^^^^^
+    76 │ 		<div
+    77 │ 			role="group"
+  
+
+src/components/ui/sidebar.tsx:83:4 lint/suspicious/noDocumentCookie ━━━━━━━━━━
+
+  ! Direct assigning to document.cookie is not recommended.
+  
+    82 │ 			// This sets the cookie to keep the sidebar state.
+  > 83 │ 			document.cookie = `${SIDEBAR_COOKIE_NAME}=${openState}; path=/; max-age=${SIDEBAR_COOKIE_MAX_AGE}`;
+       │ 			^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    84 │ 		},
+    85 │ 		[setOpenProp, open],
+  
+  i Consider using the Cookie Store API.
+  
+
+src/db/prisma.ts:5:20 lint/style/noNonNullAssertion ━━━━━━━━━━
+
+  ! Forbidden non-null assertion.
+  
+    4 │ const adapter = new PrismaPg({
+  > 5 │ 	connectionString: process.env.DATABASE_URL!,
+      │ 	                  ^^^^^^^^^^^^^^^^^^^^^^^^^
+    6 │ });
+    7 │ 
+  
+
+src/feature/auth/procedure/auth.procedure.spec.ts:21:43 lint/suspicious/noExplicitAny ━━━━━━━━━━
+
+  ! Unexpected any. Specify a different type.
+  
+    19 │ 		const input = { email: "test@example.com", password: "password123" };
+    20 │ 		const mockResp = { user: { id: "1" }, session: { id: "s1" } };
+  > 21 │ 		mockLogin.mockResolvedValue(mockResp as any);
+       │ 		                                        ^^^
+    22 │ 
+    23 │ 		// @ts-expect-error
+  
+  i any disables many type checking rules. Its use should be avoided.
+  
+
+src/feature/auth/procedure/auth.procedure.spec.ts:49:44 lint/suspicious/noExplicitAny ━━━━━━━━━━
+
+  ! Unexpected any. Specify a different type.
+  
+    47 │ 		};
+    48 │ 		const mockUser = { id: "user-1", name: input.name, email: input.email };
+  > 49 │ 		mockSignUp.mockResolvedValue(mockUser as any);
+       │ 		                                         ^^^
+    50 │ 
+    51 │ 		// @ts-expect-error
+  
+  i any disables many type checking rules. Its use should be avoided.
+  
+
+src/feature/auth/procedure/auth.procedure.spec.ts:74:51 lint/suspicious/noExplicitAny ━━━━━━━━━━
+
+  ! Unexpected any. Specify a different type.
+  
+    72 │ 		const input = { schoolName: "Test School", logo: "logo.png" };
+    73 │ 		const mockResp = { success: true, school: { id: "s1" } };
+  > 74 │ 		mockCreateProfile.mockResolvedValue(mockResp as any);
+       │ 		                                                ^^^
+    75 │ 
+    76 │ 		// @ts-expect-error
+  
+  i any disables many type checking rules. Its use should be avoided.
+  
+
+src/feature/auth/procedure/auth.procedure.spec.ts:98:40 lint/suspicious/noExplicitAny ━━━━━━━━━━
+
+  ! Unexpected any. Specify a different type.
+  
+     96 │ 		const headers = new Headers();
+     97 │ 		const mockResp = { user: { id: "1" }, session: { id: "s1" } };
+   > 98 │ 		mockMe.mockResolvedValue(mockResp as any);
+        │ 		                                     ^^^
+     99 │ 
+    100 │ 		// @ts-expect-error
+  
+  i any disables many type checking rules. Its use should be avoided.
+  
+
+src/feature/auth/repo/auth.repo.spec.ts:24:64 lint/suspicious/noExplicitAny ━━━━━━━━━━
+
+  ! Unexpected any. Specify a different type.
+  
+    22 │ 				email: "test@example.com",
+    23 │ 			};
+  > 24 │ 			vi.mocked(prisma.user.update).mockResolvedValue(mockUser as any);
+       │ 			                                                            ^^^
+    25 │ 
+    26 │ 			const result = await repo.linkUserToSchool(userId, schoolId, role);
+  
+  i any disables many type checking rules. Its use should be avoided.
+  
+
+src/server/orpc/rate-limit.ts:1:21 lint/correctness/noUnusedImports  FIXABLE  ━━━━━━━━━━
+
+  ! Several of these imports are unused.
+  
+  > 1 │ import { ORPCError, os } from "@orpc/server";
+      │                     ^^
+    2 │ import { logger } from "@/lib/logger";
+    3 │ import { baseContext } from "./middleware";
+  
+  i Unused imports might be the result of an incomplete refactoring.
+  
+  i Unsafe fix: Remove the unused imports.
+  
+    1 │ import·{·ORPCError,·os·}·from·"@orpc/server";
+      │                     ---                      
+
+src/feature/dashboard/ui/components/RecentActivity.tsx:30:5 lint/a11y/useButtonType ━━━━━━━━━━
+
+  × Provide an explicit type prop for the button element.
+  
+    28 │ 			<div className="flex items-center justify-between mb-6">
+    29 │ 				<h3 className="text-lg font-bold tracking-tight">Recent Activity</h3>
+  > 30 │ 				<button className="text-sm font-semibold text-primary hover:underline">
+       │ 				^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    31 │ 					View all
+    32 │ 				</button>
+  
+  i The default type of a button is submit, which causes the submission of a form when placed inside a `form` element. This is likely not the behaviour that you want inside a React application.
+  
+  i Allowed button types are: submit, button or reset
+  
+
+The number of diagnostics exceeds the limit allowed. Use --max-diagnostics to increase it.
+Diagnostics not shown: 36.
+Checked 114 files in 47ms. No fixes applied.
+Found 1 error.
+Found 55 warnings.
+check ━━━━━━━━━━━━━━━━━━━
+
+  × Some errors were emitted while running checks.
+  
+

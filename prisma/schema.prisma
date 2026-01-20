@@ -1,0 +1,213 @@
+generator client {
+  provider = "prisma-client"
+  output   = "./generated"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum UserRole {
+  user
+  schoolAdmin
+  teacher
+  student
+  superAdmin
+}
+
+enum OnboardingStatus {
+  PENDING
+  COMPLETED
+}
+
+enum GradingSystem {
+  GPA
+  PERCENTAGE
+  LETTER
+}
+
+model School {
+  id               String           @id @default(cuid())
+  name             String
+  slug             String           @unique
+  logo             String?
+  address          String?
+  website          String?
+  onboardingStatus OnboardingStatus @default(PENDING)
+  createdAt        DateTime         @default(now())
+  updatedAt        DateTime         @updatedAt
+
+  users         User[]
+  academicYears AcademicYear[]
+  gradeLevels   GradeLevel[]
+}
+
+model User {
+  id            String    @id
+  name          String
+  email         String
+  emailVerified Boolean
+  image         String?
+  createdAt     DateTime
+  updatedAt     DateTime
+  banned        Boolean?
+  banReason     String?
+  banExpires    DateTime?
+  sessions      Session[]
+  accounts      Account[]
+  role          UserRole
+
+  schoolId String?
+  school   School? @relation(fields: [schoolId], references: [id])
+
+  studentProfile StudentProfile?
+
+  invitations Invitation[]
+
+  @@unique([email])
+  @@index([schoolId])
+  @@map("user")
+}
+
+model Session {
+  id             String   @id
+  expiresAt      DateTime
+  token          String
+  createdAt      DateTime
+  updatedAt      DateTime
+  ipAddress      String?
+  userAgent      String?
+  userId         String
+  user           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  impersonatedBy String?
+
+  activeOrganizationId String?
+
+  @@unique([token])
+  @@map("session")
+}
+
+model Account {
+  id                    String    @id
+  accountId             String
+  providerId            String
+  userId                String
+  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  accessToken           String?
+  refreshToken          String?
+  idToken               String?
+  accessTokenExpiresAt  DateTime?
+  refreshTokenExpiresAt DateTime?
+  scope                 String?
+  password              String?
+  createdAt             DateTime
+  updatedAt             DateTime
+
+  @@map("account")
+}
+
+model Verification {
+  id         String    @id
+  identifier String
+  value      String
+  expiresAt  DateTime
+  createdAt  DateTime?
+  updatedAt  DateTime?
+
+  @@map("verification")
+}
+
+model Invitation {
+  id             String   @id
+  organizationId String
+  email          String
+  role           String?
+  status         String
+  expiresAt      DateTime
+  inviterId      String
+  user           User     @relation(fields: [inviterId], references: [id], onDelete: Cascade)
+
+  @@map("invitation")
+}
+
+model AcademicYear {
+  id            String        @id @default(cuid())
+  name          String // e.g., "2025-2026"
+  startDate     DateTime
+  endDate       DateTime
+  isActive      Boolean       @default(false)
+  gradingSystem GradingSystem @default(GPA)
+  schoolId      String
+  school        School        @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+  terms         Term[]
+
+  @@index([schoolId])
+}
+
+model Term {
+  id             String       @id @default(cuid())
+  name           String // e.g., "Term 1"
+  startDate      DateTime
+  endDate        DateTime
+  academicYearId String
+  academicYear   AcademicYear @relation(fields: [academicYearId], references: [id], onDelete: Cascade)
+
+  @@index([academicYearId])
+}
+
+model GradeLevel {
+  id       String    @id @default(cuid())
+  name     String // e.g., "Grade 1"
+  level    Int // Numerical order
+  schoolId String
+  school   School    @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+  sections Section[]
+
+  @@index([schoolId])
+}
+
+model Section {
+  id           String     @id @default(cuid())
+  name         String // e.g., "Section A"
+  gradeLevelId String
+  gradeLevel   GradeLevel @relation(fields: [gradeLevelId], references: [id], onDelete: Cascade)
+
+  // Reverse relation for StudentProfile if needed, or just link by ID.
+  // Ideally StudentProfile should link to a Section.
+  students StudentProfile[]
+
+  @@index([gradeLevelId])
+}
+
+model StudentProfile {
+  id     String @id @default(cuid())
+  userId String @unique
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // Personal
+  dob        DateTime?
+  gender     Gender?
+  bloodGroup String?
+  address    String?
+
+  // Guardian
+  guardianName     String?
+  guardianPhone    String?
+  guardianEmail    String?
+  guardianRelation String? // Father, Mother, etc.
+
+  // Academic
+  admissionNumber String?
+  rollNumber      String?
+  joiningDate     DateTime?
+
+  // Relations
+  sectionId String?
+  section   Section? @relation(fields: [sectionId], references: [id])
+}
+
+enum Gender {
+  MALE
+  FEMALE
+  OTHER
+}
