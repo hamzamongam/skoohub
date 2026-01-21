@@ -110,6 +110,7 @@ export function DataTable<TData, TValue>({
 						{onBulkDelete && (
 							<button
 								type="button"
+								aria-label="Delete selected rows"
 								onClick={() => {
 									const ids = table
 										.getFilteredSelectedRowModel()
@@ -123,6 +124,7 @@ export function DataTable<TData, TValue>({
 						)}
 						<button
 							type="button"
+							aria-label="Reset selection"
 							onClick={() => table.resetRowSelection()}
 							className="flex items-center justify-center p-2 rounded-xl hover:bg-white/10 transition-colors"
 						>

@@ -189,6 +189,9 @@ model StudentProfile {
   gender     Gender?
   bloodGroup String?
   address    String?
+  phone      String?
+  fatherName String?
+  motherName String?
 
   // Guardian
   guardianName     String?

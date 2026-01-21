@@ -1,4 +1,5 @@
 import { vi } from "vitest";
+import "@testing-library/jest-dom/vitest";
 
 // Mock Logger
 vi.mock("@/lib/logger", () => ({
@@ -22,6 +23,7 @@ vi.mock("@/db/prisma", () => ({
 		user: {
 			update: vi.fn(),
 			findUnique: vi.fn(),
+			findFirst: vi.fn(),
 		},
 	},
 }));

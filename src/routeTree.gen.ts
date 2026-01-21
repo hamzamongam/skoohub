@@ -13,6 +13,7 @@ import { Route as TestRouteImport } from './routes/test'
 import { Route as RegisterRouteImport } from './routes/register'
 import { Route as OnboardingRouteImport } from './routes/onboarding'
 import { Route as LinkSchoolRouteImport } from './routes/link-school'
+import { Route as ComingSoonRouteImport } from './routes/coming-soon'
 import { Route as AuthedRouteRouteImport } from './routes/_authed/route'
 import { Route as AuthRouteRouteImport } from './routes/_auth/route'
 import { Route as IndexRouteImport } from './routes/index'
@@ -42,6 +43,11 @@ const OnboardingRoute = OnboardingRouteImport.update({
 const LinkSchoolRoute = LinkSchoolRouteImport.update({
   id: '/link-school',
   path: '/link-school',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ComingSoonRoute = ComingSoonRouteImport.update({
+  id: '/coming-soon',
+  path: '/coming-soon',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AuthedRouteRoute = AuthedRouteRouteImport.update({
@@ -97,6 +103,7 @@ const AuthedDashboardStudentsAddRoute =
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/coming-soon': typeof ComingSoonRoute
   '/link-school': typeof LinkSchoolRoute
   '/onboarding': typeof OnboardingRoute
   '/register': typeof RegisterRoute
@@ -107,10 +114,11 @@ export interface FileRoutesByFullPath {
   '/api/rpc/$': typeof ApiRpcSplatRoute
   '/dashboard/': typeof AuthedDashboardIndexRoute
   '/dashboard/students/add': typeof AuthedDashboardStudentsAddRoute
-  '/dashboard/students': typeof AuthedDashboardStudentsIndexRoute
+  '/dashboard/students/': typeof AuthedDashboardStudentsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/coming-soon': typeof ComingSoonRoute
   '/link-school': typeof LinkSchoolRoute
   '/onboarding': typeof OnboardingRoute
   '/register': typeof RegisterRoute
@@ -127,6 +135,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/_auth': typeof AuthRouteRouteWithChildren
   '/_authed': typeof AuthedRouteRouteWithChildren
+  '/coming-soon': typeof ComingSoonRoute
   '/link-school': typeof LinkSchoolRoute
   '/onboarding': typeof OnboardingRoute
   '/register': typeof RegisterRoute
@@ -143,6 +152,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/coming-soon'
     | '/link-school'
     | '/onboarding'
     | '/register'
@@ -153,10 +163,11 @@ export interface FileRouteTypes {
     | '/api/rpc/$'
     | '/dashboard/'
     | '/dashboard/students/add'
-    | '/dashboard/students'
+    | '/dashboard/students/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/coming-soon'
     | '/link-school'
     | '/onboarding'
     | '/register'
@@ -172,6 +183,7 @@ export interface FileRouteTypes {
     | '/'
     | '/_auth'
     | '/_authed'
+    | '/coming-soon'
     | '/link-school'
     | '/onboarding'
     | '/register'
@@ -189,6 +201,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthRouteRoute: typeof AuthRouteRouteWithChildren
   AuthedRouteRoute: typeof AuthedRouteRouteWithChildren
+  ComingSoonRoute: typeof ComingSoonRoute
   LinkSchoolRoute: typeof LinkSchoolRoute
   OnboardingRoute: typeof OnboardingRoute
   RegisterRoute: typeof RegisterRoute
@@ -227,17 +240,24 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LinkSchoolRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/coming-soon': {
+      id: '/coming-soon'
+      path: '/coming-soon'
+      fullPath: '/coming-soon'
+      preLoaderRoute: typeof ComingSoonRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/_authed': {
       id: '/_authed'
       path: ''
-      fullPath: ''
+      fullPath: '/'
       preLoaderRoute: typeof AuthedRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_auth': {
       id: '/_auth'
       path: ''
-      fullPath: ''
+      fullPath: '/'
       preLoaderRoute: typeof AuthRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
@@ -286,7 +306,7 @@ declare module '@tanstack/react-router' {
     '/_authed/dashboard/students/': {
       id: '/_authed/dashboard/students/'
       path: '/students'
-      fullPath: '/dashboard/students'
+      fullPath: '/dashboard/students/'
       preLoaderRoute: typeof AuthedDashboardStudentsIndexRouteImport
       parentRoute: typeof AuthedDashboardRouteRoute
     }
@@ -343,6 +363,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthRouteRoute: AuthRouteRouteWithChildren,
   AuthedRouteRoute: AuthedRouteRouteWithChildren,
+  ComingSoonRoute: ComingSoonRoute,
   LinkSchoolRoute: LinkSchoolRoute,
   OnboardingRoute: OnboardingRoute,
   RegisterRoute: RegisterRoute,

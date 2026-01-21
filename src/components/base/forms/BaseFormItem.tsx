@@ -62,7 +62,7 @@ export default function FormItem<TFieldValues extends FieldValues>({
 
 	return (
 		<Field data-invalid={invalid} className={cn(className)}>
-			<FieldLabel>
+			<FieldLabel htmlFor={name}>
 				{label}
 				{required && <span className="text-red-600">*</span>}
 			</FieldLabel>

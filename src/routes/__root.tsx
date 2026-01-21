@@ -9,13 +9,16 @@ import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
 import { Toaster } from "sonner";
 import type { AuthSession } from "@/feature/auth/auth.functions";
 import { userQueryOptions } from "@/feature/auth/auth.functions";
+import { siteStatusQueryOptions } from "@/feature/site/site.server";
 import { ThemeProvider } from "../components/providers/ThemeProvider";
 import TanStackQueryDevtools from "../integrations/tanstack-query/devtools";
 import appCss from "../styles.css?url";
+import { ComingSoon } from "./coming-soon";
 
 interface MyRouterContext {
 	queryClient: QueryClient;
 	session: AuthSession | null;
+	siteStatus: { isComingSoon: boolean };
 }
 
 declare module "@tanstack/react-router" {
@@ -29,8 +32,13 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
 		const session = await context.queryClient.ensureQueryData(
 			userQueryOptions(),
 		);
+		const siteStatus = await context.queryClient.ensureQueryData(
+			siteStatusQueryOptions(),
+		);
+
 		return {
 			session,
+			siteStatus,
 		};
 	},
 	head: () => ({
@@ -43,10 +51,25 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
 				content: "width=device-width, initial-scale=1",
 			},
 			{
-				title: "TanStack Start Starter",
+				title: "Skoohub - #1 School Management System in Kerala",
+			},
+			{
+				name: "description",
+				content:
+					"Skoohub is the best school management system web application in Kerala, designed to streamline administration, enhance student learning, and improve parent engagement.",
+			},
+			{
+				name: "keywords",
+				content:
+					"kerala best school management system, school management software kerala, education software, student information system, skoohub, school admin, edtech, malayalam school software",
 			},
 		],
 		links: [
+			{
+				rel: "icon",
+				type: "image/svg+xml",
+				href: "/favicon.svg",
+			},
 			{
 				rel: "stylesheet",
 				href: appCss,
@@ -58,6 +81,7 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
 });
 
 function RootDocument({ children }: { children: React.ReactNode }) {
+	const context = Route.useRouteContext();
 	return (
 		<html lang="en" suppressHydrationWarning>
 			<head>
@@ -65,10 +89,11 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 			</head>
 			<body>
 				<ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-					{children}
+					{context.siteStatus?.isComingSoon ? <ComingSoon /> : children}
 					<Toaster richColors closeButton position="top-center" />
 				</ThemeProvider>
 				<TanStackDevtools
+					// ...
 					config={{
 						position: "bottom-right",
 					}}

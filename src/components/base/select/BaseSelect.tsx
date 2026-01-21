@@ -3,7 +3,7 @@
 import { Check, ChevronsUpDown, X } from "lucide-react";
 import * as React from "react";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
+// Button import removed as used via div now
 import {
 	Command,
 	CommandEmpty,
@@ -55,7 +55,7 @@ export function BaseSelect({
 				onValueChange={onChange}
 			>
 				<SelectTrigger className={cn(className, "!h-10")}>
-					<SelectValue placeholder="Select Value" />
+					<SelectValue placeholder={placeholder} />
 				</SelectTrigger>
 				<SelectContent>
 					{data.map((item) => (
@@ -85,45 +85,50 @@ export function BaseSelect({
 
 	return (
 		<Popover open={open} onOpenChange={setOpen}>
-			<PopoverTrigger>
-				<Button
-					variant="outline"
-					role="combobox"
-					aria-expanded={open}
-					className={cn(
-						"w-full justify-between h-auto min-h-10 hover:bg-background",
-						className,
-					)}
-					disabled={disabled}
-				>
-					<div>
-						<div className="flex flex-wrap gap-1 items-center">
-							{selectedValues.length > 0 ? (
-								selectedValues.map((val) => {
-									const label =
-										data.find((item) => item.value === val)?.label || val;
-									return (
-										<Badge key={val} variant="secondary" className="mr-1">
-											{label}
-											<button
-												className="ml-1 ring-offset-background rounded-full outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 cursor-pointer"
-												onClick={(e) => handleRemove(val, e)}
-												type="button"
-											>
-												<X className="h-3 w-3 text-muted-foreground hover:text-foreground" />
-											</button>
-										</Badge>
-									);
-								})
-							) : (
-								<span className="text-muted-foreground font-normal">
-									{placeholder}
-								</span>
-							)}
-						</div>
-						<ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+			<PopoverTrigger
+				render={<div />}
+				nativeButton={false}
+				role="combobox"
+				aria-expanded={open}
+				tabIndex={0}
+				className={cn(
+					"flex items-center rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-ring disabled:cursor-not-allowed disabled:opacity-50",
+					"w-full justify-between h-auto min-h-10 hover:bg-background cursor-pointer",
+					className,
+					disabled && "pointer-events-none opacity-50",
+				)}
+				aria-disabled={disabled}
+			>
+				<div className="flex flex-1 items-center justify-between w-full">
+					<div className="flex flex-wrap gap-1 items-center">
+						{selectedValues.length > 0 ? (
+							selectedValues.map((val) => {
+								const label =
+									data.find((item) => item.value === val)?.label || val;
+								return (
+									<Badge key={val} variant="secondary" className="mr-1">
+										{label}
+										<button
+											className="ml-1 ring-offset-background rounded-full outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 cursor-pointer flex items-center justify-center p-0.5"
+											onClick={(e) => {
+												e.preventDefault();
+												handleRemove(val, e);
+											}}
+											type="button"
+										>
+											<X className="h-3 w-3 text-muted-foreground hover:text-foreground" />
+										</button>
+									</Badge>
+								);
+							})
+						) : (
+							<span className="text-muted-foreground font-normal">
+								{placeholder}
+							</span>
+						)}
 					</div>
-				</Button>
+					<ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+				</div>
 			</PopoverTrigger>
 			<PopoverContent className="w-full p-0" align="start">
 				<Command>

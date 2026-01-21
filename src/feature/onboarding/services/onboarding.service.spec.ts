@@ -96,8 +96,14 @@ describe("OnboardingService", () => {
 
 			expect(repo.findSchoolById).toHaveBeenCalledWith(schoolId);
 			expect(repo.createInvitation).toHaveBeenCalled();
-			expect(repo.updateSchoolStatus).toHaveBeenCalledWith(schoolId, "ACTIVE");
-			expect(repo.updateSchoolStatus).toHaveBeenCalledWith(schoolId, "ACTIVE");
+			expect(repo.updateSchoolStatus).toHaveBeenCalledWith(
+				schoolId,
+				"COMPLETED",
+			);
+			expect(repo.updateSchoolStatus).toHaveBeenCalledWith(
+				schoolId,
+				"COMPLETED",
+			);
 			expect(result.success).toBe(true);
 			expect(result.message).toBe("Staff invitations sent");
 			expect(result.data).toBeNull();
