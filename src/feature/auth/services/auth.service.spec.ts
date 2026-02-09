@@ -46,7 +46,7 @@ describe("AuthService", () => {
 		it("should throw UnauthorizedError on login failure", async () => {
 			const input = { email: "wrong@example.com", password: "wrong" };
 			vi.mocked(auth.api.signInEmail).mockRejectedValue(
-				new Error("Invalid credentials"),
+				new UnauthorizedError("Invalid credentials"),
 			);
 
 			await expect(service.login(input)).rejects.toThrow(UnauthorizedError);
@@ -71,7 +71,7 @@ describe("AuthService", () => {
 			};
 
 			vi.mocked(auth.api.signUpEmail).mockResolvedValue({
-				user: mockUser,
+				user: mockUser as any,
 				token: "token",
 			});
 

@@ -2,6 +2,7 @@ import { oc } from "@orpc/contract";
 import z from "zod";
 import { SuccessResponseSchema } from "../../../server/orpc/utils";
 import {
+	ChangePasswordSchema,
 	CreateSchoolProfileSchema,
 	loginSchema,
 	SignUpSchema,
@@ -18,4 +19,11 @@ export const authContract = oc.router({
 		.input(CreateSchoolProfileSchema)
 		.output(SuccessResponseSchema(z.any())),
 	me: oc.output(SuccessResponseSchema(z.any())),
+	logout: oc.output(SuccessResponseSchema(z.any())),
+	changePassword: oc
+		.input(ChangePasswordSchema)
+		.output(SuccessResponseSchema(z.any())),
+	resetPassword: oc
+		.input(z.object({ token: z.string(), newPassword: z.string() }))
+		.output(SuccessResponseSchema(z.any())),
 });

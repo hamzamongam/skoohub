@@ -30,7 +30,7 @@ const DashboardLayout: FC<DashboardLayoutProps> = ({ children }) => {
 				<AppSidebar className="z-20 relative" />
 
 				<SidebarInset className="relative z-10 flex flex-col min-h-screen bg-transparent">
-					<header className="flex h-16 shrink-0 items-center justify-between gap-4 border-b px-6 sticky top-0 glass z-30 transition-all duration-300">
+					<header className="flex h-16 shrink-0 items-center justify-between gap-4 border-b px-4 sticky top-0 glass z-30 transition-all duration-300">
 						<div className="flex items-center gap-3">
 							<div className="flex items-center justify-center p-1.5 rounded-xl bg-primary/10 hover:bg-primary/20 transition-colors cursor-pointer sidebar-trigger-container">
 								<SidebarTrigger className="h-5 w-5 static!" />
@@ -47,7 +47,7 @@ const DashboardLayout: FC<DashboardLayoutProps> = ({ children }) => {
 						</div>
 					</header>
 
-					<main className="flex-1 p-6 md:p-10">
+					<main className="flex-1 p-4 md:p-4">
 						<div className="w-full mx-auto space-y-10 animate-in fade-in slide-in-from-bottom-6 duration-1000 ease-out">
 							{children}
 						</div>

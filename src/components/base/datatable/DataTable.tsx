@@ -97,13 +97,13 @@ export function DataTable<TData, TValue>({
 							onChange={(event) =>
 								table.getColumn(searchKey)?.setFilterValue(event.target.value)
 							}
-							className="w-full h-11 pl-10 pr-4 rounded-2xl bg-muted/20 border-border/50 border hover:bg-muted/30 focus:bg-background focus:ring-4 focus:ring-primary/5 focus:border-primary/20 transition-all text-sm outline-none"
+							className="w-full h-11 pl-10 pr-4 rounded-lg bg-muted/20 border-border/50 border hover:bg-muted/30 focus:bg-background focus:ring-4 focus:ring-primary/5 focus:border-primary/20 transition-all text-sm outline-none"
 						/>
 					</div>
 				)}
 
 				{selectedRowsCount > 0 && (
-					<div className="flex items-center gap-2 p-1 pl-4 pr-1 rounded-2xl bg-foreground text-background animate-in slide-in-from-right-4 fade-in duration-300">
+					<div className="flex items-center gap-2 p-1 pl-4 pr-1 rounded-lg bg-foreground text-background animate-in slide-in-from-right-4 fade-in duration-300">
 						<span className="text-xs font-black uppercase tracking-widest mr-4">
 							{selectedRowsCount} selected
 						</span>
@@ -134,7 +134,7 @@ export function DataTable<TData, TValue>({
 				)}
 			</div>
 
-			<div className="glass-card rounded-[2rem] overflow-hidden border border-border/50 shadow-2xl shadow-primary/5">
+			<div className="glass-card rounded-lg overflow-hidden border border-border/50 shadow-2xl shadow-primary/5">
 				<Table>
 					<TableHeader className="bg-muted/30">
 						{table.getHeaderGroups().map((headerGroup) => (

@@ -11,9 +11,6 @@ import { onGlobalError } from "@/server/orpc/utils";
 const rpcHandler = new RPCHandler(router, {
 	interceptors: [
 		onGlobalError, // Centralized domain error mapping
-		onError((error) => {
-			logger.error({ error }, "RPC handler error");
-		}),
 	],
 });
 

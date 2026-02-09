@@ -95,12 +95,13 @@ export const PersonalDetails: FC<PersonalDetailsProps> = ({ form }) => {
 						name="image"
 						label="Profile Image"
 					>
-						<div className="space-y-1 h-full">
-							<BaseImageUpload className="h-full" manualUpload={true} />
+						<BaseImageUpload className="h-full" />
+						{/* <div className="space-y-1 h-full">
+							<BaseImageUpload className="h-full" />
 							<p className="text-[10px] text-muted-foreground text-center lg:text-left">
 								Upload a profile picture (max 5MB)
 							</p>
-						</div>
+						</div> */}
 					</BaseForm.Item>
 				</div>
 			</div>

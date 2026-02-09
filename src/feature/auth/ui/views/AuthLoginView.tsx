@@ -1,9 +1,12 @@
 import type { FC } from "react";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import LoginForm from "../components/LoginForm";
+import { useLoginForm } from "../hooks/useLoginForm";
 import AuthLayout from "../layout/AuthLayout";
 
 const AuthLoginView: FC<{ redirectUrl?: string }> = ({ redirectUrl }) => {
+	const { form, handleSubmit, isPending } = useLoginForm({ redirectUrl });
+
 	return (
 		<AuthLayout>
 			<div className="absolute top-4 right-4 z-50">
@@ -17,7 +20,7 @@ const AuthLoginView: FC<{ redirectUrl?: string }> = ({ redirectUrl }) => {
 					Please enter your details to sign in to your account.
 				</p>
 			</div>
-			<LoginForm redirectUrl={redirectUrl} />
+			<LoginForm form={form} onSubmit={handleSubmit} isPending={isPending} />
 		</AuthLayout>
 	);
 };

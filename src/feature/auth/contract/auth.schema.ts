@@ -18,8 +18,33 @@ export const CreateSchoolProfileSchema = z.object({
 	website: z.string().url("Invalid website URL").optional().or(z.literal("")),
 });
 
+export const UserSchema = z.object({
+	id: z.string(),
+	email: z.email(),
+	name: z.string(),
+	role: z.string(),
+});
+
+export const AuthSessionSchema = z.object({
+	user: UserSchema,
+	session: z.object({
+		id: z.string(),
+		expiresAt: z.date(),
+		createdAt: z.date(),
+	}),
+});
+
 export type TLoginSchema = z.infer<typeof loginSchema>;
 export type SignUpInput = z.infer<typeof SignUpSchema>;
 export type CreateSchoolProfileInput = z.infer<
 	typeof CreateSchoolProfileSchema
 >;
+export type AuthSession = z.infer<typeof AuthSessionSchema>;
+
+export const ChangePasswordSchema = z.object({
+	currentPassword: z.string().min(1, "Current password is required"),
+	newPassword: z.string().min(8, "Password must be at least 8 characters long"),
+	revokeOtherSessions: z.boolean().optional(),
+});
+
+export type ChangePasswordInput = z.infer<typeof ChangePasswordSchema>;

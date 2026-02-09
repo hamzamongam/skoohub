@@ -13,6 +13,7 @@ interface PageLayoutProps {
 	className?: string;
 	animate?: boolean;
 	gradientTitle?: boolean;
+	isBack?: boolean;
 }
 
 export const PageLayout: FC<PageLayoutProps> = ({
@@ -26,9 +27,10 @@ export const PageLayout: FC<PageLayoutProps> = ({
 	className,
 	animate = true,
 	gradientTitle = true,
+	isBack = false,
 }) => {
 	return (
-		<div className={cn("w-full flex flex-col gap-6", className)}>
+		<div className={cn("w-full flex flex-col gap-4", className)}>
 			{title && (
 				<PageHeader
 					title={title}
@@ -37,6 +39,7 @@ export const PageLayout: FC<PageLayoutProps> = ({
 					stats={stats}
 					className={headerClassName}
 					gradientTitle={gradientTitle}
+					isBack={isBack}
 				/>
 			)}
 			<div

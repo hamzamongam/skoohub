@@ -43,37 +43,13 @@ export const BaseImageUpload: FC<BaseImageUploadProps> = ({
 
 		setError(null);
 
-		if (manualUpload) {
-			const objectUrl = URL.createObjectURL(file);
-			setImageUrl(objectUrl);
-			onChange?.(file);
-			// clear input
-			if (inputRef.current) inputRef.current.value = "";
-			return;
-		}
-
-		setIsUploading(true);
-
-		try {
-			const formData = new FormData();
-			formData.append("file", file);
-
-			const result = await uploadStudentImage({ data: formData });
-
-			if (result?.url) {
-				onChange?.(result.url);
-				setImageUrl(result.url);
-			} else {
-				throw new Error("Upload failed, no URL returned.");
-			}
-		} catch (err: any) {
-			console.error("Upload error:", err);
-			setError(err.message || "Failed to upload image.");
-		} finally {
-			setIsUploading(false);
-			// Reset input so same file selection triggers change if retrying after clear
-			if (inputRef.current) inputRef.current.value = "";
-		}
+		const objectUrl = URL.createObjectURL(file);
+		setImageUrl(objectUrl);
+		onChange?.(file);
+		console.log(file);
+		// clear input
+		// if (inputRef.current) inputRef.current.value = "";
+		// return;
 	};
 
 	const handleRemove = () => {

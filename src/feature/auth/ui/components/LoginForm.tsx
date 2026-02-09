@@ -1,49 +1,25 @@
-import { useRouter } from "@tanstack/react-router";
 import { type FC, useId } from "react";
-import type { SubmitHandler } from "react-hook-form";
+import type { SubmitHandler, UseFormReturn } from "react-hook-form";
 import { BaseButton } from "@/components/base/button";
 import { BaseCheckbox } from "@/components/base/checkbox";
 import BaseForm from "@/components/base/forms";
-import useBaseForm from "@/components/base/forms/useBaseForm";
 import InputPassword from "@/components/base/InputPassword";
 import { BaseInput } from "@/components/base/input";
-import { useOrpcMutation } from "@/hooks/useOrpcMutation";
-import { orpc } from "@/server/orpc/client";
-import { loginSchema, type TLoginSchema } from "../../contract/auth.schema";
+import type { TLoginSchema } from "../../contract/auth.schema";
 import SocialLoginButtons from "./SocialLoginButtons";
 
-const LoginForm: FC<{ redirectUrl?: string }> = ({ redirectUrl }) => {
-	const router = useRouter();
-	const { mutate: loginMutation, isPending } = useOrpcMutation(
-		orpc.auth.login.mutationOptions({
-			onSuccess: () => {
-				if (redirectUrl) {
-					router.navigate({ to: redirectUrl });
-				} else {
-					router.navigate({ to: "/" });
-				}
-			},
-		}),
-		{
-			successMessage: "Successfully signed in!",
-		},
-	);
-	const rememberId = useId();
-	const [form] = useBaseForm({
-		schema: loginSchema,
-		defaultValues: {
-			email: "",
-			password: "",
-		},
-	});
+interface LoginFormProps {
+	form: UseFormReturn<TLoginSchema>;
+	onSubmit: SubmitHandler<TLoginSchema>;
+	isPending: boolean;
+}
 
-	const handleSubmit: SubmitHandler<TLoginSchema> = (v) => {
-		loginMutation(v);
-	};
+const LoginForm: FC<LoginFormProps> = ({ form, onSubmit, isPending }) => {
+	const rememberId = useId();
 
 	return (
 		<div className="space-y-4 animate-in fade-in slide-in-from-bottom-4 duration-700">
-			<BaseForm form={form} onSubmit={handleSubmit}>
+			<BaseForm form={form} onSubmit={onSubmit}>
 				<BaseForm.Item
 					control={form.control}
 					name="email"
@@ -79,6 +55,12 @@ const LoginForm: FC<{ redirectUrl?: string }> = ({ redirectUrl }) => {
 						Forgot password?
 					</a>
 				</div>
+
+				{form.formState.errors.root && (
+					<p className="text-sm font-medium text-destructive">
+						{form.formState.errors.root.message}
+					</p>
+				)}
 
 				<BaseButton
 					variant="default"

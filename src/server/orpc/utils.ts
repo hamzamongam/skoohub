@@ -1,4 +1,5 @@
 import { ORPCError } from "@orpc/server";
+import { PrismaClientValidationError } from "@prisma/client/runtime/client";
 import { APIError } from "better-auth";
 import { ZodError, z } from "zod";
 import { logger } from "@/lib/logger";
@@ -32,6 +33,22 @@ export const onGlobalError = async ({ next }: { next: () => Promise<any> }) => {
 	try {
 		return await next();
 	} catch (error) {
+		if (error instanceof APIError) {
+			logger.warn(
+				{
+					errors: error.message,
+					statusCode: error.statusCode,
+					status: error.status,
+				},
+				"Btter Auth  error occurred",
+			);
+			throw new ORPCError(error.status as any, {
+				defined: true,
+				message: error.message,
+				status: error.statusCode,
+			});
+		}
+
 		if (error instanceof AppError) {
 			logger.warn(
 				{
@@ -39,24 +56,27 @@ export const onGlobalError = async ({ next }: { next: () => Promise<any> }) => {
 					message: error.message,
 					details: error.details,
 				},
-				"Application error occurred",
+				"Application error occurred AppError",
 			);
-			// biome-ignore lint/suspicious/noExplicitAny: map app error code to orpc error code
-			throw new ORPCError(error.code as any, {
+			throw new ORPCError(error.code, {
+				defined: true,
 				message: error.message,
 				data: error.details,
 			});
 		}
-		if (error instanceof APIError) {
+		if (error instanceof PrismaClientValidationError) {
 			logger.warn(
 				{
-					errors: error.message,
+					error: error.name,
+					message: error.message,
+					details: error.message,
 				},
-				"Btter Auth  error occurred",
+				"Prisma validation error occurred - Prisma",
 			);
 			throw new ORPCError("BAD_REQUEST", {
-				message: "Validation failed",
-				data: error.message ?? "Som",
+				defined: true,
+				message: error.message,
+				data: error.stack,
 			});
 		}
 
@@ -68,6 +88,7 @@ export const onGlobalError = async ({ next }: { next: () => Promise<any> }) => {
 				"Validation error occurred",
 			);
 			throw new ORPCError("BAD_REQUEST", {
+				defined: true,
 				message: "Validation failed",
 				data: error.flatten().fieldErrors,
 			});

@@ -6,9 +6,10 @@ export const StudentSchema = z.object({
 	email: z.string().email("Invalid email address"),
 	schoolId: z.string().nullable(),
 	role: z.string().optional().nullable(),
+	isActive: z.boolean().optional().default(true),
 
 	// Personal
-	image: z.string().optional().nullable(),
+	image: z.union([z.file(), z.string()]).optional().nullable(),
 	dob: z.date().optional().nullable(),
 	gender: z.enum(["MALE", "FEMALE", "OTHER"]).optional().nullable(),
 	bloodGroup: z.string().optional().nullable(),
@@ -27,17 +28,31 @@ export const StudentSchema = z.object({
 	admissionNumber: z.string().optional().nullable(),
 	rollNumber: z.string().optional().nullable(),
 	joiningDate: z.date().optional().nullable(),
-	sectionId: z.string().optional().nullable(),
+	classId: z.string().optional().nullable(),
 
 	createdAt: z.date(),
 	updatedAt: z.date(),
 });
 
 export const StudentSchemaInput = StudentSchema.omit({
+	isActive: true,
 	id: true,
 	createdAt: true,
 	updatedAt: true,
 	role: true,
+	schoolId: true,
+});
+
+export const StudentSchemaUpdateInput = StudentSchemaInput.extend({
+	id: z.string(),
+});
+
+export const StudentSchemaOutput = StudentSchema.extend({
+	class: z.object({
+		id: z.string(),
+		name: z.string(),
+	}),
 });
 
 export type StudentSchemaInputType = z.infer<typeof StudentSchemaInput>;
+export type StudentSchemaOutputType = z.infer<typeof StudentSchemaOutput>;

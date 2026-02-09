@@ -58,12 +58,27 @@ export type AcademicYear = Prisma.AcademicYearModel
  */
 export type Term = Prisma.TermModel
 /**
- * Model GradeLevel
+ * Model Subject
  * 
  */
-export type GradeLevel = Prisma.GradeLevelModel
+export type Subject = Prisma.SubjectModel
 /**
- * Model Section
+ * Model Teacher
  * 
  */
-export type Section = Prisma.SectionModel
+export type Teacher = Prisma.TeacherModel
+/**
+ * Model Class
+ * 
+ */
+export type Class = Prisma.ClassModel
+/**
+ * Model ClassSubject
+ * 
+ */
+export type ClassSubject = Prisma.ClassSubjectModel
+/**
+ * Model StudentProfile
+ * 
+ */
+export type StudentProfile = Prisma.StudentProfileModel

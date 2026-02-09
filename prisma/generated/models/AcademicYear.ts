@@ -415,6 +415,10 @@ export type AcademicYearUncheckedUpdateManyWithoutSchoolNestedInput = {
   deleteMany?: Prisma.AcademicYearScalarWhereInput | Prisma.AcademicYearScalarWhereInput[]
 }
 
+export type BoolFieldUpdateOperationsInput = {
+  set?: boolean
+}
+
 export type EnumGradingSystemFieldUpdateOperationsInput = {
   set?: $Enums.GradingSystem
 }

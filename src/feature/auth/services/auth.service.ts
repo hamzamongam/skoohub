@@ -1,9 +1,13 @@
+import { prisma } from "@/db/prisma";
 import { logger } from "@/lib/logger";
 import { auth } from "@/server/auth";
 import { toSuccessResponse } from "@/server/orpc/utils";
 import { BadRequestError, UnauthorizedError } from "@/utils/errors";
 import type { SchoolService } from "../../school/services/school.service";
-import type { TLoginSchema } from "../contract/auth.schema";
+import type {
+	ChangePasswordInput,
+	TLoginSchema,
+} from "../contract/auth.schema";
 import type { AuthRepository } from "../repo/auth.repo";
 
 /**
@@ -24,31 +28,18 @@ export class AuthService {
 	 * @throws {UnauthorizedError} if login fails.
 	 */
 	async login(input: TLoginSchema) {
-		try {
-			logger.info({ email: input.email }, "Login attempt");
-			const result = await auth.api.signInEmail({
-				body: {
-					email: input.email,
-					password: input.password,
-				},
-			});
-			logger.info(
-				{ email: input.email, userId: result?.user?.id },
-				"Login successful",
-			);
-			return toSuccessResponse(result, "Successfully signed in");
-		} catch (error) {
-			logger.warn(
-				{
-					email: input.email,
-					error: error instanceof Error ? error.message : "Unknown error",
-				},
-				"Login failed",
-			);
-			throw new UnauthorizedError(
-				error instanceof Error ? error.message : "Invalid credentials",
-			);
-		}
+		logger.info({ email: input.email }, "Login attempt");
+		const result = await auth.api.signInEmail({
+			body: {
+				email: input.email,
+				password: input.password,
+			},
+		});
+		logger.info(
+			{ email: input.email, userId: result?.user?.id },
+			"Login successful",
+		);
+		return toSuccessResponse(result, "Successfully signed in");
 	}
 
 	/**
@@ -84,9 +75,53 @@ export class AuthService {
 	}
 
 	/**
+	 * Step 2: resetPassword (The User)
+	 * Resets the password for the verified user.
+	 */
+	async resetPassword(token: string, newPassword: string) {
+		if (!token) {
+			throw new BadRequestError("Token is required");
+		}
+
+		logger.info({ token, newPassword }, "Resetting password");
+
+		await auth.api.resetPassword({
+			body: {
+				newPassword,
+				token,
+			},
+		});
+
+		logger.info("Password reset successfully");
+
+		return toSuccessResponse("", "Password reset successfully");
+	}
+
+	/**
 	 * Step 2: Tenant Profile (The School)
 	 * Creates the school profile and links the verified user as Owner.
 	 */
+
+	async changePassword(input: ChangePasswordInput) {
+		await auth.api.changePassword({
+			body: input,
+		});
+
+		logger.info("Password changed successfully");
+
+		return toSuccessResponse("", "Password changed successfully");
+	}
+
+	async logout(headers: Headers) {
+		await auth.api.signOut({
+			headers,
+		});
+
+		logger.info("User logged out successfully");
+
+		return toSuccessResponse("", "User logged out successfully");
+	}
+
 	async createSchoolProfile(
 		userId: string,
 		input: {

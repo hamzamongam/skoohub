@@ -21,9 +21,16 @@ import { Route as ApiSplatRouteImport } from './routes/api.$'
 import { Route as AuthLoginRouteImport } from './routes/_auth/login'
 import { Route as AuthedDashboardRouteRouteImport } from './routes/_authed/dashboard/route'
 import { Route as AuthedDashboardIndexRouteImport } from './routes/_authed/dashboard/index'
+import { Route as AuthInviteAcceptRouteImport } from './routes/auth/invite/accept'
 import { Route as ApiRpcSplatRouteImport } from './routes/api.rpc.$'
+import { Route as AuthedDashboardStudentsRouteRouteImport } from './routes/_authed/dashboard/students/route'
+import { Route as AuthedDashboardSettingsRouteRouteImport } from './routes/_authed/dashboard/settings/route'
 import { Route as AuthedDashboardStudentsIndexRouteImport } from './routes/_authed/dashboard/students/index'
+import { Route as AuthedDashboardSettingsIndexRouteImport } from './routes/_authed/dashboard/settings/index'
+import { Route as AuthedDashboardClassesIndexRouteImport } from './routes/_authed/dashboard/classes/index'
 import { Route as AuthedDashboardStudentsAddRouteImport } from './routes/_authed/dashboard/students/add'
+import { Route as AuthedDashboardStudentsStudentIdIndexRouteImport } from './routes/_authed/dashboard/students/$studentId/index'
+import { Route as AuthedDashboardStudentsStudentIdEditRouteImport } from './routes/_authed/dashboard/students/$studentId/edit'
 
 const TestRoute = TestRouteImport.update({
   id: '/test',
@@ -83,22 +90,63 @@ const AuthedDashboardIndexRoute = AuthedDashboardIndexRouteImport.update({
   path: '/',
   getParentRoute: () => AuthedDashboardRouteRoute,
 } as any)
+const AuthInviteAcceptRoute = AuthInviteAcceptRouteImport.update({
+  id: '/auth/invite/accept',
+  path: '/auth/invite/accept',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiRpcSplatRoute = ApiRpcSplatRouteImport.update({
   id: '/api/rpc/$',
   path: '/api/rpc/$',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthedDashboardStudentsRouteRoute =
+  AuthedDashboardStudentsRouteRouteImport.update({
+    id: '/students',
+    path: '/students',
+    getParentRoute: () => AuthedDashboardRouteRoute,
+  } as any)
+const AuthedDashboardSettingsRouteRoute =
+  AuthedDashboardSettingsRouteRouteImport.update({
+    id: '/settings',
+    path: '/settings',
+    getParentRoute: () => AuthedDashboardRouteRoute,
+  } as any)
 const AuthedDashboardStudentsIndexRoute =
   AuthedDashboardStudentsIndexRouteImport.update({
-    id: '/students/',
-    path: '/students/',
+    id: '/',
+    path: '/',
+    getParentRoute: () => AuthedDashboardStudentsRouteRoute,
+  } as any)
+const AuthedDashboardSettingsIndexRoute =
+  AuthedDashboardSettingsIndexRouteImport.update({
+    id: '/',
+    path: '/',
+    getParentRoute: () => AuthedDashboardSettingsRouteRoute,
+  } as any)
+const AuthedDashboardClassesIndexRoute =
+  AuthedDashboardClassesIndexRouteImport.update({
+    id: '/classes/',
+    path: '/classes/',
     getParentRoute: () => AuthedDashboardRouteRoute,
   } as any)
 const AuthedDashboardStudentsAddRoute =
   AuthedDashboardStudentsAddRouteImport.update({
-    id: '/students/add',
-    path: '/students/add',
-    getParentRoute: () => AuthedDashboardRouteRoute,
+    id: '/add',
+    path: '/add',
+    getParentRoute: () => AuthedDashboardStudentsRouteRoute,
+  } as any)
+const AuthedDashboardStudentsStudentIdIndexRoute =
+  AuthedDashboardStudentsStudentIdIndexRouteImport.update({
+    id: '/$studentId/',
+    path: '/$studentId/',
+    getParentRoute: () => AuthedDashboardStudentsRouteRoute,
+  } as any)
+const AuthedDashboardStudentsStudentIdEditRoute =
+  AuthedDashboardStudentsStudentIdEditRouteImport.update({
+    id: '/$studentId/edit',
+    path: '/$studentId/edit',
+    getParentRoute: () => AuthedDashboardStudentsRouteRoute,
   } as any)
 
 export interface FileRoutesByFullPath {
@@ -111,10 +159,17 @@ export interface FileRoutesByFullPath {
   '/dashboard': typeof AuthedDashboardRouteRouteWithChildren
   '/login': typeof AuthLoginRoute
   '/api/$': typeof ApiSplatRoute
+  '/dashboard/settings': typeof AuthedDashboardSettingsRouteRouteWithChildren
+  '/dashboard/students': typeof AuthedDashboardStudentsRouteRouteWithChildren
   '/api/rpc/$': typeof ApiRpcSplatRoute
+  '/auth/invite/accept': typeof AuthInviteAcceptRoute
   '/dashboard/': typeof AuthedDashboardIndexRoute
   '/dashboard/students/add': typeof AuthedDashboardStudentsAddRoute
+  '/dashboard/classes/': typeof AuthedDashboardClassesIndexRoute
+  '/dashboard/settings/': typeof AuthedDashboardSettingsIndexRoute
   '/dashboard/students/': typeof AuthedDashboardStudentsIndexRoute
+  '/dashboard/students/$studentId/edit': typeof AuthedDashboardStudentsStudentIdEditRoute
+  '/dashboard/students/$studentId/': typeof AuthedDashboardStudentsStudentIdIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -126,9 +181,14 @@ export interface FileRoutesByTo {
   '/login': typeof AuthLoginRoute
   '/api/$': typeof ApiSplatRoute
   '/api/rpc/$': typeof ApiRpcSplatRoute
+  '/auth/invite/accept': typeof AuthInviteAcceptRoute
   '/dashboard': typeof AuthedDashboardIndexRoute
   '/dashboard/students/add': typeof AuthedDashboardStudentsAddRoute
+  '/dashboard/classes': typeof AuthedDashboardClassesIndexRoute
+  '/dashboard/settings': typeof AuthedDashboardSettingsIndexRoute
   '/dashboard/students': typeof AuthedDashboardStudentsIndexRoute
+  '/dashboard/students/$studentId/edit': typeof AuthedDashboardStudentsStudentIdEditRoute
+  '/dashboard/students/$studentId': typeof AuthedDashboardStudentsStudentIdIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -143,10 +203,17 @@ export interface FileRoutesById {
   '/_authed/dashboard': typeof AuthedDashboardRouteRouteWithChildren
   '/_auth/login': typeof AuthLoginRoute
   '/api/$': typeof ApiSplatRoute
+  '/_authed/dashboard/settings': typeof AuthedDashboardSettingsRouteRouteWithChildren
+  '/_authed/dashboard/students': typeof AuthedDashboardStudentsRouteRouteWithChildren
   '/api/rpc/$': typeof ApiRpcSplatRoute
+  '/auth/invite/accept': typeof AuthInviteAcceptRoute
   '/_authed/dashboard/': typeof AuthedDashboardIndexRoute
   '/_authed/dashboard/students/add': typeof AuthedDashboardStudentsAddRoute
+  '/_authed/dashboard/classes/': typeof AuthedDashboardClassesIndexRoute
+  '/_authed/dashboard/settings/': typeof AuthedDashboardSettingsIndexRoute
   '/_authed/dashboard/students/': typeof AuthedDashboardStudentsIndexRoute
+  '/_authed/dashboard/students/$studentId/edit': typeof AuthedDashboardStudentsStudentIdEditRoute
+  '/_authed/dashboard/students/$studentId/': typeof AuthedDashboardStudentsStudentIdIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -160,10 +227,17 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/login'
     | '/api/$'
+    | '/dashboard/settings'
+    | '/dashboard/students'
     | '/api/rpc/$'
+    | '/auth/invite/accept'
     | '/dashboard/'
     | '/dashboard/students/add'
+    | '/dashboard/classes/'
+    | '/dashboard/settings/'
     | '/dashboard/students/'
+    | '/dashboard/students/$studentId/edit'
+    | '/dashboard/students/$studentId/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -175,9 +249,14 @@ export interface FileRouteTypes {
     | '/login'
     | '/api/$'
     | '/api/rpc/$'
+    | '/auth/invite/accept'
     | '/dashboard'
     | '/dashboard/students/add'
+    | '/dashboard/classes'
+    | '/dashboard/settings'
     | '/dashboard/students'
+    | '/dashboard/students/$studentId/edit'
+    | '/dashboard/students/$studentId'
   id:
     | '__root__'
     | '/'
@@ -191,10 +270,17 @@ export interface FileRouteTypes {
     | '/_authed/dashboard'
     | '/_auth/login'
     | '/api/$'
+    | '/_authed/dashboard/settings'
+    | '/_authed/dashboard/students'
     | '/api/rpc/$'
+    | '/auth/invite/accept'
     | '/_authed/dashboard/'
     | '/_authed/dashboard/students/add'
+    | '/_authed/dashboard/classes/'
+    | '/_authed/dashboard/settings/'
     | '/_authed/dashboard/students/'
+    | '/_authed/dashboard/students/$studentId/edit'
+    | '/_authed/dashboard/students/$studentId/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -208,6 +294,7 @@ export interface RootRouteChildren {
   TestRoute: typeof TestRoute
   ApiSplatRoute: typeof ApiSplatRoute
   ApiRpcSplatRoute: typeof ApiRpcSplatRoute
+  AuthInviteAcceptRoute: typeof AuthInviteAcceptRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -296,6 +383,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthedDashboardIndexRouteImport
       parentRoute: typeof AuthedDashboardRouteRoute
     }
+    '/auth/invite/accept': {
+      id: '/auth/invite/accept'
+      path: '/auth/invite/accept'
+      fullPath: '/auth/invite/accept'
+      preLoaderRoute: typeof AuthInviteAcceptRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/rpc/$': {
       id: '/api/rpc/$'
       path: '/api/rpc/$'
@@ -303,19 +397,61 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiRpcSplatRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authed/dashboard/students': {
+      id: '/_authed/dashboard/students'
+      path: '/students'
+      fullPath: '/dashboard/students'
+      preLoaderRoute: typeof AuthedDashboardStudentsRouteRouteImport
+      parentRoute: typeof AuthedDashboardRouteRoute
+    }
+    '/_authed/dashboard/settings': {
+      id: '/_authed/dashboard/settings'
+      path: '/settings'
+      fullPath: '/dashboard/settings'
+      preLoaderRoute: typeof AuthedDashboardSettingsRouteRouteImport
+      parentRoute: typeof AuthedDashboardRouteRoute
+    }
     '/_authed/dashboard/students/': {
       id: '/_authed/dashboard/students/'
-      path: '/students'
+      path: '/'
       fullPath: '/dashboard/students/'
       preLoaderRoute: typeof AuthedDashboardStudentsIndexRouteImport
+      parentRoute: typeof AuthedDashboardStudentsRouteRoute
+    }
+    '/_authed/dashboard/settings/': {
+      id: '/_authed/dashboard/settings/'
+      path: '/'
+      fullPath: '/dashboard/settings/'
+      preLoaderRoute: typeof AuthedDashboardSettingsIndexRouteImport
+      parentRoute: typeof AuthedDashboardSettingsRouteRoute
+    }
+    '/_authed/dashboard/classes/': {
+      id: '/_authed/dashboard/classes/'
+      path: '/classes'
+      fullPath: '/dashboard/classes/'
+      preLoaderRoute: typeof AuthedDashboardClassesIndexRouteImport
       parentRoute: typeof AuthedDashboardRouteRoute
     }
     '/_authed/dashboard/students/add': {
       id: '/_authed/dashboard/students/add'
-      path: '/students/add'
+      path: '/add'
       fullPath: '/dashboard/students/add'
       preLoaderRoute: typeof AuthedDashboardStudentsAddRouteImport
-      parentRoute: typeof AuthedDashboardRouteRoute
+      parentRoute: typeof AuthedDashboardStudentsRouteRoute
+    }
+    '/_authed/dashboard/students/$studentId/': {
+      id: '/_authed/dashboard/students/$studentId/'
+      path: '/$studentId'
+      fullPath: '/dashboard/students/$studentId/'
+      preLoaderRoute: typeof AuthedDashboardStudentsStudentIdIndexRouteImport
+      parentRoute: typeof AuthedDashboardStudentsRouteRoute
+    }
+    '/_authed/dashboard/students/$studentId/edit': {
+      id: '/_authed/dashboard/students/$studentId/edit'
+      path: '/$studentId/edit'
+      fullPath: '/dashboard/students/$studentId/edit'
+      preLoaderRoute: typeof AuthedDashboardStudentsStudentIdEditRouteImport
+      parentRoute: typeof AuthedDashboardStudentsRouteRoute
     }
   }
 }
@@ -332,16 +468,56 @@ const AuthRouteRouteWithChildren = AuthRouteRoute._addFileChildren(
   AuthRouteRouteChildren,
 )
 
-interface AuthedDashboardRouteRouteChildren {
-  AuthedDashboardIndexRoute: typeof AuthedDashboardIndexRoute
+interface AuthedDashboardSettingsRouteRouteChildren {
+  AuthedDashboardSettingsIndexRoute: typeof AuthedDashboardSettingsIndexRoute
+}
+
+const AuthedDashboardSettingsRouteRouteChildren: AuthedDashboardSettingsRouteRouteChildren =
+  {
+    AuthedDashboardSettingsIndexRoute: AuthedDashboardSettingsIndexRoute,
+  }
+
+const AuthedDashboardSettingsRouteRouteWithChildren =
+  AuthedDashboardSettingsRouteRoute._addFileChildren(
+    AuthedDashboardSettingsRouteRouteChildren,
+  )
+
+interface AuthedDashboardStudentsRouteRouteChildren {
   AuthedDashboardStudentsAddRoute: typeof AuthedDashboardStudentsAddRoute
   AuthedDashboardStudentsIndexRoute: typeof AuthedDashboardStudentsIndexRoute
+  AuthedDashboardStudentsStudentIdEditRoute: typeof AuthedDashboardStudentsStudentIdEditRoute
+  AuthedDashboardStudentsStudentIdIndexRoute: typeof AuthedDashboardStudentsStudentIdIndexRoute
+}
+
+const AuthedDashboardStudentsRouteRouteChildren: AuthedDashboardStudentsRouteRouteChildren =
+  {
+    AuthedDashboardStudentsAddRoute: AuthedDashboardStudentsAddRoute,
+    AuthedDashboardStudentsIndexRoute: AuthedDashboardStudentsIndexRoute,
+    AuthedDashboardStudentsStudentIdEditRoute:
+      AuthedDashboardStudentsStudentIdEditRoute,
+    AuthedDashboardStudentsStudentIdIndexRoute:
+      AuthedDashboardStudentsStudentIdIndexRoute,
+  }
+
+const AuthedDashboardStudentsRouteRouteWithChildren =
+  AuthedDashboardStudentsRouteRoute._addFileChildren(
+    AuthedDashboardStudentsRouteRouteChildren,
+  )
+
+interface AuthedDashboardRouteRouteChildren {
+  AuthedDashboardSettingsRouteRoute: typeof AuthedDashboardSettingsRouteRouteWithChildren
+  AuthedDashboardStudentsRouteRoute: typeof AuthedDashboardStudentsRouteRouteWithChildren
+  AuthedDashboardIndexRoute: typeof AuthedDashboardIndexRoute
+  AuthedDashboardClassesIndexRoute: typeof AuthedDashboardClassesIndexRoute
 }
 
 const AuthedDashboardRouteRouteChildren: AuthedDashboardRouteRouteChildren = {
+  AuthedDashboardSettingsRouteRoute:
+    AuthedDashboardSettingsRouteRouteWithChildren,
+  AuthedDashboardStudentsRouteRoute:
+    AuthedDashboardStudentsRouteRouteWithChildren,
   AuthedDashboardIndexRoute: AuthedDashboardIndexRoute,
-  AuthedDashboardStudentsAddRoute: AuthedDashboardStudentsAddRoute,
-  AuthedDashboardStudentsIndexRoute: AuthedDashboardStudentsIndexRoute,
+  AuthedDashboardClassesIndexRoute: AuthedDashboardClassesIndexRoute,
 }
 
 const AuthedDashboardRouteRouteWithChildren =
@@ -370,6 +546,7 @@ const rootRouteChildren: RootRouteChildren = {
   TestRoute: TestRoute,
   ApiSplatRoute: ApiSplatRoute,
   ApiRpcSplatRoute: ApiRpcSplatRoute,
+  AuthInviteAcceptRoute: AuthInviteAcceptRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

@@ -38,4 +38,13 @@ export const authRouter = os.router({
 	me: os.me.handler(async ({ context }) => {
 		return await authService.me(context.headers);
 	}),
+	resetPassword: os.resetPassword.handler(async ({ input }) => {
+		return await authService.resetPassword(input.token, input.newPassword);
+	}),
+	changePassword: os.changePassword.handler(async ({ input }) => {
+		return await authService.changePassword(input);
+	}),
+	logout: os.logout.handler(async ({ context }) => {
+		return await authService.logout(context.headers);
+	}),
 });

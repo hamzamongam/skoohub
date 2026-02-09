@@ -1,6 +1,6 @@
 "use client";
 
-import { Link } from "@tanstack/react-router";
+import { Link, useLocation } from "@tanstack/react-router";
 import { BookOpen, ChevronRight, Sparkles } from "lucide-react";
 import type * as React from "react";
 import { Button } from "@/components/ui/button";
@@ -24,9 +24,12 @@ import {
 	SidebarMenuSubItem,
 	SidebarRail,
 } from "@/components/ui/sidebar";
-import { data } from "../../../feature/dashboard/ui/config/nav-config";
+import { sidebarMenus } from "@/config/nav-config";
+import { cn } from "@/lib/utils";
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+	const { pathname } = useLocation();
+
 	return (
 		<Sidebar collapsible="icon" {...props} className="border-r-0 glass">
 			<SidebarHeader className="h-16 flex items-center px-4 border-b border-sidebar-border/50">
@@ -57,21 +60,82 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 						Platform
 					</SidebarGroupLabel>
 					<SidebarMenu className="gap-1">
-						{data.navMain.map((item) => (
-							<Collapsible
-								key={item.title}
-								open={item.isActive}
-								className="group/collapsible"
-							>
-								<SidebarMenuItem>
-									{item.items ? (
-										<>
-											<CollapsibleTrigger
+						{sidebarMenus.mainMenus.map((item) => {
+							const isActive =
+								item.items?.some(
+									(subItem) =>
+										subItem.url === pathname ||
+										pathname.startsWith(subItem.url),
+								) || item.isActive;
+
+							return (
+								<Collapsible
+									key={item.title}
+									open={isActive}
+									className="group/collapsible"
+								>
+									<SidebarMenuItem>
+										{item.items ? (
+											<>
+												<CollapsibleTrigger
+													render={(props) => (
+														<SidebarMenuButton
+															tooltip={item.title}
+															{...props}
+															className={cn(
+																"h-11 px-4 rounded-xl hover:bg-primary/5 hover:text-primary transition-all duration-300 group/btn",
+																isActive &&
+																	"bg-primary/10 text-primary font-bold",
+															)}
+														>
+															{item.icon && (
+																<item.icon className="size-5 transition-transform group-hover/btn:scale-110" />
+															)}
+															<span className="text-sm font-semibold tracking-tight">
+																{item.title}
+															</span>
+															<ChevronRight className="ml-auto size-4 opacity-40 transition-transform duration-300 group-data-[state=open]/collapsible:rotate-90 group-hover/btn:opacity-100" />
+														</SidebarMenuButton>
+													)}
+												/>
+												<CollapsibleContent>
+													<SidebarMenuSub className="ml-4 pl-4 border-l-2 border-primary/10 gap-1 mt-1">
+														{item.items?.map((subItem) => (
+															<SidebarMenuSubItem key={subItem.title}>
+																<SidebarMenuSubButton
+																	render={(props) => (
+																		<Link
+																			to={subItem.url}
+																			{...props}
+																			className="h-9 px-3 rounded-lg hover:bg-primary/5 hover:text-primary transition-colors font-medium opacity-70 hover:opacity-100"
+																			activeProps={{
+																				className:
+																					"bg-primary/10 text-primary opacity-100 font-bold",
+																			}}
+																		>
+																			<span className="text-xs font-medium">
+																				{subItem.title}
+																			</span>
+																		</Link>
+																	)}
+																/>
+															</SidebarMenuSubItem>
+														))}
+													</SidebarMenuSub>
+												</CollapsibleContent>
+											</>
+										) : (
+											<SidebarMenuButton
+												tooltip={item.title}
 												render={(props) => (
-													<SidebarMenuButton
-														tooltip={item.title}
+													<Link
+														to={item.url}
 														{...props}
 														className="h-11 px-4 rounded-xl hover:bg-primary/5 hover:text-primary transition-all duration-300 group/btn"
+														activeProps={{
+															className:
+																"bg-primary/10 text-primary opacity-100 font-bold",
+														}}
 													>
 														{item.icon && (
 															<item.icon className="size-5 transition-transform group-hover/btn:scale-110" />
@@ -79,54 +143,14 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 														<span className="text-sm font-semibold tracking-tight">
 															{item.title}
 														</span>
-														<ChevronRight className="ml-auto size-4 opacity-40 transition-transform duration-300 group-data-[state=open]/collapsible:rotate-90 group-hover/btn:opacity-100" />
-													</SidebarMenuButton>
+													</Link>
 												)}
 											/>
-											<CollapsibleContent>
-												<SidebarMenuSub className="ml-4 pl-4 border-l-2 border-primary/10 gap-1 mt-1">
-													{item.items?.map((subItem) => (
-														<SidebarMenuSubItem key={subItem.title}>
-															<SidebarMenuSubButton
-																render={(props) => (
-																	<Link
-																		to={subItem.url}
-																		{...props}
-																		className="h-9 px-3 rounded-lg hover:bg-primary/5 hover:text-primary transition-colors font-medium opacity-70 hover:opacity-100"
-																	>
-																		<span className="text-xs font-medium">
-																			{subItem.title}
-																		</span>
-																	</Link>
-																)}
-															/>
-														</SidebarMenuSubItem>
-													))}
-												</SidebarMenuSub>
-											</CollapsibleContent>
-										</>
-									) : (
-										<SidebarMenuButton
-											tooltip={item.title}
-											render={(props) => (
-												<Link
-													to={item.url}
-													{...props}
-													className="h-11 px-4 rounded-xl hover:bg-primary/5 hover:text-primary transition-all duration-300 group/btn"
-												>
-													{item.icon && (
-														<item.icon className="size-5 transition-transform group-hover/btn:scale-110" />
-													)}
-													<span className="text-sm font-semibold tracking-tight">
-														{item.title}
-													</span>
-												</Link>
-											)}
-										/>
-									)}
-								</SidebarMenuItem>
-							</Collapsible>
-						))}
+										)}
+									</SidebarMenuItem>
+								</Collapsible>
+							);
+						})}
 					</SidebarMenu>
 				</SidebarGroup>
 
@@ -150,7 +174,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 					</div>
 				</div>
 
-				<SidebarGroup className="group-data-[collapsible=icon]:hidden pt-0">
+				{/* <SidebarGroup className="group-data-[collapsible=icon]:hidden pt-0">
 					<SidebarGroupLabel className="px-4 text-label-caps text-muted-foreground/40 mb-2">
 						System
 					</SidebarGroupLabel>
@@ -170,30 +194,9 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 							</SidebarMenuItem>
 						))}
 					</SidebarMenu>
-				</SidebarGroup>
+				</SidebarGroup> */}
 			</SidebarContent>
-			<SidebarFooter className="p-4 border-t border-sidebar-border/50 bg-sidebar/50 backdrop-blur-sm">
-				<SidebarMenu>
-					<SidebarMenuItem>
-						<SidebarMenuButton
-							size="lg"
-							className="h-14 px-2 rounded-xl hover:bg-primary/5 transition-all duration-300 group/user"
-						>
-							<div className="flex h-10 w-10 shrink-0 rounded-lg bg-linear-to-br from-primary to-accent items-center justify-center text-white font-black shadow-md shadow-primary/20 transform group-hover/user:scale-105 transition-transform">
-								{data.user.avatar}
-							</div>
-							<div className="grid flex-1 text-left text-sm leading-tight ml-3 group-data-[collapsible=icon]:hidden">
-								<span className="truncate font-bold tracking-tight">
-									{data.user.name}
-								</span>
-								<span className="truncate text-xs text-muted-foreground/70">
-									{data.user.email}
-								</span>
-							</div>
-						</SidebarMenuButton>
-					</SidebarMenuItem>
-				</SidebarMenu>
-			</SidebarFooter>
+
 			<SidebarRail />
 		</Sidebar>
 	);

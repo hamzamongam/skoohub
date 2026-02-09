@@ -51,8 +51,10 @@ export function useOrpcMutation<TData, TError, TVariables, TContext>(
 				const error = args[0];
 				if (isDefinedError(error)) {
 					toast.error(errorMessage || error.message);
+				} else {
+					console.log("error", error);
+					toast.error("Something went wrong (Unexpected error)");
 				}
-				toast.error("Something went wrong (Unexpected error)");
 			}
 			mutationOptions.onError?.(...args);
 		},

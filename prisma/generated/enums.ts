@@ -20,6 +20,19 @@ export const UserRole = {
 export type UserRole = (typeof UserRole)[keyof typeof UserRole]
 
 
+export const Medium = {
+  English: 'English',
+  Malayalam: 'Malayalam',
+  Tamil: 'Tamil',
+  Hindi: 'Hindi',
+  Urdu: 'Urdu',
+  Arabic: 'Arabic',
+  Other: 'Other'
+} as const
+
+export type Medium = (typeof Medium)[keyof typeof Medium]
+
+
 export const OnboardingStatus = {
   PENDING: 'PENDING',
   COMPLETED: 'COMPLETED'
@@ -35,3 +48,12 @@ export const GradingSystem = {
 } as const
 
 export type GradingSystem = (typeof GradingSystem)[keyof typeof GradingSystem]
+
+
+export const Gender = {
+  MALE: 'MALE',
+  FEMALE: 'FEMALE',
+  OTHER: 'OTHER'
+} as const
+
+export type Gender = (typeof Gender)[keyof typeof Gender]

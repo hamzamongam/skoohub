@@ -31,7 +31,7 @@ export const BaseButton = React.forwardRef<HTMLButtonElement, BaseButtonProps>(
 			<Button
 				ref={ref}
 				disabled={isLoading || disabled}
-				className={cn("relative gap-2 h-12 px-4 cursor-pointer", className)}
+				className={cn("relative gap-2 h-12 flex cursor-pointer", className)}
 				{...props}
 			>
 				{isLoading && (

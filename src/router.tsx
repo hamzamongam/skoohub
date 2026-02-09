@@ -13,6 +13,10 @@ export const getRouter = () => {
 		routeTree,
 		context: {
 			...rqContext,
+			session: null,
+			siteStatus: {
+				isComingSoon: false,
+			},
 		},
 
 		defaultPreload: "intent",

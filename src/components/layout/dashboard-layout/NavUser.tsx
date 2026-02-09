@@ -1,6 +1,6 @@
 "use client";
 
-import { useRouteContext } from "@tanstack/react-router";
+import { useRouteContext, useRouter } from "@tanstack/react-router";
 import {
 	BadgeCheck,
 	Bell,
@@ -9,7 +9,7 @@ import {
 	Settings,
 	Sparkles,
 } from "lucide-react";
-import { type FC, useContext } from "react";
+import type { FC } from "react";
 import {
 	DropdownMenu,
 	DropdownMenuContent,
@@ -19,10 +19,12 @@ import {
 	DropdownMenuSeparator,
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { data } from "../../../feature/dashboard/ui/config/nav-config";
+import { useAuth } from "@/feature/auth/hooks/useAuth";
 
 const NavUser: FC = () => {
-	const { session } = useRouteContext({ from: "/_authed/dashboard" });
+	const { session, handleLogout } = useAuth();
+	const router = useRouter();
+
 	return (
 		<DropdownMenu>
 			<DropdownMenuTrigger
@@ -54,12 +56,14 @@ const NavUser: FC = () => {
 					<DropdownMenuLabel className="p-0 font-normal">
 						<div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
 							<div className="flex h-8 w-8 items-center justify-center rounded-lg bg-linear-to-br from-primary to-accent text-white font-black">
-								{data.user.avatar}
+								{session?.user.name.charAt(0).toUpperCase()}
 							</div>
 							<div className="grid flex-1 text-left text-sm leading-tight">
-								<span className="truncate font-semibold">{data.user.name}</span>
+								<span className="truncate font-semibold">
+									{session?.user.name}
+								</span>
 								<span className="truncate text-xs text-muted-foreground">
-									{data.user.email}
+									{session?.user.email}
 								</span>
 							</div>
 						</div>
@@ -82,7 +86,10 @@ const NavUser: FC = () => {
 						<CreditCard className="mr-2 size-4 opacity-60 group-hover:opacity-100" />
 						<span className="font-medium">Billing</span>
 					</DropdownMenuItem>
-					<DropdownMenuItem className="rounded-xl px-2 py-2 hover:bg-primary/5 hover:text-primary transition-colors cursor-pointer group">
+					<DropdownMenuItem
+						className="rounded-xl px-2 py-2 hover:bg-primary/5 hover:text-primary transition-colors cursor-pointer group"
+						onClick={() => router.navigate({ to: "/dashboard/settings" })}
+					>
 						<Settings className="mr-2 size-4 opacity-60 group-hover:opacity-100" />
 						<span className="font-medium">Settings</span>
 					</DropdownMenuItem>
@@ -92,7 +99,10 @@ const NavUser: FC = () => {
 					</DropdownMenuItem>
 				</DropdownMenuGroup>
 				<DropdownMenuSeparator className="bg-white/10" />
-				<DropdownMenuItem className="rounded-xl px-2 py-2 hover:bg-destructive/10 hover:text-destructive transition-colors cursor-pointer group mt-1">
+				<DropdownMenuItem
+					className="rounded-xl px-2 py-2 hover:bg-destructive/10 hover:text-destructive transition-colors cursor-pointer group mt-1"
+					onClick={handleLogout}
+				>
 					<LogOut className="mr-2 size-4 opacity-60 group-hover:opacity-100" />
 					<span className="font-medium">Log out</span>
 				</DropdownMenuItem>

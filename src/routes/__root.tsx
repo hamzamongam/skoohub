@@ -9,6 +9,7 @@ import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
 import { Toaster } from "sonner";
 import type { AuthSession } from "@/feature/auth/auth.functions";
 import { userQueryOptions } from "@/feature/auth/auth.functions";
+import { AuthProvider } from "@/feature/auth/provider/auth.provider";
 import { siteStatusQueryOptions } from "@/feature/site/site.server";
 import { ThemeProvider } from "../components/providers/ThemeProvider";
 import TanStackQueryDevtools from "../integrations/tanstack-query/devtools";
@@ -88,10 +89,12 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 				<HeadContent />
 			</head>
 			<body>
-				<ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-					{context.siteStatus?.isComingSoon ? <ComingSoon /> : children}
-					<Toaster richColors closeButton position="top-center" />
-				</ThemeProvider>
+				<AuthProvider session={context.session}>
+					<ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+						{context.siteStatus?.isComingSoon ? <ComingSoon /> : children}
+						<Toaster richColors closeButton position="top-center" />
+					</ThemeProvider>
+				</AuthProvider>
 				<TanStackDevtools
 					// ...
 					config={{

@@ -50,11 +50,12 @@ export function BaseSelect({
 	if (mode === "single") {
 		return (
 			<Select
+				items={data}
 				disabled={disabled}
 				value={value as string}
 				onValueChange={onChange}
 			>
-				<SelectTrigger className={cn(className, "!h-10")}>
+				<SelectTrigger className={cn(className, "h-10!")}>
 					<SelectValue placeholder={placeholder} />
 				</SelectTrigger>
 				<SelectContent>

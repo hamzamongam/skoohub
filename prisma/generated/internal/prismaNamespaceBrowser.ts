@@ -59,8 +59,11 @@ export const ModelName = {
   Invitation: 'Invitation',
   AcademicYear: 'AcademicYear',
   Term: 'Term',
-  GradeLevel: 'GradeLevel',
-  Section: 'Section'
+  Subject: 'Subject',
+  Teacher: 'Teacher',
+  Class: 'Class',
+  ClassSubject: 'ClassSubject',
+  StudentProfile: 'StudentProfile'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -196,23 +199,78 @@ export const TermScalarFieldEnum = {
 export type TermScalarFieldEnum = (typeof TermScalarFieldEnum)[keyof typeof TermScalarFieldEnum]
 
 
-export const GradeLevelScalarFieldEnum = {
+export const SubjectScalarFieldEnum = {
   id: 'id',
-  name: 'name',
-  level: 'level',
-  schoolId: 'schoolId'
+  name: 'name'
 } as const
 
-export type GradeLevelScalarFieldEnum = (typeof GradeLevelScalarFieldEnum)[keyof typeof GradeLevelScalarFieldEnum]
+export type SubjectScalarFieldEnum = (typeof SubjectScalarFieldEnum)[keyof typeof SubjectScalarFieldEnum]
 
 
-export const SectionScalarFieldEnum = {
+export const TeacherScalarFieldEnum = {
   id: 'id',
-  name: 'name',
-  gradeLevelId: 'gradeLevelId'
+  userId: 'userId',
+  schoolId: 'schoolId',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 } as const
 
-export type SectionScalarFieldEnum = (typeof SectionScalarFieldEnum)[keyof typeof SectionScalarFieldEnum]
+export type TeacherScalarFieldEnum = (typeof TeacherScalarFieldEnum)[keyof typeof TeacherScalarFieldEnum]
+
+
+export const ClassScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  grade: 'grade',
+  section: 'section',
+  medium: 'medium',
+  schoolId: 'schoolId',
+  classTeacherId: 'classTeacherId',
+  isActive: 'isActive',
+  capacity: 'capacity',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ClassScalarFieldEnum = (typeof ClassScalarFieldEnum)[keyof typeof ClassScalarFieldEnum]
+
+
+export const ClassSubjectScalarFieldEnum = {
+  id: 'id',
+  classId: 'classId',
+  teacherId: 'teacherId',
+  subjectId: 'subjectId'
+} as const
+
+export type ClassSubjectScalarFieldEnum = (typeof ClassSubjectScalarFieldEnum)[keyof typeof ClassSubjectScalarFieldEnum]
+
+
+export const StudentProfileScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  dob: 'dob',
+  gender: 'gender',
+  phone: 'phone',
+  address: 'address',
+  fatherName: 'fatherName',
+  motherName: 'motherName',
+  isActive: 'isActive',
+  bloodGroup: 'bloodGroup',
+  guardianName: 'guardianName',
+  guardianPhone: 'guardianPhone',
+  guardianEmail: 'guardianEmail',
+  guardianRelation: 'guardianRelation',
+  admissionNumber: 'admissionNumber',
+  rollNumber: 'rollNumber',
+  joiningDate: 'joiningDate',
+  imageKey: 'imageKey',
+  classId: 'classId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type StudentProfileScalarFieldEnum = (typeof StudentProfileScalarFieldEnum)[keyof typeof StudentProfileScalarFieldEnum]
 
 
 export const SortOrder = {

@@ -90,11 +90,13 @@ const StepAcademic: FC<{ onComplete: () => void }> = ({ onComplete }) => {
 					name="gradingSystem"
 					label="Grading System"
 				>
-					<BaseSelect {...form.register("gradingSystem")}>
-						<option value="PERCENTAGE">Percentage</option>
-						<option value="GPA">GPA</option>
-						<option value="LETTER">Letter Grade</option>
-					</BaseSelect>
+					<BaseSelect
+						data={[
+							{ label: "Percentage", value: "PERCENTAGE" },
+							{ label: "GPA", value: "GPA" },
+							{ label: "Letter Grade", value: "LETTER" },
+						]}
+					/>
 				</BaseForm.Item>
 			</div>
 			<div className="grid grid-cols-2 gap-4">

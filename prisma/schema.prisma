@@ -7,12 +7,26 @@ datasource db {
   provider = "postgresql"
 }
 
+/**
+ * ===================== ENUMS =====================
+ */
+
 enum UserRole {
   user
   schoolAdmin
   teacher
   student
   superAdmin
+}
+
+enum Medium {
+  English
+  Malayalam
+  Tamil
+  Hindi
+  Urdu
+  Arabic
+  Other
 }
 
 enum OnboardingStatus {
@@ -26,6 +40,16 @@ enum GradingSystem {
   LETTER
 }
 
+enum Gender {
+  MALE
+  FEMALE
+  OTHER
+}
+
+/**
+ * ===================== SCHOOL =====================
+ */
+
 model School {
   id               String           @id @default(cuid())
   name             String
@@ -34,19 +58,25 @@ model School {
   address          String?
   website          String?
   onboardingStatus OnboardingStatus @default(PENDING)
-  createdAt        DateTime         @default(now())
-  updatedAt        DateTime         @updatedAt
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   users         User[]
+  classes       Class[]
   academicYears AcademicYear[]
-  gradeLevels   GradeLevel[]
+  teachers      Teacher[]
 }
 
+/**
+ * ===================== USER =====================
+ */
+
 model User {
-  id            String    @id
+  id            String    @id @default(cuid())
   name          String
-  email         String
-  emailVerified Boolean
+  email         String    @unique
+  emailVerified Boolean?
   image         String?
   createdAt     DateTime
   updatedAt     DateTime
@@ -61,13 +91,16 @@ model User {
   school   School? @relation(fields: [schoolId], references: [id])
 
   studentProfile StudentProfile?
+  teacherProfile Teacher?
+  invitations    Invitation[]
 
-  invitations Invitation[]
-
-  @@unique([email])
   @@index([schoolId])
   @@map("user")
 }
+
+/**
+ * ===================== AUTH =====================
+ */
 
 model Session {
   id             String   @id
@@ -132,85 +165,155 @@ model Invitation {
 
 model AcademicYear {
   id            String        @id @default(cuid())
-  name          String // e.g., "2025-2026"
+  name          String
   startDate     DateTime
   endDate       DateTime
   isActive      Boolean       @default(false)
   gradingSystem GradingSystem @default(GPA)
-  schoolId      String
-  school        School        @relation(fields: [schoolId], references: [id], onDelete: Cascade)
-  terms         Term[]
+
+  schoolId String
+  school   School @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+
+  terms Term[]
 
   @@index([schoolId])
 }
 
 model Term {
-  id             String       @id @default(cuid())
-  name           String // e.g., "Term 1"
-  startDate      DateTime
-  endDate        DateTime
+  id        String   @id @default(cuid())
+  name      String
+  startDate DateTime
+  endDate   DateTime
+
   academicYearId String
   academicYear   AcademicYear @relation(fields: [academicYearId], references: [id], onDelete: Cascade)
 
   @@index([academicYearId])
 }
 
-model GradeLevel {
-  id       String    @id @default(cuid())
-  name     String // e.g., "Grade 1"
-  level    Int // Numerical order
+/**
+ * ===================== SUBJECT =====================
+ */
+
+model Subject {
+  id   String @id @default(cuid())
+  name String @unique
+
+  classSubjects ClassSubject[]
+}
+
+/**
+ * ===================== TEACHER =====================
+ */
+
+model Teacher {
+  id       String @id @default(cuid())
+  userId   String @unique
   schoolId String
-  school   School    @relation(fields: [schoolId], references: [id], onDelete: Cascade)
-  sections Section[]
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  school School @relation(fields: [schoolId], references: [id])
+
+  isActive Boolean @default(true)
+
+  // one class → one class teacher
+  classTeacherOf Class?
+
+  // many subject assignments
+  classSubjects ClassSubject[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   @@index([schoolId])
 }
 
-model Section {
-  id           String     @id @default(cuid())
-  name         String // e.g., "Section A"
-  gradeLevelId String
-  gradeLevel   GradeLevel @relation(fields: [gradeLevelId], references: [id], onDelete: Cascade)
+/**
+ * ===================== CLASS =====================
+ */
 
-  // Reverse relation for StudentProfile if needed, or just link by ID.
-  // Ideally StudentProfile should link to a Section.
-  students StudentProfile[]
+model Class {
+  id       String @id @default(cuid())
+  name     String
+  grade    String
+  section  String
+  medium   Medium
+  schoolId String
+  school   School @relation(fields: [schoolId], references: [id])
 
-  @@index([gradeLevelId])
+  // 🔒 ONE CLASS → ONE CLASS TEACHER
+  classTeacherId String?  @unique
+  classTeacher   Teacher? @relation(fields: [classTeacherId], references: [id])
+
+  students      StudentProfile[]
+  classSubjects ClassSubject[]
+
+  isActive Boolean?
+  capacity Int?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([schoolId])
 }
+
+/**
+ * ===================== CLASS–SUBJECT–TEACHER =====================
+ */
+
+model ClassSubject {
+  id        String @id @default(cuid())
+  classId   String
+  teacherId String
+  subjectId String
+
+  class   Class   @relation(fields: [classId], references: [id], onDelete: Cascade)
+  teacher Teacher @relation(fields: [teacherId], references: [id], onDelete: Cascade)
+  subject Subject @relation(fields: [subjectId], references: [id], onDelete: Cascade)
+
+  @@unique([classId, teacherId, subjectId])
+  @@index([classId])
+  @@index([teacherId])
+  @@index([subjectId])
+}
+
+/**
+ * ===================== STUDENT =====================
+ */
 
 model StudentProfile {
   id     String @id @default(cuid())
   userId String @unique
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  // Personal
+  // personal
   dob        DateTime?
   gender     Gender?
-  bloodGroup String?
-  address    String?
   phone      String?
+  address    String?
   fatherName String?
   motherName String?
+  isActive   Boolean   @default(true)
+  bloodGroup String?
 
-  // Guardian
+  // guardian
   guardianName     String?
   guardianPhone    String?
   guardianEmail    String?
-  guardianRelation String? // Father, Mother, etc.
+  guardianRelation String?
 
-  // Academic
+  // academic
   admissionNumber String?
   rollNumber      String?
   joiningDate     DateTime?
+  imageKey        String? // R2 key only
 
-  // Relations
-  sectionId String?
-  section   Section? @relation(fields: [sectionId], references: [id])
-}
+  classId String?
+  class   Class?  @relation(fields: [classId], references: [id])
 
-enum Gender {
-  MALE
-  FEMALE
-  OTHER
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([classId])
+  @@index([admissionNumber])
 }

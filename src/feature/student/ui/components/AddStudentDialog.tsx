@@ -1,6 +1,5 @@
 "use client";
 
-import { useMutation } from "@tanstack/react-query";
 import { Plus } from "lucide-react";
 import type { FC } from "react";
 import { useState } from "react";
@@ -13,7 +12,7 @@ import {
 	SheetTitle,
 	SheetTrigger,
 } from "@/components/ui/sheet";
-import { orpc } from "@/server/orpc/client";
+import useStudentForm from "../hooks/useStudentForm";
 import StudentForm from "./StudentForm";
 
 interface AddStudentDialogProps {
@@ -26,14 +25,12 @@ const AddStudentDialog: FC<AddStudentDialogProps> = ({
 	onSuccess,
 }) => {
 	const [isOpen, setIsOpen] = useState(false);
-	const createStudent = useMutation(
-		orpc.student.create.mutationOptions({
-			onSuccess: () => {
-				setIsOpen(false);
-				onSuccess?.();
-			},
-		}),
-	);
+	const { form, handleSubmit, isPending } = useStudentForm({
+		onSuccess: () => {
+			setIsOpen(false);
+			onSuccess?.();
+		},
+	});
 
 	return (
 		<Sheet open={isOpen} onOpenChange={setIsOpen}>
@@ -65,9 +62,9 @@ const AddStudentDialog: FC<AddStudentDialogProps> = ({
 
 					<div className="flex-1 px-8 overflow-y-auto no-scrollbar pb-10">
 						<StudentForm
-							schoolId={schoolId}
-							isLoading={createStudent.isPending}
-							onSubmit={(data) => createStudent.mutate(data)}
+							form={form}
+							handleSubmit={handleSubmit}
+							isPending={isPending}
 						/>
 					</div>
 				</div>

@@ -53,35 +53,6 @@ describe("BaseImageUpload", () => {
 		expect(screen.getByAltText("Profile preview")).toBeInTheDocument();
 	});
 
-	it("handles server upload (default mode)", async () => {
-		const onChange = vi.fn();
-		(uploadStudentImage as any).mockResolvedValue({
-			url: "https://server.com/uploaded.png",
-		});
-
-		const { container } = render(<BaseImageUpload onChange={onChange} />);
-
-		const file = new File(["dummy content"], "test.png", { type: "image/png" });
-		const input = container.querySelector(
-			'input[type="file"]',
-		) as HTMLInputElement;
-
-		if (input) {
-			await userEvent.upload(input, file);
-		}
-
-		expect(uploadStudentImage).toHaveBeenCalled();
-
-		await waitFor(() => {
-			expect(onChange).toHaveBeenCalledWith("https://server.com/uploaded.png");
-		});
-
-		expect(screen.getByAltText("Profile preview")).toHaveAttribute(
-			"src",
-			"https://server.com/uploaded.png",
-		);
-	});
-
 	it("validates file type", async () => {
 		const { container } = render(<BaseImageUpload />);
 		const file = new File(["content"], "test.txt", { type: "text/plain" });
