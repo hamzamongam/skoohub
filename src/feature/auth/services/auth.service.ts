@@ -1,4 +1,3 @@
-import { prisma } from "@/db/prisma";
 import { logger } from "@/lib/logger";
 import { auth } from "@/server/auth";
 import { toSuccessResponse } from "@/server/orpc/utils";

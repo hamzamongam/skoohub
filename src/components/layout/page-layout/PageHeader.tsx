@@ -2,7 +2,6 @@ import { useRouter } from "@tanstack/react-router";
 import { ArrowLeft } from "lucide-react";
 import type { FC, ReactNode } from "react";
 import { BaseButton } from "@/components/base/button";
-import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 interface PageHeaderProps {

@@ -1,6 +1,6 @@
 "use client";
 
-import { useRouteContext, useRouter } from "@tanstack/react-router";
+import { useRouter } from "@tanstack/react-router";
 import {
 	BadgeCheck,
 	Bell,

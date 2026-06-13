@@ -1,8 +1,6 @@
-import { auth } from "@/server/auth";
 import { NotFoundError, UnauthorizedError } from "@/utils/errors";
 import type {
 	ClassSchemaInputType,
-	ClassSchemaOutputType,
 } from "../contract/class.schema";
 import { ClassRepository } from "../repo/class.repo";
 import type { ClassDbModel } from "../types/server.type";

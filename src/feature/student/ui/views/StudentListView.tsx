@@ -1,39 +1,24 @@
 import { Link } from "@tanstack/react-router";
 import { Plus } from "lucide-react";
-import { type FC, useState } from "react";
+import type { FC } from "react";
 import { BaseButton } from "@/components/base/button";
 import { PageLayout } from "@/components/layout/page-layout";
-import {
-	Dialog,
-	DialogContent,
-	DialogHeader,
-	DialogTitle,
-} from "@/components/ui/dialog";
-import type { StudentSchemaOutputType } from "../../contract/student.shema";
+import { StudentListFilters } from "../components/StudentListFilters";
 import { StudentListTable } from "../components/StudentListTable";
+import { useStudentFilters } from "../hooks/useStudentFilters";
 import useStudentList from "../hooks/useStudentList";
 
 const StudentListView: FC = () => {
-	const { data, isLoading } = useStudentList();
-	const [isOpen, setIsOpen] = useState(false);
-	const [selectedStudent, setSelectedStudent] = useState<
-		StudentSchemaOutputType | undefined
-	>(undefined);
+	/* Filter State */
+	const { filters, setFilter, resetFilters, isFiltered, debouncedSearch } =
+		useStudentFilters();
 
-	const handleEdit = (student: StudentSchemaOutputType) => {
-		setSelectedStudent(student);
-		setIsOpen(true);
-	};
-
-	const handleAdd = () => {
-		setSelectedStudent(undefined);
-		setIsOpen(true);
-	};
-
-	const handleClose = () => {
-		setIsOpen(false);
-		setSelectedStudent(undefined);
-	};
+	/* Data Fetching */
+	const { data, isLoading } = useStudentList({
+		search: debouncedSearch,
+		classId: filters.classId,
+		status: filters.status,
+	});
 
 	return (
 		<PageLayout
@@ -41,7 +26,6 @@ const StudentListView: FC = () => {
 			subtitle="Manage your school's student directory and records"
 			actions={
 				<BaseButton
-					onClick={handleAdd}
 					type="button"
 					variant={"default"}
 					leftIcon={<Plus className="size-3.5" />}
@@ -52,10 +36,16 @@ const StudentListView: FC = () => {
 				</BaseButton>
 			}
 		>
+			<StudentListFilters
+				filters={filters}
+				setFilter={setFilter}
+				resetFilters={resetFilters}
+				isFiltered={isFiltered}
+			/>
+
 			<StudentListTable
 				data={data?.data || []}
 				isLoading={isLoading}
-				onEdit={handleEdit}
 			/>
 		</PageLayout>
 	);

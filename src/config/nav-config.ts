@@ -8,7 +8,7 @@ import {
 	// LifeBuoy,
 	// MessageSquare,
 	// Package,
-	Settings,
+	// Settings,
 	// Trophy,
 	UserSquare2,
 } from "lucide-react";

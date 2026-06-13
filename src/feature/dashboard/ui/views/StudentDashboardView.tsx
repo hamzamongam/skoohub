@@ -2,18 +2,20 @@
 
 import { BookOpen, Calendar, Trophy, Zap } from "lucide-react";
 import type { FC } from "react";
+import { useAuth } from "@/feature/auth/hooks/useAuth";
 import { cn } from "@/lib/utils";
 import RecentActivity from "../components/RecentActivity";
 import StatsCard from "../components/StatsCard";
-import DashboardLayout from "../layout/DashboardLayout";
 
 const StudentDashboardView: FC = () => {
+	const { session } = useAuth();
+	const user = session?.user;
 	return (
-		<DashboardLayout>
+		<>
 			<div className="space-y-2">
 				<h1 className="text-3xl font-extrabold tracking-tight text-foreground">
 					Welcome back,{" "}
-					<span className="text-primary italic font-serif">Alex</span>.
+					<span className="text-primary italic font-serif">{user?.name}</span>.
 				</h1>
 				<p className="text-muted-foreground font-medium">
 					You have 2 upcoming assignments this week. Stay focused!
@@ -153,7 +155,7 @@ const StudentDashboardView: FC = () => {
 					/>
 				</div>
 			</div>
-		</DashboardLayout>
+		</>
 	);
 };
 

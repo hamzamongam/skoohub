@@ -4,12 +4,12 @@ import { GraduationCap } from "lucide-react";
 import { BaseCheckbox } from "@/components/base/checkbox";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { cn } from "@/lib/utils";
-import type { StudentSchemaOutputType } from "../contract/student.shema";
+import type { StudentSchemaOutputType } from "../contract/student.schema";
 import { StudentRowActions } from "../ui/components/StudentRowActions";
 
-export const getStudentColumns = (
-	onEdit: (student: StudentSchemaOutputType) => void,
-): ColumnDef<StudentSchemaOutputType>[] => [
+export const getStudentColumns = (): ColumnDef<
+	StudentSchemaOutputType
+>[] => [
 	{
 		id: "select",
 		header: ({ table }) => (

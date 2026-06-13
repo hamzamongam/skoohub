@@ -6,7 +6,7 @@ import BaseForm from "@/components/base/forms";
 import { BaseInput } from "@/components/base/input";
 import { BaseSelect } from "@/components/base/select/BaseSelect";
 import { orpc } from "@/server/orpc/client";
-import type { StudentSchemaInputType } from "../../contract/student.shema";
+import type { StudentSchemaInputType } from "../../contract/student.schema";
 
 interface AcademicDetailsProps {
 	form: UseFormReturn<StudentSchemaInputType>;

@@ -1,4 +1,3 @@
-import { Link } from "@tanstack/react-router";
 import { Pencil, Trash } from "lucide-react";
 import type { FC } from "react";
 import { BaseButton } from "@/components/base/button";

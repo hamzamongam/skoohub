@@ -28,7 +28,7 @@ export const studentRouter = os.router({
 	list: os.list
 		.use(requiredAuthMiddleware)
 		.handler(async ({ input, context }) => {
-			return await studentService.list(context.schoolId!);
+			return await studentService.list(context.schoolId!, input);
 		}),
 	delete: os.delete.use(requiredAuthMiddleware).handler(async ({ input }) => {
 		return await studentService.delete(input.id);

@@ -1,4 +1,3 @@
-import { useRouteContext } from "@tanstack/react-router";
 import { useOrpcMutation } from "@/hooks/useOrpcMutation";
 import { confirm } from "@/lib/confirm";
 import { orpc } from "@/server/orpc/client";
@@ -12,7 +11,7 @@ export const AuthProvider = ({
 	children: React.ReactNode;
 	session?: any;
 }) => {
-	const { mutateAsync: logout, isPending } = useOrpcMutation(
+	const { mutateAsync: logout } = useOrpcMutation(
 		orpc.auth.logout.mutationOptions({
 			onSuccess: async () => {
 				// await router.navigate({ to: "/login", replace: true });

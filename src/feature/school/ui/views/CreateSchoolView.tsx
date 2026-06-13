@@ -17,7 +17,7 @@ const CreateSchoolView: FC = () => {
 	const navigate = useNavigate();
 	const { mutate: createSchool, isPending } = useOrpcMutation(
 		orpc.auth.createSchoolProfile.mutationOptions({
-			onSuccess: ({ data }) => {
+			onSuccess: () => {
 				navigate({ to: "/onboarding" });
 			},
 		}),

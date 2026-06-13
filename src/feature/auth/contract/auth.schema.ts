@@ -22,7 +22,7 @@ export const UserSchema = z.object({
 	id: z.string(),
 	email: z.email(),
 	name: z.string(),
-	role: z.string(),
+	role: z.enum(["schoolAdmin", "teacher", "student"]),
 });
 
 export const AuthSessionSchema = z.object({

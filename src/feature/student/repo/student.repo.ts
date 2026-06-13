@@ -61,14 +61,33 @@ export class StudentRepository {
 		});
 	}
 
-	async listBySchoolId(schoolId: string) {
-		return prisma.studentProfile.findMany({
-			where: {
-				user: {
-					schoolId,
-					role: "student",
-				},
+	async listBySchoolId(
+		schoolId: string,
+		filters?: { search?: string; classId?: string; status?: string },
+	) {
+		const where: Prisma.StudentProfileWhereInput = {
+			user: {
+				schoolId,
+				role: "student",
+				...(filters?.status && filters.status !== "all"
+					? { isActive: filters.status === "active" }
+					: {}),
+				...(filters?.search
+					? {
+							OR: [
+								{ name: { contains: filters.search, mode: "insensitive" } },
+								{ email: { contains: filters.search, mode: "insensitive" } },
+							],
+						}
+					: {}),
 			},
+			...(filters?.classId && filters.classId !== "all"
+				? { classId: filters.classId }
+				: {}),
+		};
+
+		return prisma.studentProfile.findMany({
+			where,
 			orderBy: { user: { createdAt: "desc" } },
 			include: { user: true, class: true },
 		});

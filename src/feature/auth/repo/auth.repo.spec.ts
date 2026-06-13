@@ -13,7 +13,7 @@ describe("AuthRepository", () => {
 		it("should link user to school", async () => {
 			const userId = "user-1";
 			const schoolId = "school-1";
-			const role = "school_admin";
+			const role = "schoolAdmin";
 
 			const mockUser = {
 				id: userId,
@@ -35,7 +35,7 @@ describe("AuthRepository", () => {
 		it("should handle database errors when linking user to school", async () => {
 			const userId = "user-1";
 			const schoolId = "school-1";
-			const role = "school_admin";
+			const role = "schoolAdmin";
 
 			const dbError = new Error("Database connection failed");
 			vi.mocked(prisma.user.update).mockRejectedValue(dbError);
@@ -53,7 +53,7 @@ describe("AuthRepository", () => {
 		it("should handle Prisma not found errors", async () => {
 			const userId = "non-existent-user";
 			const schoolId = "school-1";
-			const role = "school_admin";
+			const role = "schoolAdmin";
 
 			const prismaError = new Error("Record not found");
 			prismaError.name = "NotFoundError";

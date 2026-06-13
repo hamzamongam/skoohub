@@ -1,20 +1,18 @@
 import type { FC } from "react";
 import { DataTable } from "@/components/base/datatable";
 import { getStudentColumns } from "../../config/student-columns";
-import type { StudentSchemaOutputType } from "../../contract/student.shema";
+import type { StudentSchemaOutputType } from "../../contract/student.schema";
 
 interface StudentListTableProps {
 	data: StudentSchemaOutputType[];
 	isLoading: boolean;
-	onEdit: (student: StudentSchemaOutputType) => void;
 }
 
 export const StudentListTable: FC<StudentListTableProps> = ({
 	data,
 	isLoading,
-	onEdit,
 }) => {
-	const columns = getStudentColumns(onEdit);
+	const columns = getStudentColumns();
 
 	return (
 		<DataTable

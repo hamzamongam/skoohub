@@ -1,13 +1,12 @@
 import type { FC } from "react";
 import type { UseFormReturn } from "react-hook-form";
-import type { z } from "zod";
 import { BaseDatePicker } from "@/components/base/datepicker/BaseDatePicker";
 import BaseForm from "@/components/base/forms";
 import { BaseInput } from "@/components/base/input";
 import { BasePhoneInput } from "@/components/base/input/BasePhoneInput";
 import { BaseSelect } from "@/components/base/select/BaseSelect";
 import { BaseImageUpload } from "@/components/base/upload/BaseImageUpload";
-import type { StudentSchemaInputType } from "../../contract/student.shema";
+import type { StudentSchemaInputType } from "../../contract/student.schema";
 
 interface PersonalDetailsProps {
 	form: UseFormReturn<StudentSchemaInputType>;

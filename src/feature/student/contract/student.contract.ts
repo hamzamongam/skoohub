@@ -2,11 +2,11 @@ import { oc } from "@orpc/contract";
 import z from "zod";
 import { SuccessResponseSchema } from "../../../server/orpc/utils";
 import {
-	StudentSchema,
+	StudentListFilterSchema,
 	StudentSchemaInput,
 	StudentSchemaOutput,
 	StudentSchemaUpdateInput,
-} from "./student.shema";
+} from "./student.schema";
 
 /**
  * Student contract definitions.
@@ -16,7 +16,10 @@ export const studentContract = oc.router({
 	create: oc
 		.input(StudentSchemaInput)
 		.output(SuccessResponseSchema(StudentSchemaOutput)),
-	list: oc.output(SuccessResponseSchema(z.array(StudentSchemaOutput))),
+	list: oc
+		.input(StudentListFilterSchema.optional())
+		.output(SuccessResponseSchema(z.array(StudentSchemaOutput))),
+
 	delete: oc
 		.input(z.object({ id: z.string() }))
 		.output(SuccessResponseSchema(z.any())),

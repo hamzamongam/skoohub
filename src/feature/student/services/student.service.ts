@@ -11,7 +11,7 @@ import {
 import type {
 	StudentSchemaInputType,
 	StudentSchemaOutputType,
-} from "../contract/student.shema";
+} from "../contract/student.schema";
 import type { StudentRepository } from "../repo/student.repo";
 import type { StudentModel } from "../types/server.type";
 
@@ -107,9 +107,12 @@ export class StudentService {
 	/**
 	 * Lists all students for a given school.
 	 */
-	async list(schoolId: string) {
-		logger.debug({ schoolId }, "Listing students for school");
-		const students = await this.repo.listBySchoolId(schoolId);
+	async list(
+		schoolId: string,
+		filters?: { search?: string; classId?: string; status?: string },
+	) {
+		logger.debug({ schoolId, filters }, "Listing students for school");
+		const students = await this.repo.listBySchoolId(schoolId, filters);
 		return toSuccessResponse(students.map((s) => this.formatStudentOutput(s)));
 	}
 

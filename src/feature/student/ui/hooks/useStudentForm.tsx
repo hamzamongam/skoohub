@@ -9,7 +9,7 @@ import {
 	StudentSchemaInput,
 	type StudentSchemaInputType,
 	type StudentSchemaOutputType,
-} from "../../contract/student.shema";
+} from "../../contract/student.schema";
 
 export type UseStudentFormProps = {
 	onSuccess?: () => void;

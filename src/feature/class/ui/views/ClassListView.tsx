@@ -1,15 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
 import type { ColumnDef } from "@tanstack/react-table";
-import { Pencil, Plus } from "lucide-react";
+import { Plus } from "lucide-react";
 import { useState } from "react";
 import { BaseButton } from "@/components/base/button";
 import { DataTable } from "@/components/base/datatable/DataTable";
 import { PageLayout } from "@/components/layout/page-layout";
-import { Button } from "@/components/ui/button";
 import { orpc } from "@/server/orpc/client";
 import type { ClassSchemaOutputType } from "../../contract/class.schema";
 import { ClassRowActions } from "../components/ClassRowActions";
-import { AddStudentModal } from "../modals/AddStudentModal";
+import { AddClassModal } from "../modals/AddClassModal";
 
 export const ClassListView = () => {
 	const { data: classes, isLoading } = useQuery(orpc.class.list.queryOptions());
@@ -73,7 +72,7 @@ export const ClassListView = () => {
 			actions={
 				<BaseButton
 					leftIcon={<Plus className="size-3.5" />}
-					onClick={() => setIsOpen(true)}
+					onClick={handleAdd}
 					type="button"
 					className="flex h-10 items-center justify-center gap-2 rounded-xl bg-foreground px-4 text-xs font-bold text-background transition-all hover:scale-[1.02] active:scale-[0.98]"
 				>
@@ -88,13 +87,12 @@ export const ClassListView = () => {
 			/>
 
 			{isOpen && (
-				<AddStudentModal
+				<AddClassModal
 					open={isOpen}
 					onOpenChange={(val) => setIsOpen(val ?? false)}
 					classData={selectedClass}
 					classId={selectedClass?.id}
 					onSuccess={handleClose}
-					onCancel={handleClose}
 				/>
 			)}
 		</PageLayout>

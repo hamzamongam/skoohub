@@ -15,7 +15,7 @@ export const ClassSchemaInput = z.object({
 		"Other",
 	]),
 	classTeacherId: z.string().nullable().optional(),
-	capacity: z.number().min(1, "Capacity must be at least 1"),
+	capacity: z.number().min(1, "Capacity must be at least 1").nullable().optional(),
 	isActive: z.boolean().default(true),
 });
 

@@ -1,11 +1,10 @@
 import type { FC } from "react";
 import type { UseFormReturn } from "react-hook-form";
-import type { z } from "zod";
 import BaseForm from "@/components/base/forms";
 import { BaseInput } from "@/components/base/input";
 import { BasePhoneInput } from "@/components/base/input/BasePhoneInput";
 import { BaseSelect } from "@/components/base/select/BaseSelect";
-import type { StudentSchemaInputType } from "../../contract/student.shema";
+import type { StudentSchemaInputType } from "../../contract/student.schema";
 
 interface GuardianDetailsProps {
 	form: UseFormReturn<StudentSchemaInputType>;

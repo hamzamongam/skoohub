@@ -16,12 +16,10 @@ import useStudentForm from "../hooks/useStudentForm";
 import StudentForm from "./StudentForm";
 
 interface AddStudentDialogProps {
-	schoolId: string;
 	onSuccess?: () => void;
 }
 
 const AddStudentDialog: FC<AddStudentDialogProps> = ({
-	schoolId,
 	onSuccess,
 }) => {
 	const [isOpen, setIsOpen] = useState(false);

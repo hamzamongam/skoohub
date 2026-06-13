@@ -124,7 +124,7 @@ describe("StudentService", () => {
 
 			const result = await service.list(schoolId);
 
-			expect(repo.listBySchoolId).toHaveBeenCalledWith(schoolId);
+			expect(repo.listBySchoolId).toHaveBeenCalledWith(schoolId, undefined);
 			expect(result).toEqual({
 				success: true,
 				message: "Action completed successfully",
