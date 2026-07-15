@@ -27,10 +27,11 @@ export const ClassSetupSchema = z.object({
 			}),
 		)
 		.min(1),
+	defaultSubjects: z.array(z.string()).optional(),
 });
 
 export const StaffInvitationSchema = z.object({
-	emails: z.array(z.string().email()).min(1),
+	emails: z.array(z.string().email()),
 });
 
 export type AcademicStructureInput = z.infer<typeof AcademicStructureSchema>;

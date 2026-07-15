@@ -1,0 +1,687 @@
+
+ RUN  v3.2.4 /var/www/hamsa/school/skoohub
+
+stdout | src/feature/onboarding/ui/OnboardingWizard.test.tsx > OnboardingWizard Integration Flow > should progress through Step 1, Step 2, and Step 3 successfully
+useOrpcMutation called with options function
+useOrpcMutation called with options function
+
+stdout | src/feature/onboarding/ui/OnboardingWizard.test.tsx > OnboardingWizard Integration Flow > should progress through Step 1, Step 2, and Step 3 successfully
+mockMutate called with {
+  yearName: '2026-2027',
+  startDate: '2026-06-27',
+  endDate: '2027-06-27',
+  terms: [],
+  gradingSystem: 'PERCENTAGE'
+}
+registeredOnSuccess is function
+
+stdout | src/feature/onboarding/ui/OnboardingWizard.test.tsx > OnboardingWizard Integration Flow > should progress through Step 1, Step 2, and Step 3 successfully
+useOrpcMutation called with options function
+useOrpcMutation called with options function
+
+ ❯ src/feature/onboarding/ui/OnboardingWizard.test.tsx (1 test | 1 failed) 1324ms
+   × OnboardingWizard Integration Flow > should progress through Step 1, Step 2, and Step 3 successfully 1322ms
+     → Found multiple elements with the text: Classes & Sections
+
+Here are the matching elements:
+
+Ignored nodes: comments, script, style
+[36m<h2[39m
+  [33mclass[39m=[32m"text-xs font-semibold uppercase tracking-wider text-primary"[39m
+[36m>[39m
+  [0mClasses & Sections[0m
+[36m</h2>[39m
+
+Ignored nodes: comments, script, style
+[36m<h1[39m
+  [33mclass[39m=[32m"text-2xl font-bold mb-1"[39m
+[36m>[39m
+  [0mClasses & Sections[0m
+[36m</h1>[39m
+
+(If this is intentional, then use the `*AllBy*` variant of the query (like `queryAllByText`, `getAllByText`, or `findAllByText`)).
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<div[39m
+      [33mclass[39m=[32m"max-w-3xl mx-auto py-6"[39m
+    [36m>[39m
+      [36m<div[39m
+        [33mclass[39m=[32m"mb-10 px-2"[39m
+      [36m>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"flex items-center justify-between"[39m
+        [36m>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"flex-1 relative flex items-center"[39m
+          [36m>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"flex items-center"[39m
+            [36m>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"flex h-10 w-10 shrink-0 items-center justify-center rounded-full border-2 text-sm font-semibold transition-all duration-300 bg-primary border-primary text-primary-foreground"[39m
+              [36m>[39m
+                [36m<svg[39m
+                  [33maria-hidden[39m=[32m"true"[39m
+                  [33mclass[39m=[32m"lucide lucide-check h-5 w-5"[39m
+                  [33mfill[39m=[32m"none"[39m
+                  [33mheight[39m=[32m"24"[39m
+                  [33mstroke[39m=[32m"currentColor"[39m
+                  [33mstroke-linecap[39m=[32m"round"[39m
+                  [33mstroke-linejoin[39m=[32m"round"[39m
+                  [33mstroke-width[39m=[32m"2"[39m
+                  [33mviewBox[39m=[32m"0 0 24 24"[39m
+                  [33mwidth[39m=[32m"24"[39m
+                  [33mxmlns[39m=[32m"http://www.w3.org/2000/svg"[39m
+                [36m>[39m
+                  [36m<path[39m
+                    [33md[39m=[32m"M20 6 9 17l-5-5"[39m
+                  [36m/>[39m
+                [36m</svg>[39m
+              [36m</div>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"ml-3 hidden md:block"[39m
+              [36m>[39m
+                [36m<h2[39m
+                  [33mclass[39m=[32m"text-xs font-semibold uppercase tracking-wider text-muted-foreground"[39m
+                [36m>[39m
+                  [0mAcademic Year[0m
+                [36m</h2>[39m
+                [36m<p[39m
+                  [33mclass[39m=[32m"text-xs text-muted-foreground/80 font-normal"[39m
+                [36m>[39m
+                  [0mDefine year & terms[0m
+                [36m</p>[39m
+              [36m</div>[39m
+            [36m</div>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"absolute top-5 left-10 right-4 h-[2px] -z-10 hidden md:block bg-primary"[39m
+            [36m/>[39m
+          [36m</div>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"flex-1 relative flex items-center"[39m
+          [36m>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"flex items-center"[39m
+            [36m>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"flex h-10 w-10 shrink-0 items-center justify-center rounded-full border-2 text-sm font-semibold transition-all duration-300 border-primary text-primary bg-primary/10"[39m
+              [36m>[39m
+                [0m2[0m
+              [36m</div>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"ml-3 hidden md:block"[39m
+              [36m>[39m
+                [36m<h2[39m
+                  [33mclass[39m=[32m"text-xs font-semibold uppercase tracking-wider text-primary"[39m
+                [36m>[39m
+                  [0mClasses & Sections[0m
+                [36m</h2>[39m
+                [36m<p[39m
+                  [33mclass[39m=[32m"text-xs text-muted-foreground/80 font-normal"[39m
+                [36m>[39m
+                  [0mCreate grade levels[0m
+                [36m</p>[39m
+              [36m</div>[39m
+            [36m</div>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"absolute top-5 left-10 right-4 h-[2px] -z-10 hidden md:block bg-muted/40"[39m
+            [36m/>[39m
+          [36m</div>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"flex-1 relative flex items-center"[39m
+          [36m>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"flex items-center"[39m
+            [36m>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"flex h-10 w-10 shrink-0 items-center justify-center rounded-full border-2 text-sm font-semibold transition-all duration-300 border-muted text-muted-foreground bg-muted/20"[39m
+              [36m>[39m
+                [0m3[0m
+              [36m</div>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"ml-3 hidden md:block"[39m
+              [36m>[39m
+                [36m<h2[39m
+                  [33mclass[39m=[32m"text-xs font-semibold uppercase tracking-wider text-muted-foreground"[39m
+                [36m>[39m
+                  [0mInvite Staff[0m
+                [36m</h2>[39m
+                [36m<p[39m
+                  [33mclass[39m=[32m"text-xs text-muted-foreground/80 font-normal"[39m
+                [36m>[39m
+                  [0mInvite teachers[0m
+                [36m</p>[39m
+              [36m</div>[39m
+            [36m</div>[39m
+          [36m</div>[39m
+        [36m</div>[39m
+      [36m</div>[39m
+      [36m<div[39m
+        [33mclass[39m=[32m"bg-card border rounded-2xl p-6 md:p-8 shadow-sm"[39m
+      [36m>[39m
+        [36m<form>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"gap-3 data-[slot=checkbox-group]:gap-3 [&>[data-slot=field-group]]:gap-4 group/field-group @container/field-group flex w-full flex-col space-y-6"[39m
+            [33mdata-slot[39m=[32m"field-group"[39m
+          [36m>[39m
+            [36m<div>[39m
+              [36m<h1[39m
+                [33mclass[39m=[32m"text-2xl font-bold mb-1"[39m
+              [36m>[39m
+                [0mClasses & Sections[0m
+              [36m</h1>[39m
+              [36m<p[39m
+                [33mclass[39m=[32m"text-sm text-muted-foreground"[39m
+              [36m>[39m
+                [0mConfigure the grades and classes available in your school. Separate multiple sections with commas.[0m
+              [36m</p>[39m
+            [36m</div>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"space-y-4"[39m
+            [36m>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"flex flex-col md:flex-row items-start md:items-end gap-3 p-4 bg-muted/20 border border-muted/50 rounded-xl relative group"[39m
+              [36m>[39m
+                [36m<div[39m
+                  [33mclass[39m=[32m"grid grid-cols-1 md:grid-cols-3 gap-3 w-full"[39m
+                [36m>[39m
+                  [36m<div[39m
+                    [33mclass[39m=[32m"data-[invalid=true]:text-destructive gap-2 group/field flex w-full flex-col [&>*]:w-full [&>.sr-only]:w-auto"[39m
+                    [33mdata-invalid[39m=[32m"false"[39m
+                    [33mdata-orientation[39m=[32m"vertical"...
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<div[39m
+      [33mclass[39m=[32m"max-w-3xl mx-auto py-6"[39m
+    [36m>[39m
+      [36m<div[39m
+        [33mclass[39m=[32m"mb-10 px-2"[39m
+      [36m>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"flex items-center justify-between"[39m
+        [36m>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"flex-1 relative flex items-center"[39m
+          [36m>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"flex items-center"[39m
+            [36m>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"flex h-10 w-10 shrink-0 items-center justify-center rounded-full border-2 text-sm font-semibold transition-all duration-300 bg-primary border-primary text-primary-foreground"[39m
+              [36m>[39m
+                [36m<svg[39m
+                  [33maria-hidden[39m=[32m"true"[39m
+                  [33mclass[39m=[32m"lucide lucide-check h-5 w-5"[39m
+                  [33mfill[39m=[32m"none"[39m
+                  [33mheight[39m=[32m"24"[39m
+                  [33mstroke[39m=[32m"currentColor"[39m
+                  [33mstroke-linecap[39m=[32m"round"[39m
+                  [33mstroke-linejoin[39m=[32m"round"[39m
+                  [33mstroke-width[39m=[32m"2"[39m
+                  [33mviewBox[39m=[32m"0 0 24 24"[39m
+                  [33mwidth[39m=[32m"24"[39m
+                  [33mxmlns[39m=[32m"http://www.w3.org/2000/svg"[39m
+                [36m>[39m
+                  [36m<path[39m
+                    [33md[39m=[32m"M20 6 9 17l-5-5"[39m
+                  [36m/>[39m
+                [36m</svg>[39m
+              [36m</div>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"ml-3 hidden md:block"[39m
+              [36m>[39m
+                [36m<h2[39m
+                  [33mclass[39m=[32m"text-xs font-semibold uppercase tracking-wider text-muted-foreground"[39m
+                [36m>[39m
+                  [0mAcademic Year[0m
+                [36m</h2>[39m
+                [36m<p[39m
+                  [33mclass[39m=[32m"text-xs text-muted-foreground/80 font-normal"[39m
+                [36m>[39m
+                  [0mDefine year & terms[0m
+                [36m</p>[39m
+              [36m</div>[39m
+            [36m</div>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"absolute top-5 left-10 right-4 h-[2px] -z-10 hidden md:block bg-primary"[39m
+            [36m/>[39m
+          [36m</div>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"flex-1 relative flex items-center"[39m
+          [36m>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"flex items-center"[39m
+            [36m>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"flex h-10 w-10 shrink-0 items-center justify-center rounded-full border-2 text-sm font-semibold transition-all duration-300 border-primary text-primary bg-primary/10"[39m
+              [36m>[39m
+                [0m2[0m
+              [36m</div>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"ml-3 hidden md:block"[39m
+              [36m>[39m
+                [36m<h2[39m
+                  [33mclass[39m=[32m"text-xs font-semibold uppercase tracking-wider text-primary"[39m
+                [36m>[39m
+                  [0mClasses & Sections[0m
+                [36m</h2>[39m
+                [36m<p[39m
+                  [33mclass[39m=[32m"text-xs text-muted-foreground/80 font-normal"[39m
+                [36m>[39m
+                  [0mCreate grade levels[0m
+                [36m</p>[39m
+              [36m</div>[39m
+            [36m</div>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"absolute top-5 left-10 right-4 h-[2px] -z-10 hidden md:block bg-muted/40"[39m
+            [36m/>[39m
+          [36m</div>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"flex-1 relative flex items-center"[39m
+          [36m>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"flex items-center"[39m
+            [36m>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"flex h-10 w-10 shrink-0 items-center justify-center rounded-full border-2 text-sm font-semibold transition-all duration-300 border-muted text-muted-foreground bg-muted/20"[39m
+              [36m>[39m
+                [0m3[0m
+              [36m</div>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"ml-3 hidden md:block"[39m
+              [36m>[39m
+                [36m<h2[39m
+                  [33mclass[39m=[32m"text-xs font-semibold uppercase tracking-wider text-muted-foreground"[39m
+                [36m>[39m
+                  [0mInvite Staff[0m
+                [36m</h2>[39m
+                [36m<p[39m
+                  [33mclass[39m=[32m"text-xs text-muted-foreground/80 font-normal"[39m
+                [36m>[39m
+                  [0mInvite teachers[0m
+                [36m</p>[39m
+              [36m</div>[39m
+            [36m</div>[39m
+          [36m</div>[39m
+        [36m</div>[39m
+      [36m</div>[39m
+      [36m<div[39m
+        [33mclass[39m=[32m"bg-card border rounded-2xl p-6 md:p-8 shadow-sm"[39m
+      [36m>[39m
+        [36m<form>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"gap-3 data-[slot=checkbox-group]:gap-3 [&>[data-slot=field-group]]:gap-4 group/field-group @container/field-group flex w-full flex-col space-y-6"[39m
+            [33mdata-slot[39m=[32m"field-group"[39m
+          [36m>[39m
+            [36m<div>[39m
+              [36m<h1[39m
+                [33mclass[39m=[32m"text-2xl font-bold mb-1"[39m
+              [36m>[39m
+                [0mClasses & Sections[0m
+              [36m</h1>[39m
+              [36m<p[39m
+                [33mclass[39m=[32m"text-sm text-muted-foreground"[39m
+              [36m>[39m
+                [0mConfigure the grades and classes available in your school. Separate multiple sections with commas.[0m
+              [36m</p>[39m
+            [36m</div>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"space-y-4"[39m
+            [36m>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"flex flex-col md:flex-row items-start md:items-end gap-3 p-4 bg-muted/20 border border-muted/50 rounded-xl relative group"[39m
+              [36m>[39m
+                [36m<div[39m
+                  [33mclass[39m=[32m"grid grid-cols-1 md:grid-cols-3 gap-3 w-full"[39m
+                [36m>[39m
+                  [36m<div[39m
+                    [33mclass[39m=[32m"data-[invalid=true]:text-destructive gap-2 group/field flex w-full flex-col [&>*]:w-full [&>.sr-only]:w-auto"[39m
+                    [33mdata-invalid[39m=[32m"false"[39m
+                    [33mdata-orientation[39m=[32m"vertical"...
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/feature/onboarding/ui/OnboardingWizard.test.tsx > OnboardingWizard Integration Flow > should progress through Step 1, Step 2, and Step 3 successfully
+TestingLibraryElementError: Found multiple elements with the text: Classes & Sections
+
+Here are the matching elements:
+
+Ignored nodes: comments, script, style
+[36m<h2[39m
+  [33mclass[39m=[32m"text-xs font-semibold uppercase tracking-wider text-primary"[39m
+[36m>[39m
+  [0mClasses & Sections[0m
+[36m</h2>[39m
+
+Ignored nodes: comments, script, style
+[36m<h1[39m
+  [33mclass[39m=[32m"text-2xl font-bold mb-1"[39m
+[36m>[39m
+  [0mClasses & Sections[0m
+[36m</h1>[39m
+
+(If this is intentional, then use the `*AllBy*` variant of the query (like `queryAllByText`, `getAllByText`, or `findAllByText`)).
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<div[39m
+      [33mclass[39m=[32m"max-w-3xl mx-auto py-6"[39m
+    [36m>[39m
+      [36m<div[39m
+        [33mclass[39m=[32m"mb-10 px-2"[39m
+      [36m>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"flex items-center justify-between"[39m
+        [36m>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"flex-1 relative flex items-center"[39m
+          [36m>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"flex items-center"[39m
+            [36m>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"flex h-10 w-10 shrink-0 items-center justify-center rounded-full border-2 text-sm font-semibold transition-all duration-300 bg-primary border-primary text-primary-foreground"[39m
+              [36m>[39m
+                [36m<svg[39m
+                  [33maria-hidden[39m=[32m"true"[39m
+                  [33mclass[39m=[32m"lucide lucide-check h-5 w-5"[39m
+                  [33mfill[39m=[32m"none"[39m
+                  [33mheight[39m=[32m"24"[39m
+                  [33mstroke[39m=[32m"currentColor"[39m
+                  [33mstroke-linecap[39m=[32m"round"[39m
+                  [33mstroke-linejoin[39m=[32m"round"[39m
+                  [33mstroke-width[39m=[32m"2"[39m
+                  [33mviewBox[39m=[32m"0 0 24 24"[39m
+                  [33mwidth[39m=[32m"24"[39m
+                  [33mxmlns[39m=[32m"http://www.w3.org/2000/svg"[39m
+                [36m>[39m
+                  [36m<path[39m
+                    [33md[39m=[32m"M20 6 9 17l-5-5"[39m
+                  [36m/>[39m
+                [36m</svg>[39m
+              [36m</div>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"ml-3 hidden md:block"[39m
+              [36m>[39m
+                [36m<h2[39m
+                  [33mclass[39m=[32m"text-xs font-semibold uppercase tracking-wider text-muted-foreground"[39m
+                [36m>[39m
+                  [0mAcademic Year[0m
+                [36m</h2>[39m
+                [36m<p[39m
+                  [33mclass[39m=[32m"text-xs text-muted-foreground/80 font-normal"[39m
+                [36m>[39m
+                  [0mDefine year & terms[0m
+                [36m</p>[39m
+              [36m</div>[39m
+            [36m</div>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"absolute top-5 left-10 right-4 h-[2px] -z-10 hidden md:block bg-primary"[39m
+            [36m/>[39m
+          [36m</div>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"flex-1 relative flex items-center"[39m
+          [36m>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"flex items-center"[39m
+            [36m>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"flex h-10 w-10 shrink-0 items-center justify-center rounded-full border-2 text-sm font-semibold transition-all duration-300 border-primary text-primary bg-primary/10"[39m
+              [36m>[39m
+                [0m2[0m
+              [36m</div>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"ml-3 hidden md:block"[39m
+              [36m>[39m
+                [36m<h2[39m
+                  [33mclass[39m=[32m"text-xs font-semibold uppercase tracking-wider text-primary"[39m
+                [36m>[39m
+                  [0mClasses & Sections[0m
+                [36m</h2>[39m
+                [36m<p[39m
+                  [33mclass[39m=[32m"text-xs text-muted-foreground/80 font-normal"[39m
+                [36m>[39m
+                  [0mCreate grade levels[0m
+                [36m</p>[39m
+              [36m</div>[39m
+            [36m</div>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"absolute top-5 left-10 right-4 h-[2px] -z-10 hidden md:block bg-muted/40"[39m
+            [36m/>[39m
+          [36m</div>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"flex-1 relative flex items-center"[39m
+          [36m>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"flex items-center"[39m
+            [36m>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"flex h-10 w-10 shrink-0 items-center justify-center rounded-full border-2 text-sm font-semibold transition-all duration-300 border-muted text-muted-foreground bg-muted/20"[39m
+              [36m>[39m
+                [0m3[0m
+              [36m</div>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"ml-3 hidden md:block"[39m
+              [36m>[39m
+                [36m<h2[39m
+                  [33mclass[39m=[32m"text-xs font-semibold uppercase tracking-wider text-muted-foreground"[39m
+                [36m>[39m
+                  [0mInvite Staff[0m
+                [36m</h2>[39m
+                [36m<p[39m
+                  [33mclass[39m=[32m"text-xs text-muted-foreground/80 font-normal"[39m
+                [36m>[39m
+                  [0mInvite teachers[0m
+                [36m</p>[39m
+              [36m</div>[39m
+            [36m</div>[39m
+          [36m</div>[39m
+        [36m</div>[39m
+      [36m</div>[39m
+      [36m<div[39m
+        [33mclass[39m=[32m"bg-card border rounded-2xl p-6 md:p-8 shadow-sm"[39m
+      [36m>[39m
+        [36m<form>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"gap-3 data-[slot=checkbox-group]:gap-3 [&>[data-slot=field-group]]:gap-4 group/field-group @container/field-group flex w-full flex-col space-y-6"[39m
+            [33mdata-slot[39m=[32m"field-group"[39m
+          [36m>[39m
+            [36m<div>[39m
+              [36m<h1[39m
+                [33mclass[39m=[32m"text-2xl font-bold mb-1"[39m
+              [36m>[39m
+                [0mClasses & Sections[0m
+              [36m</h1>[39m
+              [36m<p[39m
+                [33mclass[39m=[32m"text-sm text-muted-foreground"[39m
+              [36m>[39m
+                [0mConfigure the grades and classes available in your school. Separate multiple sections with commas.[0m
+              [36m</p>[39m
+            [36m</div>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"space-y-4"[39m
+            [36m>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"flex flex-col md:flex-row items-start md:items-end gap-3 p-4 bg-muted/20 border border-muted/50 rounded-xl relative group"[39m
+              [36m>[39m
+                [36m<div[39m
+                  [33mclass[39m=[32m"grid grid-cols-1 md:grid-cols-3 gap-3 w-full"[39m
+                [36m>[39m
+                  [36m<div[39m
+                    [33mclass[39m=[32m"data-[invalid=true]:text-destructive gap-2 group/field flex w-full flex-col [&>*]:w-full [&>.sr-only]:w-auto"[39m
+                    [33mdata-invalid[39m=[32m"false"[39m
+                    [33mdata-orientation[39m=[32m"vertical"...
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<div[39m
+      [33mclass[39m=[32m"max-w-3xl mx-auto py-6"[39m
+    [36m>[39m
+      [36m<div[39m
+        [33mclass[39m=[32m"mb-10 px-2"[39m
+      [36m>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"flex items-center justify-between"[39m
+        [36m>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"flex-1 relative flex items-center"[39m
+          [36m>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"flex items-center"[39m
+            [36m>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"flex h-10 w-10 shrink-0 items-center justify-center rounded-full border-2 text-sm font-semibold transition-all duration-300 bg-primary border-primary text-primary-foreground"[39m
+              [36m>[39m
+                [36m<svg[39m
+                  [33maria-hidden[39m=[32m"true"[39m
+                  [33mclass[39m=[32m"lucide lucide-check h-5 w-5"[39m
+                  [33mfill[39m=[32m"none"[39m
+                  [33mheight[39m=[32m"24"[39m
+                  [33mstroke[39m=[32m"currentColor"[39m
+                  [33mstroke-linecap[39m=[32m"round"[39m
+                  [33mstroke-linejoin[39m=[32m"round"[39m
+                  [33mstroke-width[39m=[32m"2"[39m
+                  [33mviewBox[39m=[32m"0 0 24 24"[39m
+                  [33mwidth[39m=[32m"24"[39m
+                  [33mxmlns[39m=[32m"http://www.w3.org/2000/svg"[39m
+                [36m>[39m
+                  [36m<path[39m
+                    [33md[39m=[32m"M20 6 9 17l-5-5"[39m
+                  [36m/>[39m
+                [36m</svg>[39m
+              [36m</div>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"ml-3 hidden md:block"[39m
+              [36m>[39m
+                [36m<h2[39m
+                  [33mclass[39m=[32m"text-xs font-semibold uppercase tracking-wider text-muted-foreground"[39m
+                [36m>[39m
+                  [0mAcademic Year[0m
+                [36m</h2>[39m
+                [36m<p[39m
+                  [33mclass[39m=[32m"text-xs text-muted-foreground/80 font-normal"[39m
+                [36m>[39m
+                  [0mDefine year & terms[0m
+                [36m</p>[39m
+              [36m</div>[39m
+            [36m</div>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"absolute top-5 left-10 right-4 h-[2px] -z-10 hidden md:block bg-primary"[39m
+            [36m/>[39m
+          [36m</div>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"flex-1 relative flex items-center"[39m
+          [36m>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"flex items-center"[39m
+            [36m>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"flex h-10 w-10 shrink-0 items-center justify-center rounded-full border-2 text-sm font-semibold transition-all duration-300 border-primary text-primary bg-primary/10"[39m
+              [36m>[39m
+                [0m2[0m
+              [36m</div>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"ml-3 hidden md:block"[39m
+              [36m>[39m
+                [36m<h2[39m
+                  [33mclass[39m=[32m"text-xs font-semibold uppercase tracking-wider text-primary"[39m
+                [36m>[39m
+                  [0mClasses & Sections[0m
+                [36m</h2>[39m
+                [36m<p[39m
+                  [33mclass[39m=[32m"text-xs text-muted-foreground/80 font-normal"[39m
+                [36m>[39m
+                  [0mCreate grade levels[0m
+                [36m</p>[39m
+              [36m</div>[39m
+            [36m</div>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"absolute top-5 left-10 right-4 h-[2px] -z-10 hidden md:block bg-muted/40"[39m
+            [36m/>[39m
+          [36m</div>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"flex-1 relative flex items-center"[39m
+          [36m>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"flex items-center"[39m
+            [36m>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"flex h-10 w-10 shrink-0 items-center justify-center rounded-full border-2 text-sm font-semibold transition-all duration-300 border-muted text-muted-foreground bg-muted/20"[39m
+              [36m>[39m
+                [0m3[0m
+              [36m</div>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"ml-3 hidden md:block"[39m
+              [36m>[39m
+                [36m<h2[39m
+                  [33mclass[39m=[32m"text-xs font-semibold uppercase tracking-wider text-muted-foreground"[39m
+                [36m>[39m
+                  [0mInvite Staff[0m
+                [36m</h2>[39m
+                [36m<p[39m
+                  [33mclass[39m=[32m"text-xs text-muted-foreground/80 font-normal"[39m
+                [36m>[39m
+                  [0mInvite teachers[0m
+                [36m</p>[39m
+              [36m</div>[39m
+            [36m</div>[39m
+          [36m</div>[39m
+        [36m</div>[39m
+      [36m</div>[39m
+      [36m<div[39m
+        [33mclass[39m=[32m"bg-card border rounded-2xl p-6 md:p-8 shadow-sm"[39m
+      [36m>[39m
+        [36m<form>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"gap-3 data-[slot=checkbox-group]:gap-3 [&>[data-slot=field-group]]:gap-4 group/field-group @container/field-group flex w-full flex-col space-y-6"[39m
+            [33mdata-slot[39m=[32m"field-group"[39m
+          [36m>[39m
+            [36m<div>[39m
+              [36m<h1[39m
+                [33mclass[39m=[32m"text-2xl font-bold mb-1"[39m
+              [36m>[39m
+                [0mClasses & Sections[0m
+              [36m</h1>[39m
+              [36m<p[39m
+                [33mclass[39m=[32m"text-sm text-muted-foreground"[39m
+              [36m>[39m
+                [0mConfigure the grades and classes available in your school. Separate multiple sections with commas.[0m
+              [36m</p>[39m
+            [36m</div>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"space-y-4"[39m
+            [36m>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"flex flex-col md:flex-row items-start md:items-end gap-3 p-4 bg-muted/20 border border-muted/50 rounded-xl relative group"[39m
+              [36m>[39m
+                [36m<div[39m
+                  [33mclass[39m=[32m"grid grid-cols-1 md:grid-cols-3 gap-3 w-full"[39m
+                [36m>[39m
+                  [36m<div[39m
+                    [33mclass[39m=[32m"data-[invalid=true]:text-destructive gap-2 group/field flex w-full flex-col [&>*]:w-full [&>.sr-only]:w-auto"[39m
+                    [33mdata-invalid[39m=[32m"false"[39m
+                    [33mdata-orientation[39m=[32m"vertical"...
+ ❯ waitForWrapper node_modules/@testing-library/dom/dist/wait-for.js:163:27
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:86:33
+ ❯ src/feature/onboarding/ui/OnboardingWizard.test.tsx:105:23
+    103|   // STEP 2: Classes, Sections & Subjects Setup
+    104|   // ==========================================
+    105|   expect(await screen.findByText("Classes & Sections")).toBeInTheDocum…
+       |                       ^
+    106|   expect(await screen.findByText("Default School Subjects")).toBeInThe…
+    107| 
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed (1)
+   Start at  15:00:10
+   Duration  2.69s (transform 224ms, setup 85ms, collect 501ms, tests 1.32s, environment 377ms, prepare 126ms)
+

@@ -10,5 +10,14 @@ export const Route = createFileRoute("/_authed")({
 				},
 			});
 		}
+
+		if (
+			context.session.user.role === "schoolAdmin" &&
+			context.session.user.onboardingStatus === "PENDING"
+		) {
+			throw redirect({
+				to: "/onboarding",
+			});
+		}
 	},
 });

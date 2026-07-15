@@ -72,12 +72,6 @@ export class OnboardingService {
 				},
 			});
 
-			// 5. Update School onboarding status
-			await tx.school.update({
-				where: { id: schoolId },
-				data: { onboardingStatus: "COMPLETED" },
-			});
-
 			return toSuccessResponse(academicYear, "Academic structure saved");
 		});
 	}
@@ -90,28 +84,37 @@ export class OnboardingService {
 		schoolId: string,
 		input: {
 			grades: { name: string; level: number; sections: string[] }[];
+			defaultSubjects?: string[];
 		},
 	) {
 		logger.info({ schoolId }, "Setting up classes and sections");
 
 		return await this.repo.transaction(async (tx) => {
 			for (const grade of input.grades) {
-				await tx.gradeLevel.create({
-					data: {
-						name: grade.name,
-						level: grade.level,
-						schoolId,
-						sections: {
-							create: grade.sections.map((s: string) => ({ name: s })),
+				for (const section of grade.sections) {
+					await tx.class.create({
+						data: {
+							name: `${grade.name}-${section}`,
+							grade: grade.name,
+							section: section,
+							medium: "English",
+							schoolId,
+							isActive: true,
 						},
-					},
-				});
+					});
+				}
 			}
 
-			await tx.school.update({
-				where: { id: schoolId },
-				data: { onboardingStatus: "COMPLETED" },
-			});
+			if (input.defaultSubjects && input.defaultSubjects.length > 0) {
+				const subjectData = input.defaultSubjects.map((name) => ({
+					name,
+					schoolId,
+				}));
+				await tx.subject.createMany({
+					data: subjectData,
+					skipDuplicates: true,
+				});
+			}
 
 			return toSuccessResponse(null, "Classes configured successfully");
 		});

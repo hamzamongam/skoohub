@@ -196,4 +196,25 @@ describe("AuthService", () => {
 			await expect(service.me(headers)).rejects.toThrow(UnauthorizedError);
 		});
 	});
+
+	describe("forgotPassword", () => {
+		it("should trigger requestPasswordReset successfully", async () => {
+			const email = "test@example.com";
+			vi.mocked(auth.api.requestPasswordReset).mockResolvedValue(null as any);
+
+			const result = await service.forgotPassword(email);
+
+			expect(auth.api.requestPasswordReset).toHaveBeenCalledWith({
+				body: {
+					email,
+					redirectTo: expect.stringContaining("/auth/invite/accept"),
+				},
+			});
+			expect(result).toEqual({
+				success: true,
+				message: "Password reset email sent",
+				data: null,
+			});
+		});
+	});
 });

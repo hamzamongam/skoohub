@@ -96,6 +96,18 @@ export class AuthService {
 		return toSuccessResponse("", "Password reset successfully");
 	}
 
+	async forgotPassword(email: string) {
+		logger.info({ email }, "Requesting password reset");
+		const baseUrl = process.env.BETTER_AUTH_URL || "http://localhost:3000";
+		await auth.api.requestPasswordReset({
+			body: {
+				email,
+				redirectTo: `${baseUrl}/auth/invite/accept`,
+			},
+		});
+		return toSuccessResponse(null, "Password reset email sent");
+	}
+
 	/**
 	 * Step 2: Tenant Profile (The School)
 	 * Creates the school profile and links the verified user as Owner.

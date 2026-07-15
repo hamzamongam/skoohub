@@ -2,11 +2,7 @@ import { UnauthorizedError } from "@/utils/errors";
 import { TeacherRepository } from "../repo/teacher.repo";
 
 export class TeacherService {
-	private repo: TeacherRepository;
-
-	constructor() {
-		this.repo = new TeacherRepository();
-	}
+	constructor(private repo: TeacherRepository) {}
 
 	async list(schoolId: string) {
 		if (!schoolId) {

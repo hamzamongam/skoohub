@@ -3,9 +3,11 @@ import type { Context } from "@/server/orpc/context";
 import { requiredAuthMiddleware } from "@/server/orpc/middleware";
 import { toSuccessResponse } from "@/server/orpc/utils";
 import { teacherContract } from "../contract/teacher.contract";
+import { TeacherRepository } from "../repo/teacher.repo";
 import { TeacherService } from "../services/teacher.service";
 
-const service = new TeacherService();
+const repo = new TeacherRepository();
+const service = new TeacherService(repo);
 const os = implement(teacherContract).$context<Context>();
 
 export const teacherRouter = os.router({

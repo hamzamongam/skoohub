@@ -15,7 +15,7 @@ export const auth = betterAuth({
 		async sendResetPassword({ user, url, token }) {
 			// Construct custom invite URL
 			const baseUrl = process.env.BETTER_AUTH_URL || "http://localhost:3000";
-			const inviteUrl = `${baseUrl}/invite/accept?token=${token}`;
+			const inviteUrl = `${baseUrl}/auth/invite/accept?token=${token}`;
 
 			if (!user.emailVerified) {
 				// New user flow (Invitation)

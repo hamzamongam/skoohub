@@ -6,7 +6,7 @@ vi.mock("@/db/prisma", () => ({
 	prisma: {
 		academicYear: { create: vi.fn() },
 		school: { update: vi.fn(), findUnique: vi.fn() },
-		gradeLevel: { create: vi.fn() },
+		class: { create: vi.fn() },
 		invitation: { create: vi.fn() },
 		$transaction: vi.fn(),
 	},
@@ -41,10 +41,10 @@ describe("OnboardingRepository", () => {
 		});
 	});
 
-	it("should create a grade level", async () => {
-		const data = { name: "Grade 1", level: 1, schoolId: "s1" };
-		await repo.createGradeLevel(data as any);
-		expect(prisma.gradeLevel.create).toHaveBeenCalledWith({ data });
+	it("should create a class", async () => {
+		const data = { name: "Grade 1-A", grade: "Grade 1", section: "A", medium: "English", schoolId: "s1" };
+		await repo.createClass(data as any);
+		expect(prisma.class.create).toHaveBeenCalledWith({ data });
 	});
 
 	it("should find school by id", async () => {

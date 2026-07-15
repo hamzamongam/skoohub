@@ -65,8 +65,9 @@ describe("OnboardingService", () => {
 
 			vi.spyOn(repo, "transaction").mockImplementation(async (fn: any) => {
 				const tx = {
-					gradeLevel: { create: vi.fn().mockResolvedValue({}) },
+					class: { create: vi.fn().mockResolvedValue({}) },
 					school: { update: vi.fn().mockResolvedValue({}) },
+					subject: { createMany: vi.fn().mockResolvedValue({ count: 0 }) },
 				};
 				return await fn(tx);
 			});
@@ -77,6 +78,37 @@ describe("OnboardingService", () => {
 			expect(result.success).toBe(true);
 			expect(result.message).toBe("Classes configured successfully");
 			expect(result.data).toBeNull();
+		});
+
+		it("should setup default subjects successfully when provided", async () => {
+			const schoolId = "school-1";
+			const input = {
+				grades: [{ name: "Grade 1", level: 1, sections: ["A", "B"] }],
+				defaultSubjects: ["Math", "Science"],
+			};
+
+			const mockCreateMany = vi.fn().mockResolvedValue({ count: 2 });
+
+			vi.spyOn(repo, "transaction").mockImplementation(async (fn: any) => {
+				const tx = {
+					class: { create: vi.fn().mockResolvedValue({}) },
+					school: { update: vi.fn().mockResolvedValue({}) },
+					subject: { createMany: mockCreateMany },
+				};
+				return await fn(tx);
+			});
+
+			const result = await service.setupClasses(schoolId, input);
+
+			expect(repo.transaction).toHaveBeenCalled();
+			expect(mockCreateMany).toHaveBeenCalledWith({
+				data: [
+					{ name: "Math", schoolId },
+					{ name: "Science", schoolId },
+				],
+				skipDuplicates: true,
+			});
+			expect(result.success).toBe(true);
 		});
 	});
 

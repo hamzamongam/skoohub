@@ -26,10 +26,10 @@ export class OnboardingRepository {
 	}
 
 	/**
-	 * Creates a new Grade Level (and its sections if nested).
+	 * Creates a new Class.
 	 */
-	async createGradeLevel(data: Prisma.GradeLevelCreateInput) {
-		return await prisma.gradeLevel.create({
+	async createClass(data: Prisma.ClassUncheckedCreateInput) {
+		return await prisma.class.create({
 			data,
 		});
 	}

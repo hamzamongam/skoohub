@@ -126,4 +126,32 @@ describe("authRouter", () => {
 			data: mockResp,
 		});
 	});
+
+	it("should call authService.forgotPassword in the forgotPassword handler", async () => {
+		const mockForgotPassword = vi.fn();
+		vi.doMock("../services/auth.service", () => ({
+			AuthService: vi.fn().mockImplementation(() => ({
+				forgotPassword: mockForgotPassword,
+			})),
+		}));
+
+		const { authRouter } = await import("./auth.router");
+
+		const input = { email: "test@example.com" };
+		mockForgotPassword.mockResolvedValue({
+			success: true,
+			message: "Password reset email sent",
+		} as any);
+
+		const result = await authRouter.forgotPassword["~orpc"].handler({
+			input,
+			context: {},
+		} as any);
+
+		expect(mockForgotPassword).toHaveBeenCalledWith(input.email);
+		expect(result).toEqual({
+			success: true,
+			message: "Password reset email sent",
+		});
+	});
 });

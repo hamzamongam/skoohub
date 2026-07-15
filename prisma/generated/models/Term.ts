@@ -183,6 +183,7 @@ export type TermWhereInput = {
   endDate?: Prisma.DateTimeFilter<"Term"> | Date | string
   academicYearId?: Prisma.StringFilter<"Term"> | string
   academicYear?: Prisma.XOR<Prisma.AcademicYearScalarRelationFilter, Prisma.AcademicYearWhereInput>
+  exams?: Prisma.ExamListRelationFilter
 }
 
 export type TermOrderByWithRelationInput = {
@@ -192,6 +193,7 @@ export type TermOrderByWithRelationInput = {
   endDate?: Prisma.SortOrder
   academicYearId?: Prisma.SortOrder
   academicYear?: Prisma.AcademicYearOrderByWithRelationInput
+  exams?: Prisma.ExamOrderByRelationAggregateInput
 }
 
 export type TermWhereUniqueInput = Prisma.AtLeast<{
@@ -204,6 +206,7 @@ export type TermWhereUniqueInput = Prisma.AtLeast<{
   endDate?: Prisma.DateTimeFilter<"Term"> | Date | string
   academicYearId?: Prisma.StringFilter<"Term"> | string
   academicYear?: Prisma.XOR<Prisma.AcademicYearScalarRelationFilter, Prisma.AcademicYearWhereInput>
+  exams?: Prisma.ExamListRelationFilter
 }, "id">
 
 export type TermOrderByWithAggregationInput = {
@@ -234,6 +237,7 @@ export type TermCreateInput = {
   startDate: Date | string
   endDate: Date | string
   academicYear: Prisma.AcademicYearCreateNestedOneWithoutTermsInput
+  exams?: Prisma.ExamCreateNestedManyWithoutTermInput
 }
 
 export type TermUncheckedCreateInput = {
@@ -242,6 +246,7 @@ export type TermUncheckedCreateInput = {
   startDate: Date | string
   endDate: Date | string
   academicYearId: string
+  exams?: Prisma.ExamUncheckedCreateNestedManyWithoutTermInput
 }
 
 export type TermUpdateInput = {
@@ -250,6 +255,7 @@ export type TermUpdateInput = {
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   academicYear?: Prisma.AcademicYearUpdateOneRequiredWithoutTermsNestedInput
+  exams?: Prisma.ExamUpdateManyWithoutTermNestedInput
 }
 
 export type TermUncheckedUpdateInput = {
@@ -258,6 +264,7 @@ export type TermUncheckedUpdateInput = {
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   academicYearId?: Prisma.StringFieldUpdateOperationsInput | string
+  exams?: Prisma.ExamUncheckedUpdateManyWithoutTermNestedInput
 }
 
 export type TermCreateManyInput = {
@@ -317,6 +324,11 @@ export type TermMinOrderByAggregateInput = {
   academicYearId?: Prisma.SortOrder
 }
 
+export type TermNullableScalarRelationFilter = {
+  is?: Prisma.TermWhereInput | null
+  isNot?: Prisma.TermWhereInput | null
+}
+
 export type TermCreateNestedManyWithoutAcademicYearInput = {
   create?: Prisma.XOR<Prisma.TermCreateWithoutAcademicYearInput, Prisma.TermUncheckedCreateWithoutAcademicYearInput> | Prisma.TermCreateWithoutAcademicYearInput[] | Prisma.TermUncheckedCreateWithoutAcademicYearInput[]
   connectOrCreate?: Prisma.TermCreateOrConnectWithoutAcademicYearInput | Prisma.TermCreateOrConnectWithoutAcademicYearInput[]
@@ -359,11 +371,28 @@ export type TermUncheckedUpdateManyWithoutAcademicYearNestedInput = {
   deleteMany?: Prisma.TermScalarWhereInput | Prisma.TermScalarWhereInput[]
 }
 
+export type TermCreateNestedOneWithoutExamsInput = {
+  create?: Prisma.XOR<Prisma.TermCreateWithoutExamsInput, Prisma.TermUncheckedCreateWithoutExamsInput>
+  connectOrCreate?: Prisma.TermCreateOrConnectWithoutExamsInput
+  connect?: Prisma.TermWhereUniqueInput
+}
+
+export type TermUpdateOneWithoutExamsNestedInput = {
+  create?: Prisma.XOR<Prisma.TermCreateWithoutExamsInput, Prisma.TermUncheckedCreateWithoutExamsInput>
+  connectOrCreate?: Prisma.TermCreateOrConnectWithoutExamsInput
+  upsert?: Prisma.TermUpsertWithoutExamsInput
+  disconnect?: Prisma.TermWhereInput | boolean
+  delete?: Prisma.TermWhereInput | boolean
+  connect?: Prisma.TermWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.TermUpdateToOneWithWhereWithoutExamsInput, Prisma.TermUpdateWithoutExamsInput>, Prisma.TermUncheckedUpdateWithoutExamsInput>
+}
+
 export type TermCreateWithoutAcademicYearInput = {
   id?: string
   name: string
   startDate: Date | string
   endDate: Date | string
+  exams?: Prisma.ExamCreateNestedManyWithoutTermInput
 }
 
 export type TermUncheckedCreateWithoutAcademicYearInput = {
@@ -371,6 +400,7 @@ export type TermUncheckedCreateWithoutAcademicYearInput = {
   name: string
   startDate: Date | string
   endDate: Date | string
+  exams?: Prisma.ExamUncheckedCreateNestedManyWithoutTermInput
 }
 
 export type TermCreateOrConnectWithoutAcademicYearInput = {
@@ -410,6 +440,54 @@ export type TermScalarWhereInput = {
   academicYearId?: Prisma.StringFilter<"Term"> | string
 }
 
+export type TermCreateWithoutExamsInput = {
+  id?: string
+  name: string
+  startDate: Date | string
+  endDate: Date | string
+  academicYear: Prisma.AcademicYearCreateNestedOneWithoutTermsInput
+}
+
+export type TermUncheckedCreateWithoutExamsInput = {
+  id?: string
+  name: string
+  startDate: Date | string
+  endDate: Date | string
+  academicYearId: string
+}
+
+export type TermCreateOrConnectWithoutExamsInput = {
+  where: Prisma.TermWhereUniqueInput
+  create: Prisma.XOR<Prisma.TermCreateWithoutExamsInput, Prisma.TermUncheckedCreateWithoutExamsInput>
+}
+
+export type TermUpsertWithoutExamsInput = {
+  update: Prisma.XOR<Prisma.TermUpdateWithoutExamsInput, Prisma.TermUncheckedUpdateWithoutExamsInput>
+  create: Prisma.XOR<Prisma.TermCreateWithoutExamsInput, Prisma.TermUncheckedCreateWithoutExamsInput>
+  where?: Prisma.TermWhereInput
+}
+
+export type TermUpdateToOneWithWhereWithoutExamsInput = {
+  where?: Prisma.TermWhereInput
+  data: Prisma.XOR<Prisma.TermUpdateWithoutExamsInput, Prisma.TermUncheckedUpdateWithoutExamsInput>
+}
+
+export type TermUpdateWithoutExamsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  academicYear?: Prisma.AcademicYearUpdateOneRequiredWithoutTermsNestedInput
+}
+
+export type TermUncheckedUpdateWithoutExamsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  academicYearId?: Prisma.StringFieldUpdateOperationsInput | string
+}
+
 export type TermCreateManyAcademicYearInput = {
   id?: string
   name: string
@@ -422,6 +500,7 @@ export type TermUpdateWithoutAcademicYearInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  exams?: Prisma.ExamUpdateManyWithoutTermNestedInput
 }
 
 export type TermUncheckedUpdateWithoutAcademicYearInput = {
@@ -429,6 +508,7 @@ export type TermUncheckedUpdateWithoutAcademicYearInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  exams?: Prisma.ExamUncheckedUpdateManyWithoutTermNestedInput
 }
 
 export type TermUncheckedUpdateManyWithoutAcademicYearInput = {
@@ -439,6 +519,35 @@ export type TermUncheckedUpdateManyWithoutAcademicYearInput = {
 }
 
 
+/**
+ * Count Type TermCountOutputType
+ */
+
+export type TermCountOutputType = {
+  exams: number
+}
+
+export type TermCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  exams?: boolean | TermCountOutputTypeCountExamsArgs
+}
+
+/**
+ * TermCountOutputType without action
+ */
+export type TermCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the TermCountOutputType
+   */
+  select?: Prisma.TermCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * TermCountOutputType without action
+ */
+export type TermCountOutputTypeCountExamsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ExamWhereInput
+}
+
 
 export type TermSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -447,6 +556,8 @@ export type TermSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   endDate?: boolean
   academicYearId?: boolean
   academicYear?: boolean | Prisma.AcademicYearDefaultArgs<ExtArgs>
+  exams?: boolean | Prisma.Term$examsArgs<ExtArgs>
+  _count?: boolean | Prisma.TermCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["term"]>
 
 export type TermSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -478,6 +589,8 @@ export type TermSelectScalar = {
 export type TermOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "startDate" | "endDate" | "academicYearId", ExtArgs["result"]["term"]>
 export type TermInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   academicYear?: boolean | Prisma.AcademicYearDefaultArgs<ExtArgs>
+  exams?: boolean | Prisma.Term$examsArgs<ExtArgs>
+  _count?: boolean | Prisma.TermCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type TermIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   academicYear?: boolean | Prisma.AcademicYearDefaultArgs<ExtArgs>
@@ -490,6 +603,7 @@ export type $TermPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   name: "Term"
   objects: {
     academicYear: Prisma.$AcademicYearPayload<ExtArgs>
+    exams: Prisma.$ExamPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -892,6 +1006,7 @@ readonly fields: TermFieldRefs;
 export interface Prisma__TermClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   academicYear<T extends Prisma.AcademicYearDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AcademicYearDefaultArgs<ExtArgs>>): Prisma.Prisma__AcademicYearClient<runtime.Types.Result.GetResult<Prisma.$AcademicYearPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  exams<T extends Prisma.Term$examsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Term$examsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ExamPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1319,6 +1434,30 @@ export type TermDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Internal
    * Limit how many Terms to delete.
    */
   limit?: number
+}
+
+/**
+ * Term.exams
+ */
+export type Term$examsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Exam
+   */
+  select?: Prisma.ExamSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Exam
+   */
+  omit?: Prisma.ExamOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ExamInclude<ExtArgs> | null
+  where?: Prisma.ExamWhereInput
+  orderBy?: Prisma.ExamOrderByWithRelationInput | Prisma.ExamOrderByWithRelationInput[]
+  cursor?: Prisma.ExamWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ExamScalarFieldEnum | Prisma.ExamScalarFieldEnum[]
 }
 
 /**

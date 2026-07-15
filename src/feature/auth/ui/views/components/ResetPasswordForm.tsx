@@ -29,7 +29,7 @@ interface ResetPasswordFormProps {
 }
 
 const ResetPasswordForm: FC<ResetPasswordFormProps> = ({ token }) => {
-	const { mutate } = useOrpcMutation(
+	const { mutate, isPending } = useOrpcMutation(
 		orpc.auth.resetPassword.mutationOptions({
 			onSuccess: () => {
 				toast.success("Password reset successfully");
@@ -79,7 +79,8 @@ const ResetPasswordForm: FC<ResetPasswordFormProps> = ({ token }) => {
 				<BaseButton
 					type="submit"
 					className="w-full"
-					// Add loading state if needed
+					isLoading={isPending}
+					loadingText="Setting password..."
 				>
 					Set Password
 				</BaseButton>

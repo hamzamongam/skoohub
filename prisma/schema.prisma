@@ -66,6 +66,10 @@ model School {
   classes       Class[]
   academicYears AcademicYear[]
   teachers      Teacher[]
+  exams         Exam[]
+  feeCategories FeeCategory[]
+  invoices      Invoice[]
+  subjects      Subject[]
 }
 
 /**
@@ -174,7 +178,9 @@ model AcademicYear {
   schoolId String
   school   School @relation(fields: [schoolId], references: [id], onDelete: Cascade)
 
-  terms Term[]
+  terms    Term[]
+  exams    Exam[]
+  invoices Invoice[]
 
   @@index([schoolId])
 }
@@ -187,6 +193,7 @@ model Term {
 
   academicYearId String
   academicYear   AcademicYear @relation(fields: [academicYearId], references: [id], onDelete: Cascade)
+  exams          Exam[]
 
   @@index([academicYearId])
 }
@@ -196,10 +203,16 @@ model Term {
  */
 
 model Subject {
-  id   String @id @default(cuid())
-  name String @unique
+  id       String @id @default(cuid())
+  name     String
+  schoolId String
+  school   School @relation(fields: [schoolId], references: [id], onDelete: Cascade)
 
   classSubjects ClassSubject[]
+  examSubjects  ExamSubject[]
+
+  @@unique([schoolId, name])
+  @@index([schoolId])
 }
 
 /**
@@ -247,6 +260,8 @@ model Class {
 
   students      StudentProfile[]
   classSubjects ClassSubject[]
+  attendances   Attendance[]
+  examSubjects  ExamSubject[]
 
   isActive Boolean?
   capacity Int?
@@ -311,9 +326,182 @@ model StudentProfile {
   classId String?
   class   Class?  @relation(fields: [classId], references: [id])
 
+  attendances Attendance[]
+  examScores  ExamScore[]
+  invoices    Invoice[]
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
   @@index([classId])
   @@index([admissionNumber])
+}
+
+enum AttendanceStatus {
+  PRESENT
+  ABSENT
+  LATE
+  EXCUSED
+}
+
+model Attendance {
+  id        String           @id @default(cuid())
+  date      DateTime         @db.Date
+  status    AttendanceStatus
+  remarks   String?
+
+  studentId String
+  student   StudentProfile   @relation(fields: [studentId], references: [id], onDelete: Cascade)
+
+  classId   String
+  class     Class            @relation(fields: [classId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([studentId, date])
+  @@index([classId])
+  @@index([date])
+}
+
+model Exam {
+  id             String        @id @default(cuid())
+  name           String
+  schoolId       String
+  school         School        @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+  academicYearId String
+  academicYear   AcademicYear  @relation(fields: [academicYearId], references: [id], onDelete: Cascade)
+  termId         String?
+  term           Term?         @relation(fields: [termId], references: [id], onDelete: Cascade)
+  examSubjects   ExamSubject[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([schoolId])
+  @@index([academicYearId])
+}
+
+model ExamSubject {
+  id           String      @id @default(cuid())
+  examId       String
+  exam         Exam        @relation(fields: [examId], references: [id], onDelete: Cascade)
+  classId      String
+  class        Class       @relation(fields: [classId], references: [id], onDelete: Cascade)
+  subjectId    String
+  subject      Subject     @relation(fields: [subjectId], references: [id], onDelete: Cascade)
+  maxMarks     Float       @default(100)
+  passingMarks Float       @default(35)
+  examDate     DateTime?
+  scores       ExamScore[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([examId, classId, subjectId])
+  @@index([examId])
+  @@index([classId])
+  @@index([subjectId])
+}
+
+model ExamScore {
+  id            String         @id @default(cuid())
+  examSubjectId String
+  examSubject   ExamSubject    @relation(fields: [examSubjectId], references: [id], onDelete: Cascade)
+  studentId     String
+  student       StudentProfile @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  marksObtained Float
+  remarks       String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([examSubjectId, studentId])
+  @@index([examSubjectId])
+  @@index([studentId])
+}
+
+enum InvoiceStatus {
+  UNPAID
+  PARTIALLY_PAID
+  PAID
+  OVERDUE
+}
+
+enum PaymentMethod {
+  CASH
+  BANK_TRANSFER
+  CARD
+  ONLINE
+}
+
+model FeeCategory {
+  id          String        @id @default(cuid())
+  name        String
+  description String?
+  amount      Float
+  schoolId    String
+  school      School        @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+  
+  invoiceItems InvoiceItem[]
+
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+
+  @@index([schoolId])
+}
+
+model Invoice {
+  id             String        @id @default(cuid())
+  invoiceNumber  String        @unique
+  dueDate        DateTime
+  status         InvoiceStatus @default(UNPAID)
+  
+  studentId      String
+  student        StudentProfile @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  academicYearId String
+  academicYear   AcademicYear  @relation(fields: [academicYearId], references: [id], onDelete: Cascade)
+  schoolId       String
+  school         School        @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+  
+  items          InvoiceItem[]
+  payments       Payment[]
+
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+
+  @@index([studentId])
+  @@index([schoolId])
+}
+
+model InvoiceItem {
+  id            String      @id @default(cuid())
+  invoiceId     String
+  invoice       Invoice     @relation(fields: [invoiceId], references: [id], onDelete: Cascade)
+  feeCategoryId String
+  feeCategory   FeeCategory @relation(fields: [feeCategoryId], references: [id])
+  amount        Float
+
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+
+  @@index([invoiceId])
+  @@index([feeCategoryId])
+}
+
+model Payment {
+  id            String        @id @default(cuid())
+  amount        Float
+  paymentDate   DateTime
+  paymentMethod PaymentMethod
+  reference     String?
+  remarks       String?
+  
+  invoiceId     String
+  invoice       Invoice       @relation(fields: [invoiceId], references: [id], onDelete: Cascade)
+
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+
+  @@index([invoiceId])
 }

@@ -200,6 +200,8 @@ export type AcademicYearWhereInput = {
   schoolId?: Prisma.StringFilter<"AcademicYear"> | string
   school?: Prisma.XOR<Prisma.SchoolScalarRelationFilter, Prisma.SchoolWhereInput>
   terms?: Prisma.TermListRelationFilter
+  exams?: Prisma.ExamListRelationFilter
+  invoices?: Prisma.InvoiceListRelationFilter
 }
 
 export type AcademicYearOrderByWithRelationInput = {
@@ -212,6 +214,8 @@ export type AcademicYearOrderByWithRelationInput = {
   schoolId?: Prisma.SortOrder
   school?: Prisma.SchoolOrderByWithRelationInput
   terms?: Prisma.TermOrderByRelationAggregateInput
+  exams?: Prisma.ExamOrderByRelationAggregateInput
+  invoices?: Prisma.InvoiceOrderByRelationAggregateInput
 }
 
 export type AcademicYearWhereUniqueInput = Prisma.AtLeast<{
@@ -227,6 +231,8 @@ export type AcademicYearWhereUniqueInput = Prisma.AtLeast<{
   schoolId?: Prisma.StringFilter<"AcademicYear"> | string
   school?: Prisma.XOR<Prisma.SchoolScalarRelationFilter, Prisma.SchoolWhereInput>
   terms?: Prisma.TermListRelationFilter
+  exams?: Prisma.ExamListRelationFilter
+  invoices?: Prisma.InvoiceListRelationFilter
 }, "id">
 
 export type AcademicYearOrderByWithAggregationInput = {
@@ -264,6 +270,8 @@ export type AcademicYearCreateInput = {
   gradingSystem?: $Enums.GradingSystem
   school: Prisma.SchoolCreateNestedOneWithoutAcademicYearsInput
   terms?: Prisma.TermCreateNestedManyWithoutAcademicYearInput
+  exams?: Prisma.ExamCreateNestedManyWithoutAcademicYearInput
+  invoices?: Prisma.InvoiceCreateNestedManyWithoutAcademicYearInput
 }
 
 export type AcademicYearUncheckedCreateInput = {
@@ -275,6 +283,8 @@ export type AcademicYearUncheckedCreateInput = {
   gradingSystem?: $Enums.GradingSystem
   schoolId: string
   terms?: Prisma.TermUncheckedCreateNestedManyWithoutAcademicYearInput
+  exams?: Prisma.ExamUncheckedCreateNestedManyWithoutAcademicYearInput
+  invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutAcademicYearInput
 }
 
 export type AcademicYearUpdateInput = {
@@ -286,6 +296,8 @@ export type AcademicYearUpdateInput = {
   gradingSystem?: Prisma.EnumGradingSystemFieldUpdateOperationsInput | $Enums.GradingSystem
   school?: Prisma.SchoolUpdateOneRequiredWithoutAcademicYearsNestedInput
   terms?: Prisma.TermUpdateManyWithoutAcademicYearNestedInput
+  exams?: Prisma.ExamUpdateManyWithoutAcademicYearNestedInput
+  invoices?: Prisma.InvoiceUpdateManyWithoutAcademicYearNestedInput
 }
 
 export type AcademicYearUncheckedUpdateInput = {
@@ -297,6 +309,8 @@ export type AcademicYearUncheckedUpdateInput = {
   gradingSystem?: Prisma.EnumGradingSystemFieldUpdateOperationsInput | $Enums.GradingSystem
   schoolId?: Prisma.StringFieldUpdateOperationsInput | string
   terms?: Prisma.TermUncheckedUpdateManyWithoutAcademicYearNestedInput
+  exams?: Prisma.ExamUncheckedUpdateManyWithoutAcademicYearNestedInput
+  invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutAcademicYearNestedInput
 }
 
 export type AcademicYearCreateManyInput = {
@@ -437,6 +451,34 @@ export type AcademicYearUpdateOneRequiredWithoutTermsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.AcademicYearUpdateToOneWithWhereWithoutTermsInput, Prisma.AcademicYearUpdateWithoutTermsInput>, Prisma.AcademicYearUncheckedUpdateWithoutTermsInput>
 }
 
+export type AcademicYearCreateNestedOneWithoutExamsInput = {
+  create?: Prisma.XOR<Prisma.AcademicYearCreateWithoutExamsInput, Prisma.AcademicYearUncheckedCreateWithoutExamsInput>
+  connectOrCreate?: Prisma.AcademicYearCreateOrConnectWithoutExamsInput
+  connect?: Prisma.AcademicYearWhereUniqueInput
+}
+
+export type AcademicYearUpdateOneRequiredWithoutExamsNestedInput = {
+  create?: Prisma.XOR<Prisma.AcademicYearCreateWithoutExamsInput, Prisma.AcademicYearUncheckedCreateWithoutExamsInput>
+  connectOrCreate?: Prisma.AcademicYearCreateOrConnectWithoutExamsInput
+  upsert?: Prisma.AcademicYearUpsertWithoutExamsInput
+  connect?: Prisma.AcademicYearWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.AcademicYearUpdateToOneWithWhereWithoutExamsInput, Prisma.AcademicYearUpdateWithoutExamsInput>, Prisma.AcademicYearUncheckedUpdateWithoutExamsInput>
+}
+
+export type AcademicYearCreateNestedOneWithoutInvoicesInput = {
+  create?: Prisma.XOR<Prisma.AcademicYearCreateWithoutInvoicesInput, Prisma.AcademicYearUncheckedCreateWithoutInvoicesInput>
+  connectOrCreate?: Prisma.AcademicYearCreateOrConnectWithoutInvoicesInput
+  connect?: Prisma.AcademicYearWhereUniqueInput
+}
+
+export type AcademicYearUpdateOneRequiredWithoutInvoicesNestedInput = {
+  create?: Prisma.XOR<Prisma.AcademicYearCreateWithoutInvoicesInput, Prisma.AcademicYearUncheckedCreateWithoutInvoicesInput>
+  connectOrCreate?: Prisma.AcademicYearCreateOrConnectWithoutInvoicesInput
+  upsert?: Prisma.AcademicYearUpsertWithoutInvoicesInput
+  connect?: Prisma.AcademicYearWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.AcademicYearUpdateToOneWithWhereWithoutInvoicesInput, Prisma.AcademicYearUpdateWithoutInvoicesInput>, Prisma.AcademicYearUncheckedUpdateWithoutInvoicesInput>
+}
+
 export type AcademicYearCreateWithoutSchoolInput = {
   id?: string
   name: string
@@ -445,6 +487,8 @@ export type AcademicYearCreateWithoutSchoolInput = {
   isActive?: boolean
   gradingSystem?: $Enums.GradingSystem
   terms?: Prisma.TermCreateNestedManyWithoutAcademicYearInput
+  exams?: Prisma.ExamCreateNestedManyWithoutAcademicYearInput
+  invoices?: Prisma.InvoiceCreateNestedManyWithoutAcademicYearInput
 }
 
 export type AcademicYearUncheckedCreateWithoutSchoolInput = {
@@ -455,6 +499,8 @@ export type AcademicYearUncheckedCreateWithoutSchoolInput = {
   isActive?: boolean
   gradingSystem?: $Enums.GradingSystem
   terms?: Prisma.TermUncheckedCreateNestedManyWithoutAcademicYearInput
+  exams?: Prisma.ExamUncheckedCreateNestedManyWithoutAcademicYearInput
+  invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutAcademicYearInput
 }
 
 export type AcademicYearCreateOrConnectWithoutSchoolInput = {
@@ -504,6 +550,8 @@ export type AcademicYearCreateWithoutTermsInput = {
   isActive?: boolean
   gradingSystem?: $Enums.GradingSystem
   school: Prisma.SchoolCreateNestedOneWithoutAcademicYearsInput
+  exams?: Prisma.ExamCreateNestedManyWithoutAcademicYearInput
+  invoices?: Prisma.InvoiceCreateNestedManyWithoutAcademicYearInput
 }
 
 export type AcademicYearUncheckedCreateWithoutTermsInput = {
@@ -514,6 +562,8 @@ export type AcademicYearUncheckedCreateWithoutTermsInput = {
   isActive?: boolean
   gradingSystem?: $Enums.GradingSystem
   schoolId: string
+  exams?: Prisma.ExamUncheckedCreateNestedManyWithoutAcademicYearInput
+  invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutAcademicYearInput
 }
 
 export type AcademicYearCreateOrConnectWithoutTermsInput = {
@@ -540,6 +590,8 @@ export type AcademicYearUpdateWithoutTermsInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   gradingSystem?: Prisma.EnumGradingSystemFieldUpdateOperationsInput | $Enums.GradingSystem
   school?: Prisma.SchoolUpdateOneRequiredWithoutAcademicYearsNestedInput
+  exams?: Prisma.ExamUpdateManyWithoutAcademicYearNestedInput
+  invoices?: Prisma.InvoiceUpdateManyWithoutAcademicYearNestedInput
 }
 
 export type AcademicYearUncheckedUpdateWithoutTermsInput = {
@@ -550,6 +602,136 @@ export type AcademicYearUncheckedUpdateWithoutTermsInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   gradingSystem?: Prisma.EnumGradingSystemFieldUpdateOperationsInput | $Enums.GradingSystem
   schoolId?: Prisma.StringFieldUpdateOperationsInput | string
+  exams?: Prisma.ExamUncheckedUpdateManyWithoutAcademicYearNestedInput
+  invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutAcademicYearNestedInput
+}
+
+export type AcademicYearCreateWithoutExamsInput = {
+  id?: string
+  name: string
+  startDate: Date | string
+  endDate: Date | string
+  isActive?: boolean
+  gradingSystem?: $Enums.GradingSystem
+  school: Prisma.SchoolCreateNestedOneWithoutAcademicYearsInput
+  terms?: Prisma.TermCreateNestedManyWithoutAcademicYearInput
+  invoices?: Prisma.InvoiceCreateNestedManyWithoutAcademicYearInput
+}
+
+export type AcademicYearUncheckedCreateWithoutExamsInput = {
+  id?: string
+  name: string
+  startDate: Date | string
+  endDate: Date | string
+  isActive?: boolean
+  gradingSystem?: $Enums.GradingSystem
+  schoolId: string
+  terms?: Prisma.TermUncheckedCreateNestedManyWithoutAcademicYearInput
+  invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutAcademicYearInput
+}
+
+export type AcademicYearCreateOrConnectWithoutExamsInput = {
+  where: Prisma.AcademicYearWhereUniqueInput
+  create: Prisma.XOR<Prisma.AcademicYearCreateWithoutExamsInput, Prisma.AcademicYearUncheckedCreateWithoutExamsInput>
+}
+
+export type AcademicYearUpsertWithoutExamsInput = {
+  update: Prisma.XOR<Prisma.AcademicYearUpdateWithoutExamsInput, Prisma.AcademicYearUncheckedUpdateWithoutExamsInput>
+  create: Prisma.XOR<Prisma.AcademicYearCreateWithoutExamsInput, Prisma.AcademicYearUncheckedCreateWithoutExamsInput>
+  where?: Prisma.AcademicYearWhereInput
+}
+
+export type AcademicYearUpdateToOneWithWhereWithoutExamsInput = {
+  where?: Prisma.AcademicYearWhereInput
+  data: Prisma.XOR<Prisma.AcademicYearUpdateWithoutExamsInput, Prisma.AcademicYearUncheckedUpdateWithoutExamsInput>
+}
+
+export type AcademicYearUpdateWithoutExamsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  gradingSystem?: Prisma.EnumGradingSystemFieldUpdateOperationsInput | $Enums.GradingSystem
+  school?: Prisma.SchoolUpdateOneRequiredWithoutAcademicYearsNestedInput
+  terms?: Prisma.TermUpdateManyWithoutAcademicYearNestedInput
+  invoices?: Prisma.InvoiceUpdateManyWithoutAcademicYearNestedInput
+}
+
+export type AcademicYearUncheckedUpdateWithoutExamsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  gradingSystem?: Prisma.EnumGradingSystemFieldUpdateOperationsInput | $Enums.GradingSystem
+  schoolId?: Prisma.StringFieldUpdateOperationsInput | string
+  terms?: Prisma.TermUncheckedUpdateManyWithoutAcademicYearNestedInput
+  invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutAcademicYearNestedInput
+}
+
+export type AcademicYearCreateWithoutInvoicesInput = {
+  id?: string
+  name: string
+  startDate: Date | string
+  endDate: Date | string
+  isActive?: boolean
+  gradingSystem?: $Enums.GradingSystem
+  school: Prisma.SchoolCreateNestedOneWithoutAcademicYearsInput
+  terms?: Prisma.TermCreateNestedManyWithoutAcademicYearInput
+  exams?: Prisma.ExamCreateNestedManyWithoutAcademicYearInput
+}
+
+export type AcademicYearUncheckedCreateWithoutInvoicesInput = {
+  id?: string
+  name: string
+  startDate: Date | string
+  endDate: Date | string
+  isActive?: boolean
+  gradingSystem?: $Enums.GradingSystem
+  schoolId: string
+  terms?: Prisma.TermUncheckedCreateNestedManyWithoutAcademicYearInput
+  exams?: Prisma.ExamUncheckedCreateNestedManyWithoutAcademicYearInput
+}
+
+export type AcademicYearCreateOrConnectWithoutInvoicesInput = {
+  where: Prisma.AcademicYearWhereUniqueInput
+  create: Prisma.XOR<Prisma.AcademicYearCreateWithoutInvoicesInput, Prisma.AcademicYearUncheckedCreateWithoutInvoicesInput>
+}
+
+export type AcademicYearUpsertWithoutInvoicesInput = {
+  update: Prisma.XOR<Prisma.AcademicYearUpdateWithoutInvoicesInput, Prisma.AcademicYearUncheckedUpdateWithoutInvoicesInput>
+  create: Prisma.XOR<Prisma.AcademicYearCreateWithoutInvoicesInput, Prisma.AcademicYearUncheckedCreateWithoutInvoicesInput>
+  where?: Prisma.AcademicYearWhereInput
+}
+
+export type AcademicYearUpdateToOneWithWhereWithoutInvoicesInput = {
+  where?: Prisma.AcademicYearWhereInput
+  data: Prisma.XOR<Prisma.AcademicYearUpdateWithoutInvoicesInput, Prisma.AcademicYearUncheckedUpdateWithoutInvoicesInput>
+}
+
+export type AcademicYearUpdateWithoutInvoicesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  gradingSystem?: Prisma.EnumGradingSystemFieldUpdateOperationsInput | $Enums.GradingSystem
+  school?: Prisma.SchoolUpdateOneRequiredWithoutAcademicYearsNestedInput
+  terms?: Prisma.TermUpdateManyWithoutAcademicYearNestedInput
+  exams?: Prisma.ExamUpdateManyWithoutAcademicYearNestedInput
+}
+
+export type AcademicYearUncheckedUpdateWithoutInvoicesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  gradingSystem?: Prisma.EnumGradingSystemFieldUpdateOperationsInput | $Enums.GradingSystem
+  schoolId?: Prisma.StringFieldUpdateOperationsInput | string
+  terms?: Prisma.TermUncheckedUpdateManyWithoutAcademicYearNestedInput
+  exams?: Prisma.ExamUncheckedUpdateManyWithoutAcademicYearNestedInput
 }
 
 export type AcademicYearCreateManySchoolInput = {
@@ -569,6 +751,8 @@ export type AcademicYearUpdateWithoutSchoolInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   gradingSystem?: Prisma.EnumGradingSystemFieldUpdateOperationsInput | $Enums.GradingSystem
   terms?: Prisma.TermUpdateManyWithoutAcademicYearNestedInput
+  exams?: Prisma.ExamUpdateManyWithoutAcademicYearNestedInput
+  invoices?: Prisma.InvoiceUpdateManyWithoutAcademicYearNestedInput
 }
 
 export type AcademicYearUncheckedUpdateWithoutSchoolInput = {
@@ -579,6 +763,8 @@ export type AcademicYearUncheckedUpdateWithoutSchoolInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   gradingSystem?: Prisma.EnumGradingSystemFieldUpdateOperationsInput | $Enums.GradingSystem
   terms?: Prisma.TermUncheckedUpdateManyWithoutAcademicYearNestedInput
+  exams?: Prisma.ExamUncheckedUpdateManyWithoutAcademicYearNestedInput
+  invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutAcademicYearNestedInput
 }
 
 export type AcademicYearUncheckedUpdateManyWithoutSchoolInput = {
@@ -597,10 +783,14 @@ export type AcademicYearUncheckedUpdateManyWithoutSchoolInput = {
 
 export type AcademicYearCountOutputType = {
   terms: number
+  exams: number
+  invoices: number
 }
 
 export type AcademicYearCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   terms?: boolean | AcademicYearCountOutputTypeCountTermsArgs
+  exams?: boolean | AcademicYearCountOutputTypeCountExamsArgs
+  invoices?: boolean | AcademicYearCountOutputTypeCountInvoicesArgs
 }
 
 /**
@@ -620,6 +810,20 @@ export type AcademicYearCountOutputTypeCountTermsArgs<ExtArgs extends runtime.Ty
   where?: Prisma.TermWhereInput
 }
 
+/**
+ * AcademicYearCountOutputType without action
+ */
+export type AcademicYearCountOutputTypeCountExamsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ExamWhereInput
+}
+
+/**
+ * AcademicYearCountOutputType without action
+ */
+export type AcademicYearCountOutputTypeCountInvoicesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.InvoiceWhereInput
+}
+
 
 export type AcademicYearSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -631,6 +835,8 @@ export type AcademicYearSelect<ExtArgs extends runtime.Types.Extensions.Internal
   schoolId?: boolean
   school?: boolean | Prisma.SchoolDefaultArgs<ExtArgs>
   terms?: boolean | Prisma.AcademicYear$termsArgs<ExtArgs>
+  exams?: boolean | Prisma.AcademicYear$examsArgs<ExtArgs>
+  invoices?: boolean | Prisma.AcademicYear$invoicesArgs<ExtArgs>
   _count?: boolean | Prisma.AcademicYearCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["academicYear"]>
 
@@ -670,6 +876,8 @@ export type AcademicYearOmit<ExtArgs extends runtime.Types.Extensions.InternalAr
 export type AcademicYearInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   school?: boolean | Prisma.SchoolDefaultArgs<ExtArgs>
   terms?: boolean | Prisma.AcademicYear$termsArgs<ExtArgs>
+  exams?: boolean | Prisma.AcademicYear$examsArgs<ExtArgs>
+  invoices?: boolean | Prisma.AcademicYear$invoicesArgs<ExtArgs>
   _count?: boolean | Prisma.AcademicYearCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type AcademicYearIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -684,6 +892,8 @@ export type $AcademicYearPayload<ExtArgs extends runtime.Types.Extensions.Intern
   objects: {
     school: Prisma.$SchoolPayload<ExtArgs>
     terms: Prisma.$TermPayload<ExtArgs>[]
+    exams: Prisma.$ExamPayload<ExtArgs>[]
+    invoices: Prisma.$InvoicePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1089,6 +1299,8 @@ export interface Prisma__AcademicYearClient<T, Null = never, ExtArgs extends run
   readonly [Symbol.toStringTag]: "PrismaPromise"
   school<T extends Prisma.SchoolDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SchoolDefaultArgs<ExtArgs>>): Prisma.Prisma__SchoolClient<runtime.Types.Result.GetResult<Prisma.$SchoolPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   terms<T extends Prisma.AcademicYear$termsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AcademicYear$termsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TermPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  exams<T extends Prisma.AcademicYear$examsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AcademicYear$examsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ExamPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  invoices<T extends Prisma.AcademicYear$invoicesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AcademicYear$invoicesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$InvoicePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1542,6 +1754,54 @@ export type AcademicYear$termsArgs<ExtArgs extends runtime.Types.Extensions.Inte
   take?: number
   skip?: number
   distinct?: Prisma.TermScalarFieldEnum | Prisma.TermScalarFieldEnum[]
+}
+
+/**
+ * AcademicYear.exams
+ */
+export type AcademicYear$examsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Exam
+   */
+  select?: Prisma.ExamSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Exam
+   */
+  omit?: Prisma.ExamOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ExamInclude<ExtArgs> | null
+  where?: Prisma.ExamWhereInput
+  orderBy?: Prisma.ExamOrderByWithRelationInput | Prisma.ExamOrderByWithRelationInput[]
+  cursor?: Prisma.ExamWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ExamScalarFieldEnum | Prisma.ExamScalarFieldEnum[]
+}
+
+/**
+ * AcademicYear.invoices
+ */
+export type AcademicYear$invoicesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Invoice
+   */
+  select?: Prisma.InvoiceSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Invoice
+   */
+  omit?: Prisma.InvoiceOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.InvoiceInclude<ExtArgs> | null
+  where?: Prisma.InvoiceWhereInput
+  orderBy?: Prisma.InvoiceOrderByWithRelationInput | Prisma.InvoiceOrderByWithRelationInput[]
+  cursor?: Prisma.InvoiceWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.InvoiceScalarFieldEnum | Prisma.InvoiceScalarFieldEnum[]
 }
 
 /**

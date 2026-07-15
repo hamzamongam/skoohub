@@ -19,18 +19,27 @@ import { Route as AuthRouteRouteImport } from './routes/_auth/route'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ApiSplatRouteImport } from './routes/api.$'
 import { Route as AuthLoginRouteImport } from './routes/_auth/login'
+import { Route as AuthForgotPasswordRouteImport } from './routes/_auth/forgot-password'
 import { Route as AuthedDashboardRouteRouteImport } from './routes/_authed/dashboard/route'
 import { Route as AuthedDashboardIndexRouteImport } from './routes/_authed/dashboard/index'
 import { Route as AuthInviteAcceptRouteImport } from './routes/auth/invite/accept'
 import { Route as ApiRpcSplatRouteImport } from './routes/api.rpc.$'
 import { Route as AuthedDashboardStudentsRouteRouteImport } from './routes/_authed/dashboard/students/route'
 import { Route as AuthedDashboardSettingsRouteRouteImport } from './routes/_authed/dashboard/settings/route'
+import { Route as AuthedDashboardExamsRouteRouteImport } from './routes/_authed/dashboard/exams/route'
+import { Route as AuthedDashboardBillingRouteRouteImport } from './routes/_authed/dashboard/billing/route'
 import { Route as AuthedDashboardStudentsIndexRouteImport } from './routes/_authed/dashboard/students/index'
 import { Route as AuthedDashboardSettingsIndexRouteImport } from './routes/_authed/dashboard/settings/index'
+import { Route as AuthedDashboardExamsIndexRouteImport } from './routes/_authed/dashboard/exams/index'
 import { Route as AuthedDashboardClassesIndexRouteImport } from './routes/_authed/dashboard/classes/index'
+import { Route as AuthedDashboardStudentsAttendanceRouteImport } from './routes/_authed/dashboard/students/attendance'
 import { Route as AuthedDashboardStudentsAddRouteImport } from './routes/_authed/dashboard/students/add'
+import { Route as AuthedDashboardExamsScoresRouteImport } from './routes/_authed/dashboard/exams/scores'
+import { Route as AuthedDashboardBillingFeesRouteImport } from './routes/_authed/dashboard/billing/fees'
 import { Route as AuthedDashboardStudentsStudentIdIndexRouteImport } from './routes/_authed/dashboard/students/$studentId/index'
+import { Route as AuthedDashboardBillingInvoicesIndexRouteImport } from './routes/_authed/dashboard/billing/invoices/index'
 import { Route as AuthedDashboardStudentsStudentIdEditRouteImport } from './routes/_authed/dashboard/students/$studentId/edit'
+import { Route as AuthedDashboardBillingInvoicesInvoiceIdRouteImport } from './routes/_authed/dashboard/billing/invoices/$invoiceId'
 
 const TestRoute = TestRouteImport.update({
   id: '/test',
@@ -80,6 +89,11 @@ const AuthLoginRoute = AuthLoginRouteImport.update({
   path: '/login',
   getParentRoute: () => AuthRouteRoute,
 } as any)
+const AuthForgotPasswordRoute = AuthForgotPasswordRouteImport.update({
+  id: '/forgot-password',
+  path: '/forgot-password',
+  getParentRoute: () => AuthRouteRoute,
+} as any)
 const AuthedDashboardRouteRoute = AuthedDashboardRouteRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
@@ -112,6 +126,18 @@ const AuthedDashboardSettingsRouteRoute =
     path: '/settings',
     getParentRoute: () => AuthedDashboardRouteRoute,
   } as any)
+const AuthedDashboardExamsRouteRoute =
+  AuthedDashboardExamsRouteRouteImport.update({
+    id: '/exams',
+    path: '/exams',
+    getParentRoute: () => AuthedDashboardRouteRoute,
+  } as any)
+const AuthedDashboardBillingRouteRoute =
+  AuthedDashboardBillingRouteRouteImport.update({
+    id: '/billing',
+    path: '/billing',
+    getParentRoute: () => AuthedDashboardRouteRoute,
+  } as any)
 const AuthedDashboardStudentsIndexRoute =
   AuthedDashboardStudentsIndexRouteImport.update({
     id: '/',
@@ -124,11 +150,23 @@ const AuthedDashboardSettingsIndexRoute =
     path: '/',
     getParentRoute: () => AuthedDashboardSettingsRouteRoute,
   } as any)
+const AuthedDashboardExamsIndexRoute =
+  AuthedDashboardExamsIndexRouteImport.update({
+    id: '/',
+    path: '/',
+    getParentRoute: () => AuthedDashboardExamsRouteRoute,
+  } as any)
 const AuthedDashboardClassesIndexRoute =
   AuthedDashboardClassesIndexRouteImport.update({
     id: '/classes/',
     path: '/classes/',
     getParentRoute: () => AuthedDashboardRouteRoute,
+  } as any)
+const AuthedDashboardStudentsAttendanceRoute =
+  AuthedDashboardStudentsAttendanceRouteImport.update({
+    id: '/attendance',
+    path: '/attendance',
+    getParentRoute: () => AuthedDashboardStudentsRouteRoute,
   } as any)
 const AuthedDashboardStudentsAddRoute =
   AuthedDashboardStudentsAddRouteImport.update({
@@ -136,17 +174,41 @@ const AuthedDashboardStudentsAddRoute =
     path: '/add',
     getParentRoute: () => AuthedDashboardStudentsRouteRoute,
   } as any)
+const AuthedDashboardExamsScoresRoute =
+  AuthedDashboardExamsScoresRouteImport.update({
+    id: '/scores',
+    path: '/scores',
+    getParentRoute: () => AuthedDashboardExamsRouteRoute,
+  } as any)
+const AuthedDashboardBillingFeesRoute =
+  AuthedDashboardBillingFeesRouteImport.update({
+    id: '/fees',
+    path: '/fees',
+    getParentRoute: () => AuthedDashboardBillingRouteRoute,
+  } as any)
 const AuthedDashboardStudentsStudentIdIndexRoute =
   AuthedDashboardStudentsStudentIdIndexRouteImport.update({
     id: '/$studentId/',
     path: '/$studentId/',
     getParentRoute: () => AuthedDashboardStudentsRouteRoute,
   } as any)
+const AuthedDashboardBillingInvoicesIndexRoute =
+  AuthedDashboardBillingInvoicesIndexRouteImport.update({
+    id: '/invoices/',
+    path: '/invoices/',
+    getParentRoute: () => AuthedDashboardBillingRouteRoute,
+  } as any)
 const AuthedDashboardStudentsStudentIdEditRoute =
   AuthedDashboardStudentsStudentIdEditRouteImport.update({
     id: '/$studentId/edit',
     path: '/$studentId/edit',
     getParentRoute: () => AuthedDashboardStudentsRouteRoute,
+  } as any)
+const AuthedDashboardBillingInvoicesInvoiceIdRoute =
+  AuthedDashboardBillingInvoicesInvoiceIdRouteImport.update({
+    id: '/invoices/$invoiceId',
+    path: '/invoices/$invoiceId',
+    getParentRoute: () => AuthedDashboardBillingRouteRoute,
   } as any)
 
 export interface FileRoutesByFullPath {
@@ -157,18 +219,27 @@ export interface FileRoutesByFullPath {
   '/register': typeof RegisterRoute
   '/test': typeof TestRoute
   '/dashboard': typeof AuthedDashboardRouteRouteWithChildren
+  '/forgot-password': typeof AuthForgotPasswordRoute
   '/login': typeof AuthLoginRoute
   '/api/$': typeof ApiSplatRoute
+  '/dashboard/billing': typeof AuthedDashboardBillingRouteRouteWithChildren
+  '/dashboard/exams': typeof AuthedDashboardExamsRouteRouteWithChildren
   '/dashboard/settings': typeof AuthedDashboardSettingsRouteRouteWithChildren
   '/dashboard/students': typeof AuthedDashboardStudentsRouteRouteWithChildren
   '/api/rpc/$': typeof ApiRpcSplatRoute
   '/auth/invite/accept': typeof AuthInviteAcceptRoute
   '/dashboard/': typeof AuthedDashboardIndexRoute
+  '/dashboard/billing/fees': typeof AuthedDashboardBillingFeesRoute
+  '/dashboard/exams/scores': typeof AuthedDashboardExamsScoresRoute
   '/dashboard/students/add': typeof AuthedDashboardStudentsAddRoute
+  '/dashboard/students/attendance': typeof AuthedDashboardStudentsAttendanceRoute
   '/dashboard/classes/': typeof AuthedDashboardClassesIndexRoute
+  '/dashboard/exams/': typeof AuthedDashboardExamsIndexRoute
   '/dashboard/settings/': typeof AuthedDashboardSettingsIndexRoute
   '/dashboard/students/': typeof AuthedDashboardStudentsIndexRoute
+  '/dashboard/billing/invoices/$invoiceId': typeof AuthedDashboardBillingInvoicesInvoiceIdRoute
   '/dashboard/students/$studentId/edit': typeof AuthedDashboardStudentsStudentIdEditRoute
+  '/dashboard/billing/invoices/': typeof AuthedDashboardBillingInvoicesIndexRoute
   '/dashboard/students/$studentId/': typeof AuthedDashboardStudentsStudentIdIndexRoute
 }
 export interface FileRoutesByTo {
@@ -178,16 +249,24 @@ export interface FileRoutesByTo {
   '/onboarding': typeof OnboardingRoute
   '/register': typeof RegisterRoute
   '/test': typeof TestRoute
+  '/forgot-password': typeof AuthForgotPasswordRoute
   '/login': typeof AuthLoginRoute
   '/api/$': typeof ApiSplatRoute
+  '/dashboard/billing': typeof AuthedDashboardBillingRouteRouteWithChildren
   '/api/rpc/$': typeof ApiRpcSplatRoute
   '/auth/invite/accept': typeof AuthInviteAcceptRoute
   '/dashboard': typeof AuthedDashboardIndexRoute
+  '/dashboard/billing/fees': typeof AuthedDashboardBillingFeesRoute
+  '/dashboard/exams/scores': typeof AuthedDashboardExamsScoresRoute
   '/dashboard/students/add': typeof AuthedDashboardStudentsAddRoute
+  '/dashboard/students/attendance': typeof AuthedDashboardStudentsAttendanceRoute
   '/dashboard/classes': typeof AuthedDashboardClassesIndexRoute
+  '/dashboard/exams': typeof AuthedDashboardExamsIndexRoute
   '/dashboard/settings': typeof AuthedDashboardSettingsIndexRoute
   '/dashboard/students': typeof AuthedDashboardStudentsIndexRoute
+  '/dashboard/billing/invoices/$invoiceId': typeof AuthedDashboardBillingInvoicesInvoiceIdRoute
   '/dashboard/students/$studentId/edit': typeof AuthedDashboardStudentsStudentIdEditRoute
+  '/dashboard/billing/invoices': typeof AuthedDashboardBillingInvoicesIndexRoute
   '/dashboard/students/$studentId': typeof AuthedDashboardStudentsStudentIdIndexRoute
 }
 export interface FileRoutesById {
@@ -201,18 +280,27 @@ export interface FileRoutesById {
   '/register': typeof RegisterRoute
   '/test': typeof TestRoute
   '/_authed/dashboard': typeof AuthedDashboardRouteRouteWithChildren
+  '/_auth/forgot-password': typeof AuthForgotPasswordRoute
   '/_auth/login': typeof AuthLoginRoute
   '/api/$': typeof ApiSplatRoute
+  '/_authed/dashboard/billing': typeof AuthedDashboardBillingRouteRouteWithChildren
+  '/_authed/dashboard/exams': typeof AuthedDashboardExamsRouteRouteWithChildren
   '/_authed/dashboard/settings': typeof AuthedDashboardSettingsRouteRouteWithChildren
   '/_authed/dashboard/students': typeof AuthedDashboardStudentsRouteRouteWithChildren
   '/api/rpc/$': typeof ApiRpcSplatRoute
   '/auth/invite/accept': typeof AuthInviteAcceptRoute
   '/_authed/dashboard/': typeof AuthedDashboardIndexRoute
+  '/_authed/dashboard/billing/fees': typeof AuthedDashboardBillingFeesRoute
+  '/_authed/dashboard/exams/scores': typeof AuthedDashboardExamsScoresRoute
   '/_authed/dashboard/students/add': typeof AuthedDashboardStudentsAddRoute
+  '/_authed/dashboard/students/attendance': typeof AuthedDashboardStudentsAttendanceRoute
   '/_authed/dashboard/classes/': typeof AuthedDashboardClassesIndexRoute
+  '/_authed/dashboard/exams/': typeof AuthedDashboardExamsIndexRoute
   '/_authed/dashboard/settings/': typeof AuthedDashboardSettingsIndexRoute
   '/_authed/dashboard/students/': typeof AuthedDashboardStudentsIndexRoute
+  '/_authed/dashboard/billing/invoices/$invoiceId': typeof AuthedDashboardBillingInvoicesInvoiceIdRoute
   '/_authed/dashboard/students/$studentId/edit': typeof AuthedDashboardStudentsStudentIdEditRoute
+  '/_authed/dashboard/billing/invoices/': typeof AuthedDashboardBillingInvoicesIndexRoute
   '/_authed/dashboard/students/$studentId/': typeof AuthedDashboardStudentsStudentIdIndexRoute
 }
 export interface FileRouteTypes {
@@ -225,18 +313,27 @@ export interface FileRouteTypes {
     | '/register'
     | '/test'
     | '/dashboard'
+    | '/forgot-password'
     | '/login'
     | '/api/$'
+    | '/dashboard/billing'
+    | '/dashboard/exams'
     | '/dashboard/settings'
     | '/dashboard/students'
     | '/api/rpc/$'
     | '/auth/invite/accept'
     | '/dashboard/'
+    | '/dashboard/billing/fees'
+    | '/dashboard/exams/scores'
     | '/dashboard/students/add'
+    | '/dashboard/students/attendance'
     | '/dashboard/classes/'
+    | '/dashboard/exams/'
     | '/dashboard/settings/'
     | '/dashboard/students/'
+    | '/dashboard/billing/invoices/$invoiceId'
     | '/dashboard/students/$studentId/edit'
+    | '/dashboard/billing/invoices/'
     | '/dashboard/students/$studentId/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -246,16 +343,24 @@ export interface FileRouteTypes {
     | '/onboarding'
     | '/register'
     | '/test'
+    | '/forgot-password'
     | '/login'
     | '/api/$'
+    | '/dashboard/billing'
     | '/api/rpc/$'
     | '/auth/invite/accept'
     | '/dashboard'
+    | '/dashboard/billing/fees'
+    | '/dashboard/exams/scores'
     | '/dashboard/students/add'
+    | '/dashboard/students/attendance'
     | '/dashboard/classes'
+    | '/dashboard/exams'
     | '/dashboard/settings'
     | '/dashboard/students'
+    | '/dashboard/billing/invoices/$invoiceId'
     | '/dashboard/students/$studentId/edit'
+    | '/dashboard/billing/invoices'
     | '/dashboard/students/$studentId'
   id:
     | '__root__'
@@ -268,18 +373,27 @@ export interface FileRouteTypes {
     | '/register'
     | '/test'
     | '/_authed/dashboard'
+    | '/_auth/forgot-password'
     | '/_auth/login'
     | '/api/$'
+    | '/_authed/dashboard/billing'
+    | '/_authed/dashboard/exams'
     | '/_authed/dashboard/settings'
     | '/_authed/dashboard/students'
     | '/api/rpc/$'
     | '/auth/invite/accept'
     | '/_authed/dashboard/'
+    | '/_authed/dashboard/billing/fees'
+    | '/_authed/dashboard/exams/scores'
     | '/_authed/dashboard/students/add'
+    | '/_authed/dashboard/students/attendance'
     | '/_authed/dashboard/classes/'
+    | '/_authed/dashboard/exams/'
     | '/_authed/dashboard/settings/'
     | '/_authed/dashboard/students/'
+    | '/_authed/dashboard/billing/invoices/$invoiceId'
     | '/_authed/dashboard/students/$studentId/edit'
+    | '/_authed/dashboard/billing/invoices/'
     | '/_authed/dashboard/students/$studentId/'
   fileRoutesById: FileRoutesById
 }
@@ -369,6 +483,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthLoginRouteImport
       parentRoute: typeof AuthRouteRoute
     }
+    '/_auth/forgot-password': {
+      id: '/_auth/forgot-password'
+      path: '/forgot-password'
+      fullPath: '/forgot-password'
+      preLoaderRoute: typeof AuthForgotPasswordRouteImport
+      parentRoute: typeof AuthRouteRoute
+    }
     '/_authed/dashboard': {
       id: '/_authed/dashboard'
       path: '/dashboard'
@@ -411,6 +532,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthedDashboardSettingsRouteRouteImport
       parentRoute: typeof AuthedDashboardRouteRoute
     }
+    '/_authed/dashboard/exams': {
+      id: '/_authed/dashboard/exams'
+      path: '/exams'
+      fullPath: '/dashboard/exams'
+      preLoaderRoute: typeof AuthedDashboardExamsRouteRouteImport
+      parentRoute: typeof AuthedDashboardRouteRoute
+    }
+    '/_authed/dashboard/billing': {
+      id: '/_authed/dashboard/billing'
+      path: '/billing'
+      fullPath: '/dashboard/billing'
+      preLoaderRoute: typeof AuthedDashboardBillingRouteRouteImport
+      parentRoute: typeof AuthedDashboardRouteRoute
+    }
     '/_authed/dashboard/students/': {
       id: '/_authed/dashboard/students/'
       path: '/'
@@ -425,12 +560,26 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthedDashboardSettingsIndexRouteImport
       parentRoute: typeof AuthedDashboardSettingsRouteRoute
     }
+    '/_authed/dashboard/exams/': {
+      id: '/_authed/dashboard/exams/'
+      path: '/'
+      fullPath: '/dashboard/exams/'
+      preLoaderRoute: typeof AuthedDashboardExamsIndexRouteImport
+      parentRoute: typeof AuthedDashboardExamsRouteRoute
+    }
     '/_authed/dashboard/classes/': {
       id: '/_authed/dashboard/classes/'
       path: '/classes'
       fullPath: '/dashboard/classes/'
       preLoaderRoute: typeof AuthedDashboardClassesIndexRouteImport
       parentRoute: typeof AuthedDashboardRouteRoute
+    }
+    '/_authed/dashboard/students/attendance': {
+      id: '/_authed/dashboard/students/attendance'
+      path: '/attendance'
+      fullPath: '/dashboard/students/attendance'
+      preLoaderRoute: typeof AuthedDashboardStudentsAttendanceRouteImport
+      parentRoute: typeof AuthedDashboardStudentsRouteRoute
     }
     '/_authed/dashboard/students/add': {
       id: '/_authed/dashboard/students/add'
@@ -439,12 +588,33 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthedDashboardStudentsAddRouteImport
       parentRoute: typeof AuthedDashboardStudentsRouteRoute
     }
+    '/_authed/dashboard/exams/scores': {
+      id: '/_authed/dashboard/exams/scores'
+      path: '/scores'
+      fullPath: '/dashboard/exams/scores'
+      preLoaderRoute: typeof AuthedDashboardExamsScoresRouteImport
+      parentRoute: typeof AuthedDashboardExamsRouteRoute
+    }
+    '/_authed/dashboard/billing/fees': {
+      id: '/_authed/dashboard/billing/fees'
+      path: '/fees'
+      fullPath: '/dashboard/billing/fees'
+      preLoaderRoute: typeof AuthedDashboardBillingFeesRouteImport
+      parentRoute: typeof AuthedDashboardBillingRouteRoute
+    }
     '/_authed/dashboard/students/$studentId/': {
       id: '/_authed/dashboard/students/$studentId/'
       path: '/$studentId'
       fullPath: '/dashboard/students/$studentId/'
       preLoaderRoute: typeof AuthedDashboardStudentsStudentIdIndexRouteImport
       parentRoute: typeof AuthedDashboardStudentsRouteRoute
+    }
+    '/_authed/dashboard/billing/invoices/': {
+      id: '/_authed/dashboard/billing/invoices/'
+      path: '/invoices'
+      fullPath: '/dashboard/billing/invoices/'
+      preLoaderRoute: typeof AuthedDashboardBillingInvoicesIndexRouteImport
+      parentRoute: typeof AuthedDashboardBillingRouteRoute
     }
     '/_authed/dashboard/students/$studentId/edit': {
       id: '/_authed/dashboard/students/$studentId/edit'
@@ -453,20 +623,65 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthedDashboardStudentsStudentIdEditRouteImport
       parentRoute: typeof AuthedDashboardStudentsRouteRoute
     }
+    '/_authed/dashboard/billing/invoices/$invoiceId': {
+      id: '/_authed/dashboard/billing/invoices/$invoiceId'
+      path: '/invoices/$invoiceId'
+      fullPath: '/dashboard/billing/invoices/$invoiceId'
+      preLoaderRoute: typeof AuthedDashboardBillingInvoicesInvoiceIdRouteImport
+      parentRoute: typeof AuthedDashboardBillingRouteRoute
+    }
   }
 }
 
 interface AuthRouteRouteChildren {
+  AuthForgotPasswordRoute: typeof AuthForgotPasswordRoute
   AuthLoginRoute: typeof AuthLoginRoute
 }
 
 const AuthRouteRouteChildren: AuthRouteRouteChildren = {
+  AuthForgotPasswordRoute: AuthForgotPasswordRoute,
   AuthLoginRoute: AuthLoginRoute,
 }
 
 const AuthRouteRouteWithChildren = AuthRouteRoute._addFileChildren(
   AuthRouteRouteChildren,
 )
+
+interface AuthedDashboardBillingRouteRouteChildren {
+  AuthedDashboardBillingFeesRoute: typeof AuthedDashboardBillingFeesRoute
+  AuthedDashboardBillingInvoicesInvoiceIdRoute: typeof AuthedDashboardBillingInvoicesInvoiceIdRoute
+  AuthedDashboardBillingInvoicesIndexRoute: typeof AuthedDashboardBillingInvoicesIndexRoute
+}
+
+const AuthedDashboardBillingRouteRouteChildren: AuthedDashboardBillingRouteRouteChildren =
+  {
+    AuthedDashboardBillingFeesRoute: AuthedDashboardBillingFeesRoute,
+    AuthedDashboardBillingInvoicesInvoiceIdRoute:
+      AuthedDashboardBillingInvoicesInvoiceIdRoute,
+    AuthedDashboardBillingInvoicesIndexRoute:
+      AuthedDashboardBillingInvoicesIndexRoute,
+  }
+
+const AuthedDashboardBillingRouteRouteWithChildren =
+  AuthedDashboardBillingRouteRoute._addFileChildren(
+    AuthedDashboardBillingRouteRouteChildren,
+  )
+
+interface AuthedDashboardExamsRouteRouteChildren {
+  AuthedDashboardExamsScoresRoute: typeof AuthedDashboardExamsScoresRoute
+  AuthedDashboardExamsIndexRoute: typeof AuthedDashboardExamsIndexRoute
+}
+
+const AuthedDashboardExamsRouteRouteChildren: AuthedDashboardExamsRouteRouteChildren =
+  {
+    AuthedDashboardExamsScoresRoute: AuthedDashboardExamsScoresRoute,
+    AuthedDashboardExamsIndexRoute: AuthedDashboardExamsIndexRoute,
+  }
+
+const AuthedDashboardExamsRouteRouteWithChildren =
+  AuthedDashboardExamsRouteRoute._addFileChildren(
+    AuthedDashboardExamsRouteRouteChildren,
+  )
 
 interface AuthedDashboardSettingsRouteRouteChildren {
   AuthedDashboardSettingsIndexRoute: typeof AuthedDashboardSettingsIndexRoute
@@ -484,6 +699,7 @@ const AuthedDashboardSettingsRouteRouteWithChildren =
 
 interface AuthedDashboardStudentsRouteRouteChildren {
   AuthedDashboardStudentsAddRoute: typeof AuthedDashboardStudentsAddRoute
+  AuthedDashboardStudentsAttendanceRoute: typeof AuthedDashboardStudentsAttendanceRoute
   AuthedDashboardStudentsIndexRoute: typeof AuthedDashboardStudentsIndexRoute
   AuthedDashboardStudentsStudentIdEditRoute: typeof AuthedDashboardStudentsStudentIdEditRoute
   AuthedDashboardStudentsStudentIdIndexRoute: typeof AuthedDashboardStudentsStudentIdIndexRoute
@@ -492,6 +708,8 @@ interface AuthedDashboardStudentsRouteRouteChildren {
 const AuthedDashboardStudentsRouteRouteChildren: AuthedDashboardStudentsRouteRouteChildren =
   {
     AuthedDashboardStudentsAddRoute: AuthedDashboardStudentsAddRoute,
+    AuthedDashboardStudentsAttendanceRoute:
+      AuthedDashboardStudentsAttendanceRoute,
     AuthedDashboardStudentsIndexRoute: AuthedDashboardStudentsIndexRoute,
     AuthedDashboardStudentsStudentIdEditRoute:
       AuthedDashboardStudentsStudentIdEditRoute,
@@ -505,6 +723,8 @@ const AuthedDashboardStudentsRouteRouteWithChildren =
   )
 
 interface AuthedDashboardRouteRouteChildren {
+  AuthedDashboardBillingRouteRoute: typeof AuthedDashboardBillingRouteRouteWithChildren
+  AuthedDashboardExamsRouteRoute: typeof AuthedDashboardExamsRouteRouteWithChildren
   AuthedDashboardSettingsRouteRoute: typeof AuthedDashboardSettingsRouteRouteWithChildren
   AuthedDashboardStudentsRouteRoute: typeof AuthedDashboardStudentsRouteRouteWithChildren
   AuthedDashboardIndexRoute: typeof AuthedDashboardIndexRoute
@@ -512,6 +732,9 @@ interface AuthedDashboardRouteRouteChildren {
 }
 
 const AuthedDashboardRouteRouteChildren: AuthedDashboardRouteRouteChildren = {
+  AuthedDashboardBillingRouteRoute:
+    AuthedDashboardBillingRouteRouteWithChildren,
+  AuthedDashboardExamsRouteRoute: AuthedDashboardExamsRouteRouteWithChildren,
   AuthedDashboardSettingsRouteRoute:
     AuthedDashboardSettingsRouteRouteWithChildren,
   AuthedDashboardStudentsRouteRoute:

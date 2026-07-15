@@ -1,5 +1,6 @@
 import { type FC, useId } from "react";
 import type { SubmitHandler, UseFormReturn } from "react-hook-form";
+import { Link } from "@tanstack/react-router";
 import { BaseButton } from "@/components/base/button";
 import { BaseCheckbox } from "@/components/base/checkbox";
 import BaseForm from "@/components/base/forms";
@@ -48,12 +49,12 @@ const LoginForm: FC<LoginFormProps> = ({ form, onSubmit, isPending }) => {
 							Remember me
 						</label>
 					</div>
-					<a
-						href="#forgot-password"
+					<Link
+						to="/forgot-password"
 						className="text-sm font-semibold text-primary hover:text-primary/80 transition-colors"
 					>
 						Forgot password?
-					</a>
+					</Link>
 				</div>
 
 				{form.formState.errors.root && (

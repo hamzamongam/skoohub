@@ -41,6 +41,9 @@ export const authRouter = os.router({
 	resetPassword: os.resetPassword.handler(async ({ input }) => {
 		return await authService.resetPassword(input.token, input.newPassword);
 	}),
+	forgotPassword: os.forgotPassword.handler(async ({ input }) => {
+		return await authService.forgotPassword(input.email);
+	}),
 	changePassword: os.changePassword.handler(async ({ input }) => {
 		return await authService.changePassword(input);
 	}),

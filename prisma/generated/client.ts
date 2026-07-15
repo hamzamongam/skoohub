@@ -104,3 +104,43 @@ export type ClassSubject = Prisma.ClassSubjectModel
  * 
  */
 export type StudentProfile = Prisma.StudentProfileModel
+/**
+ * Model Attendance
+ * 
+ */
+export type Attendance = Prisma.AttendanceModel
+/**
+ * Model Exam
+ * 
+ */
+export type Exam = Prisma.ExamModel
+/**
+ * Model ExamSubject
+ * 
+ */
+export type ExamSubject = Prisma.ExamSubjectModel
+/**
+ * Model ExamScore
+ * 
+ */
+export type ExamScore = Prisma.ExamScoreModel
+/**
+ * Model FeeCategory
+ * 
+ */
+export type FeeCategory = Prisma.FeeCategoryModel
+/**
+ * Model Invoice
+ * 
+ */
+export type Invoice = Prisma.InvoiceModel
+/**
+ * Model InvoiceItem
+ * 
+ */
+export type InvoiceItem = Prisma.InvoiceItemModel
+/**
+ * Model Payment
+ * 
+ */
+export type Payment = Prisma.PaymentModel

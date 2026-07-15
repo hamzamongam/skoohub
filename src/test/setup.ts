@@ -1,3 +1,4 @@
+import React from "react";
 import { vi } from "vitest";
 import "@testing-library/jest-dom/vitest";
 
@@ -35,6 +36,18 @@ vi.mock("@/server/auth", () => ({
 			signInEmail: vi.fn(),
 			signUpEmail: vi.fn(),
 			getSession: vi.fn(),
+			requestPasswordReset: vi.fn(),
 		},
 	},
 }));
+
+// Mock TanStack Router
+vi.mock("@tanstack/react-router", () => ({
+	Link: ({ children, to, ...props }: any) =>
+		React.createElement("a", { href: to, ...props }, children),
+	useRouter: () => ({
+		navigate: vi.fn(),
+	}),
+	createFileRoute: () => () => ({}),
+}));
+

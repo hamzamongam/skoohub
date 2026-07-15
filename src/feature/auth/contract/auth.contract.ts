@@ -26,4 +26,7 @@ export const authContract = oc.router({
 	resetPassword: oc
 		.input(z.object({ token: z.string(), newPassword: z.string() }))
 		.output(SuccessResponseSchema(z.any())),
+	forgotPassword: oc
+		.input(z.object({ email: z.string().email("Invalid email address") }))
+		.output(SuccessResponseSchema(z.any())),
 });

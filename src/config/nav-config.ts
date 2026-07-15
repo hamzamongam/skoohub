@@ -1,7 +1,7 @@
 import {
 	// BarChart3,
 	BookOpen,
-	// CreditCard,
+	CreditCard,
 	GraduationCap,
 	LayoutDashboard,
 	type LucideIcon,
@@ -9,7 +9,7 @@ import {
 	// MessageSquare,
 	// Package,
 	// Settings,
-	// Trophy,
+	Trophy,
 	UserSquare2,
 } from "lucide-react";
 import type { FileRouteTypes } from "../routeTree.gen";
@@ -50,10 +50,10 @@ export const sidebarMenus: SidebarMenus = {
 				// 	title: "Branches",
 				// 	url: "/dashboard/academics/branches",
 				// },
-				// {
-				// 	title: "Sessions",
-				// 	url: "/dashboard/academics/sessions",
-				// },
+				{
+					title: "Sessions",
+					url: "/dashboard/academics/sessions",
+				},
 				{
 					title: "Classes",
 					url: "/dashboard/classes",
@@ -76,6 +76,10 @@ export const sidebarMenus: SidebarMenus = {
 				{
 					title: "Admission",
 					url: "/dashboard/students/add",
+				},
+				{
+					title: "Attendance",
+					url: "/dashboard/students/attendance",
 				},
 				// {
 				// 	title: "Promotion",
@@ -106,85 +110,35 @@ export const sidebarMenus: SidebarMenus = {
 				// },
 			],
 		},
-		// {
-		// 	title: "Finance",
-		// 	url: "/dashboard/finance",
-		// 	icon: CreditCard,
-		// 	items: [
-		// 		{
-		// 			title: "Fee Setup",
-		// 			url: "/dashboard/finance/fees",
-		// 		},
-		// 		{
-		// 			title: "Collection",
-		// 			url: "/dashboard/finance/collection",
-		// 		},
-		// 		{
-		// 			title: "Expenses",
-		// 			url: "/dashboard/finance/expenses",
-		// 		},
-		// 		{
-		// 			title: "Payroll",
-		// 			url: "/dashboard/finance/payroll",
-		// 		},
-		// 	],
-		// },
-		// {
-		// 	title: "Examination",
-		// 	url: "/dashboard/exams",
-		// 	icon: Trophy,
-		// 	items: [
-		// 		{
-		// 			title: "Exam Setup",
-		// 			url: "/dashboard/exams/setup",
-		// 		},
-		// 		{
-		// 			title: "Results",
-		// 			url: "/dashboard/exams/results",
-		// 		},
-		// 		{
-		// 			title: "Admit Cards",
-		// 			url: "/dashboard/exams/admit-cards",
-		// 		},
-		// 	],
-		// },
-		// {
-		// 	title: "Communication",
-		// 	url: "/dashboard/communication",
-		// 	icon: MessageSquare,
-		// 	items: [
-		// 		{
-		// 			title: "Notice Board",
-		// 			url: "/dashboard/communication/notices",
-		// 		},
-		// 		{
-		// 			title: "SMS/Email",
-		// 			url: "/dashboard/communication/messaging",
-		// 		},
-		// 	],
-		// },
-		// {
-		// 	title: "Resources",
-		// 	url: "/dashboard/resources",
-		// 	icon: Package,
-		// 	items: [
-		// 		{
-		// 			title: "Library",
-		// 			url: "/dashboard/resources/library",
-		// 		},
-		// 		{
-		// 			title: "Transport",
-		// 			url: "/dashboard/resources/transport",
-		// 		},
-		// 		{
-		// 			title: "Hostel",
-		// 			url: "/dashboard/resources/hostel",
-		// 		},
-		// 		{
-		// 			title: "Inventory",
-		// 			url: "/dashboard/resources/inventory",
-		// 		},
-		// 	],
-		// },
+		{
+			title: "Examination",
+			url: "/dashboard/exams",
+			icon: Trophy,
+			items: [
+				{
+					title: "Exam Cycles",
+					url: "/dashboard/exams",
+				},
+				{
+					title: "Record Scores",
+					url: "/dashboard/exams/scores",
+				},
+			],
+		},
+		{
+			title: "Billing & Fees",
+			url: "/dashboard/billing",
+			icon: CreditCard,
+			items: [
+				{
+					title: "Fee Categories",
+					url: "/dashboard/billing/fees",
+				},
+				{
+					title: "Invoices",
+					url: "/dashboard/billing/invoices",
+				},
+			],
+		},
 	],
 };

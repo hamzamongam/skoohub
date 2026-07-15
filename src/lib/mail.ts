@@ -14,13 +14,60 @@ interface EmailOptions {
 }
 
 export const sendEmail = async (options: EmailOptions) => {
+	const apiKey = process.env.RESEND_API_KEY;
+	const fromEmail = process.env.RESEND_FROM || "SkooHub <onboarding@resend.dev>";
+
+	if (apiKey) {
+		logger.info(
+			{
+				to: options.to,
+				subject: options.subject,
+			},
+			"📧 Sending email via Resend API",
+		);
+
+		try {
+			const response = await fetch("https://api.resend.com/emails", {
+				method: "POST",
+				headers: {
+					Authorization: `Bearer ${apiKey}`,
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({
+					from: fromEmail,
+					to: [options.to],
+					subject: options.subject,
+					html: options.html,
+					text: options.text,
+				}),
+			});
+
+			if (!response.ok) {
+				const errorData = await response.json().catch(() => ({}));
+				logger.error(
+					{ errorData, status: response.status },
+					"❌ Failed to send email via Resend API",
+				);
+				throw new Error(
+					errorData?.message || `Resend API returned status ${response.status}`,
+				);
+			}
+
+			const data = await response.json();
+			logger.info({ id: data.id }, "📧 Email sent successfully via Resend API");
+			return { success: true, id: data.id };
+		} catch (error) {
+			logger.error({ error }, "❌ Error sending email via Resend API");
+			throw error;
+		}
+	}
+
 	logger.info(
 		{
 			to: options.to,
 			subject: options.subject,
-			// html: options.html, // content might be too long for logs
 		},
-		"📧 [Mock Email Service] Sending Email",
+		"📧 [Mock Email Service] Sending Email (RESEND_API_KEY is not set)",
 	);
 
 	// Log the "Magic Link" or content clearly for the developer

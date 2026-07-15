@@ -1,6 +1,6 @@
 import type { BetterAuthPlugin } from "better-auth";
-import { createAuthEndpoint, getSessionFromCtx } from "better-auth/api";
-import { schoolSchema } from "@/server/orpc/schema/school";
+import { createAuthEndpoint } from "better-auth/api";
+import { z } from "zod";
 
 export const schoolPlugin = () => {
 	return {
@@ -12,11 +12,9 @@ export const schoolPlugin = () => {
 				"/school/create",
 				{
 					method: "POST",
-					body: schoolSchema,
+					body: z.object({}),
 				},
 				async (ctx) => {
-					// ctx.context
-					const _session = await getSessionFromCtx(ctx);
 					return ctx.json({
 						message: "Hello World",
 					});
